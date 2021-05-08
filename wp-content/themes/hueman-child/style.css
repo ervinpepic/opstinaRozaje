@@ -1,0 +1,57 @@
+/*
+Theme Name: Opština Rožaje
+Theme URI: https://github.com/ervinpepic
+Version: 1.0.1
+Description: This is a custom theme for Opstina Rozaje web app
+Author: Ervin Pepic
+Author URI: https://linkedin.com/in/ervinpepic
+Tags: No tags - private use
+Text Domain: Ervin
+Domain Path: /languages
+Copyright: Opstina Rozaje - sva prava zadrzana
+Requires PHP: 5.3
+Tested up to: 5.6
+Template:     hueman
+*/
+
+p {
+	color: black;
+}
+
+.boja-teksta {
+	color: white;
+}
+
+.widget_text a {
+	text-decoration:none;
+	
+}
+
+.hr, hr {
+	background: #e4e4e4;
+	margin:10px 0;
+	border-bottom: 0px;
+	
+}
+
+.kontakt-desno {
+	float: right;
+}
+
+.site-description {
+ font-size: 2em;
+ font-style: italic;
+ color: #fff;
+ margin-left: 40px;
+ line-height: 140px;
+}
+
+img[src$=".svg"] { 
+    width: 100% !important; 
+    height: auto !important; 
+    
+}
+
+#copyright p {
+	color: rgb(166, 169, 173) ;
+}
