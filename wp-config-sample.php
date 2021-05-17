@@ -1,90 +1,89 @@
 <?php
 /**
- * The base configuration for WordPress
+ * Bazna konfiguracija WordPressa.
  *
- * The wp-config.php creation script uses this file during the
- * installation. You don't have to use the web site, you can
- * copy this file to "wp-config.php" and fill in the values.
+ * wp-config.php instalacijska skripta koristi ovaj fajl prilikom
+ * instalacije. Ne morate koristiti web stranicu, ovaj fajl
+ * možete kopirati kao "wp-config.php" i popuniti vrijednosti.
  *
- * This file contains the following configurations:
+ * Ovaj falj sadrži sljedeće postavke:
  *
- * * MySQL settings
- * * Secret keys
- * * Database table prefix
- * * ABSPATH
+ * MySQL postavke
+ * Tajne ključeve
+ * Prefiks baze podataka
+ * ABSPATH
  *
- * @link https://wordpress.org/support/article/editing-wp-config-php/
+ * @link https://codex.wordpress.org/Editing_wp-config.php
  *
  * @package WordPress
  */
 
-// ** MySQL settings - You can get this info from your web host ** //
-/** The name of the database for WordPress */
-define( 'DB_NAME', 'database_name_here' );
+// ** MySQL postavke - Informacije o postavkama možete dobiti od vašeg web hosting servisa ** //
+/** Ime vaše baze podataka za WordPress */
+define( 'DB_NAME', 'ovdje_upišite_ime_vaše_baze' );
 
-/** MySQL database username */
-define( 'DB_USER', 'username_here' );
+/** MySQL korisničko ime za bazu podataka */
+define( 'DB_USER', 'ovdje_upišite_korisničko_ime' );
 
-/** MySQL database password */
-define( 'DB_PASSWORD', 'password_here' );
+/** MySQL šifra baze podataka */
+define( 'DB_PASSWORD', 'ovdje_upišite_šifru_za_bazu' );
 
-/** MySQL hostname */
+/** MySQL naziv hostinga*/
 define( 'DB_HOST', 'localhost' );
 
-/** Database Charset to use in creating database tables. */
+/** Kodiranje znakova koje će se koristiti u tabelama unutar baze podataka. */
 define( 'DB_CHARSET', 'utf8' );
 
-/** The Database Collate type. Don't change this if in doubt. */
-define( 'DB_COLLATE', '' );
+/** Collate tip baze podataka. Ne mijenjajte ovo ako niste sigurni. */
+define('DB_COLLATE', '');
 
 /**#@+
- * Authentication Unique Keys and Salts.
+ * Unikatni ključevi za autentifikaciju i salts.
  *
- * Change these to different unique phrases!
- * You can generate these using the {@link https://api.wordpress.org/secret-key/1.1/salt/ WordPress.org secret-key service}
- * You can change these at any point in time to invalidate all existing cookies. This will force all users to have to log in again.
+ * Promijenite ključeve u vaše unikatne fraze!
+ * Ključeve možete generisati pomoću WordPress.org servisa za generisanje ključeva {@link https://api.wordpress.org/secret-key/1.1/salt/ WordPress.org secret-key service}
+ * Ključeve možete promijeniti bilo kada. Svi korisnici će se morati ponovo prijaviti jer kolačići neće važiti nakon izmjene ključeva.
  *
  * @since 2.6.0
  */
-define( 'AUTH_KEY',         'put your unique phrase here' );
-define( 'SECURE_AUTH_KEY',  'put your unique phrase here' );
-define( 'LOGGED_IN_KEY',    'put your unique phrase here' );
-define( 'NONCE_KEY',        'put your unique phrase here' );
-define( 'AUTH_SALT',        'put your unique phrase here' );
-define( 'SECURE_AUTH_SALT', 'put your unique phrase here' );
-define( 'LOGGED_IN_SALT',   'put your unique phrase here' );
-define( 'NONCE_SALT',       'put your unique phrase here' );
+define( 'AUTH_KEY',         'upišite vašu jedinstvenu frazu ovdje' );
+define( 'SECURE_AUTH_KEY',  'upišite vašu jedinstvenu frazu ovdje' );
+define( 'LOGGED_IN_KEY',    'upišite vašu jedinstvenu frazu ovdje' );
+define( 'NONCE_KEY',        'upišite vašu jedinstvenu frazu ovdje' );
+define( 'AUTH_SALT',        'upišite vašu jedinstvenu frazu ovdje' );
+define( 'SECURE_AUTH_SALT', 'upišite vašu jedinstvenu frazu ovdje' );
+define( 'LOGGED_IN_SALT',   'upišite vašu jedinstvenu frazu ovdje' );
+define( 'NONCE_SALT',       'upišite vašu jedinstvenu frazu ovdje' );
 
 /**#@-*/
 
 /**
- * WordPress Database Table prefix.
+ * Prefiks WordPressove tabele u bazi podataka.
  *
- * You can have multiple installations in one database if you give each
- * a unique prefix. Only numbers, letters, and underscores please!
+ * Možete imati više instalacija unutar jedne baze ukoliko svakoj date jedinstven prefiks.
+ * Molimo vas da koristite samo brojeve, slova, i donje crtice!
  */
 $table_prefix = 'wp_';
 
 /**
- * For developers: WordPress debugging mode.
+ * Za programere: WordPress debugging mod.
  *
- * Change this to true to enable the display of notices during development.
- * It is strongly recommended that plugin and theme developers use WP_DEBUG
- * in their development environments.
+ * Promijenite ovu vrijednost u true da omogućite prikaz obavijesti prilikom razvoja.
+ * Preporučeno je da programeri tema i plugina koriste WP_DEBUG
+ * u svojim razvojnim okruženjima.
  *
- * For information on other constants that can be used for debugging,
- * visit the documentation.
+ * Za informacije o drugim konstantama za debugovanje, posjetite Codex.
  *
- * @link https://wordpress.org/support/article/debugging-in-wordpress/
+ * @link https://codex.wordpress.org/Debugging_in_WordPress
  */
-define( 'WP_DEBUG', false );
+define('WP_DEBUG', false);
 
-/* That's all, stop editing! Happy publishing. */
+/* To je sve, ne morate više ništa mijenjati! Sretno objavljivanje. */
 
-/** Absolute path to the WordPress directory. */
+/** Apsolutna putanja do WordPress foldera. */
 if ( ! defined( 'ABSPATH' ) ) {
-	define( 'ABSPATH', __DIR__ . '/' );
+	define( 'ABSPATH', dirname( __FILE__ ) . '/' );
 }
 
-/** Sets up WordPress vars and included files. */
-require_once ABSPATH . 'wp-settings.php';
+/** Postavke za WordPress varijable i već uključene datoteke. */
+require_once( ABSPATH . 'wp-settings.php' );

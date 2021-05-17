@@ -1,97 +1,98 @@
-<!DOCTYPE html>
-<html lang="en">
+﻿<!DOCTYPE html>
+<html lang="bs-BA">
 <head>
-	<meta name="viewport" content="width=device-width" />
+	<meta name="viewport" content="width=device-width" /> 
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>WordPress &#8250; ReadMe</title>
+	<title>WordPress &#8250; Uputstvo</title>
 	<link rel="stylesheet" href="wp-admin/css/install.css?ver=20100228" type="text/css" />
 </head>
 <body>
 <h1 id="logo">
 	<a href="https://wordpress.org/"><img alt="WordPress" src="wp-admin/images/wordpress-logo.png" /></a>
 </h1>
-<p style="text-align: center">Semantic Personal Publishing Platform</p>
+<p style="text-align: center">Semantička platforma za objavljivanje</p>
 
-<h2>First Things First</h2>
-<p>Welcome. WordPress is a very special project to me. Every developer and contributor adds something unique to the mix, and together we create something beautiful that I&#8217;m proud to be a part of. Thousands of hours have gone into WordPress, and we&#8217;re dedicated to making it better every day. Thank you for making it part of your world.</p>
+<h2>Najvažnije stvari prvo</h2>
+<p>Dobro došli. WordPress je veoma poseban projekat za mene. Svaki programer i saradnik dodao je nešto posebno u njega i zajedno smo napravili nešto prelijepo. Veoma sam ponosan što sam dio ovoga. Hiljade sati su već potrošene u WordPress i stalno nastojimo da ga učinimo još boljim. Hvala vam što ste WordPress učinili dijelom svog svijeta.</p>
 <p style="text-align: right">&#8212; Matt Mullenweg</p>
 
-<h2>Installation: Famous 5-minute install</h2>
+<h2>Instalacija: Poznata petominutna instalacija</h2>
 <ol>
-	<li>Unzip the package in an empty directory and upload everything.</li>
-	<li>Open <span class="file"><a href="wp-admin/install.php">wp-admin/install.php</a></span> in your browser. It will take you through the process to set up a <code>wp-config.php</code> file with your database connection details.
+	<li>Raspakujte paket u prazan folder i dodajte taj sadržaj na vaš server.</li>
+	<li>Otvorite <span class="file"><a href="wp-admin/install.php">wp-admin/install.php</a></span> u vašem browseru. Proći ćete kroz potrebne korake za upisavanje informacija o bazi podataka u vaš <code>wp-config.php</code> fajl.
 		<ol>
-			<li>If for some reason this doesn&#8217;t work, don&#8217;t worry. It doesn&#8217;t work on all web hosts. Open up <code>wp-config-sample.php</code> with a text editor like WordPad or similar and fill in your database connection details.</li>
-			<li>Save the file as <code>wp-config.php</code> and upload it.</li>
-			<li>Open <span class="file"><a href="wp-admin/install.php">wp-admin/install.php</a></span> in your browser.</li>
+			<li>Ako ova skripta iz nekog razloga ne bude funkcionisala, ne brinite se. Ova skripta ne radi na svakom web hostingu. Otvorite <code>wp-config-sample.php</code> u nekom uređivaču teksta kao što je npr. WordPad i unesite detalje o vašoj bazi podataka.</li>
+			<li>Sačuvajte fajl pod nazivom <code>wp-config.php</code> i dodajte ga na vaš server.</li>
+			<li>Otvorite <span class="file"><a href="wp-admin/install.php">wp-admin/install.php</a></span> u vašem browseru.</li>
 		</ol>
 	</li>
-	<li>Once the configuration file is set up, the installer will set up the tables needed for your site. If there is an error, double check your <code>wp-config.php</code> file, and try again. If it fails again, please go to the <a href="https://wordpress.org/support/forums/">WordPress support forums</a> with as much data as you can gather.</li>
-	<li><strong>If you did not enter a password, note the password given to you.</strong> If you did not provide a username, it will be <code>admin</code>.</li>
-	<li>The installer should then send you to the <a href="wp-login.php">login page</a>. Sign in with the username and password you chose during the installation. If a password was generated for you, you can then click on &#8220;Profile&#8221; to change the password.</li>
+	<li>Nakon što je konfiguracijski fajl uspješno kreiran, instalacija će kreirati tabele koje su neophodne za rad vaše stranice. Ako se desi neka greška, molimo vas da provjerite podatke u vašem <code>wp-config.php</code> fajlu i pokušate ponovo. Ako se greška ponovi, molimo vas da posjetite <a href="https://wordpress.org/support/" title="WordPress podrška">forume za podršku</a> i tu napišete što je moguće više informacija o vašem problemu.</li>
+	<li><strong>Ako niste unijeli šifru, zabilježite šifru koja je generisana za vas.</strong> Ako niste upisali korisničko ime, ono će biti <code>admin</code>.</li>
+	<li>Instalacija bi vas onda trebala poslati na <a href="wp-login.php">stranicu za prijavu</a>. Prijavite se pomoću vašeg korisničkog imena i šifre koju ste odabrali prilikom instalacije. Ako je vaša šira automatski generisana, onda kliknite na &#8220;Profil&#8221; kako biste je promijenili.</li>
 </ol>
 
-<h2>Updating</h2>
-<h3>Using the Automatic Updater</h3>
+<h2>Nadogradnja</h2>
+<h3>Korištenje automatske nadogradnje</h3>
+<p>Ako vršite nadogradnju sa verzije 2.7 ili neke novije, možete koristiti automatsku nadogradnju:</p>
 <ol>
-	<li>Open <span class="file"><a href="wp-admin/update-core.php">wp-admin/update-core.php</a></span> in your browser and follow the instructions.</li>
-	<li>You wanted more, perhaps? That&#8217;s it!</li>
+	<li>Otvorite <span class="file"><a href="wp-admin/update-core.php">wp-admin/update-core.php</a></span> u vašem browseru i pratite uputstva.</li>
+	<li>Možda ste očekivali dužu proceduru? Moramo vas razočarati, to je sve!</li>
 </ol>
 
-<h3>Updating Manually</h3>
+<h3>Ručna nadogradnja</h3>
 <ol>
-	<li>Before you update anything, make sure you have backup copies of any files you may have modified such as <code>index.php</code>.</li>
-	<li>Delete your old WordPress files, saving ones you&#8217;ve modified.</li>
-	<li>Upload the new files.</li>
-	<li>Point your browser to <span class="file"><a href="wp-admin/upgrade.php">/wp-admin/upgrade.php</a>.</span></li>
+	<li>Prije nego nadogradite bilo šta, obavezno napravite backup svih fajlova koje ćete možda mijenjati (kao npr. <code>index.php</code>).</li>
+	<li>Obrišite vaše stare WordPress fajlove, sačuvajte samo one koje ste mijenjali ako je to neophodno.</li>
+	<li>Dodajte nove fajlove.</li>
+	<li>Otvorite <span class="file"><a href="wp-admin/upgrade.php">/wp-admin/upgrade.php</a> u vašem browseru.</span></li>
 </ol>
 
-<h2>Migrating from other systems</h2>
-<p>WordPress can <a href="https://wordpress.org/support/article/importing-content/">import from a number of systems</a>. First you need to get WordPress installed and working as described above, before using <a href="wp-admin/import.php">our import tools</a>.</p>
+<h2>Migracija sa drugih sistema</h2>
+<p>WordPress podržava <a href="https://codex.wordpress.org/Importing_Content">uvoz iz mnogih drugih sistema</a>. Prvo je potrebno da uspješno instalirate vaš WordPress kao što je to opisano iznad, nakon čega ćete moći da pokrenete <a href="wp-admin/import.php" title="Uvoz u WordPress">naše alate za uvoz</a>.</p>
 
-<h2>System Requirements</h2>
+<h2>Sistemski zahtjevi</h2>
 <ul>
-	<li><a href="https://secure.php.net/">PHP</a> version <strong>5.6.20</strong> or higher.</li>
-	<li><a href="https://www.mysql.com/">MySQL</a> version <strong>5.0</strong> or higher.</li>
+	<li><a href="https://secure.php.net/">PHP</a> verzija <strong>5.6.20</strong> ili novija.</li>
+	<li><a href="https://www.mysql.com/">MySQL</a> verzija <strong>5.0</strong> ili novija.</li>
 </ul>
 
-<h3>Recommendations</h3>
+<h3>Preporuke</h3>
 <ul>
-	<li><a href="https://secure.php.net/">PHP</a> version <strong>7.4</strong> or higher.</li>
-	<li><a href="https://www.mysql.com/">MySQL</a> version <strong>5.6</strong> or higher.</li>
-	<li>The <a href="https://httpd.apache.org/docs/2.2/mod/mod_rewrite.html">mod_rewrite</a> Apache module.</li>
-	<li><a href="https://wordpress.org/news/2016/12/moving-toward-ssl/">HTTPS</a> support.</li>
-	<li>A link to <a href="https://wordpress.org/">wordpress.org</a> on your site.</li>
+	<li><a href="https://secure.php.net/">PHP</a> verzija <strong>7.3</strong> ili novija.</li>
+	<li><a href="https://www.mysql.com/">MySQL</a> verzija <strong>5.6</strong> ili novija.</li>
+	<li><a href="https://httpd.apache.org/docs/2.2/mod/mod_rewrite.html">mod_rewrite</a> Apache modul.</li>
+	<li><a href="https://wordpress.org/news/2016/12/moving-toward-ssl/">HTTPS</a> podrška.</li>
+	<li>Link do <a href="https://wordpress.org/">wordpress.org</a> na vašoj stranici.</li>
 </ul>
 
-<h2>Online Resources</h2>
-<p>If you have any questions that aren&#8217;t addressed in this document, please take advantage of WordPress&#8217; numerous online resources:</p>
+<h2>Online resursi</h2>
+<p>Ako imate bilo kakvih pitanja na koja ne možete naći odgovore u ovom dokumentu, molimo vas da pogledate brojne WordPress resurse na internetu:</p>
 <dl>
-	<dt><a href="https://codex.wordpress.org/">The WordPress Codex</a></dt>
-		<dd>The Codex is the encyclopedia of all things WordPress. It is the most comprehensive source of information for WordPress available.</dd>
-	<dt><a href="https://wordpress.org/news/">The WordPress Blog</a></dt>
-		<dd>This is where you&#8217;ll find the latest updates and news related to WordPress. Recent WordPress news appears in your administrative dashboard by default.</dd>
+	<dt><a href="https://codex.wordpress.org/">WordPressov Codex</a></dt>
+		<dd>Codex je WordPressova enciklopedija o svemu. To je najbolji izvor informacija vezan za WordPress.</dd>
+	<dt><a href="https://wordpress.org/news/">WordPress blog</a></dt>
+		<dd>Ovdje ćete pronaći najnovije vijesti vezane za WordPress. Ove vijesti prikazuju se i u vašoj administratorskoj kontrolnoj ploči.</dd>
 	<dt><a href="https://planet.wordpress.org/">WordPress Planet</a></dt>
-		<dd>The WordPress Planet is a news aggregator that brings together posts from WordPress blogs around the web.</dd>
-	<dt><a href="https://wordpress.org/support/forums/">WordPress Support Forums</a></dt>
-		<dd>If you&#8217;ve looked everywhere and still can&#8217;t find an answer, the support forums are very active and have a large community ready to help. To help them help you be sure to use a descriptive thread title and describe your question in as much detail as possible.</dd>
-	<dt><a href="https://make.wordpress.org/support/handbook/appendix/other-support-locations/introduction-to-irc/">WordPress <abbr>IRC</abbr> (Internet Relay Chat) Channel</a></dt>
-		<dd>There is an online chat channel that is used for discussion among people who use WordPress and occasionally support topics. The above wiki page should point you in the right direction. (<a href="irc://irc.freenode.net/wordpress">irc.freenode.net #wordpress</a>)</dd>
+		<dd>WordPress Planet sakuplja vijesti i članke sa svih WordPressovih blogova širom weba.</dd>
+	<dt><a href="https://wordpress.org/support/">WordPress forumi za podršku</a></dt>
+		<dd>Ako ste tražili svugdje i još ne možete pronaći odgovor, forumi za podršku su veoma aktivni i naša velika zajednica je uvijek spremna da vam pomogne. Da biste im pomogli u rješavanju vašeg problema napišite što više detalja o njemu.</dd>
+	<dt><a href="https://codex.wordpress.org/IRC">WordPress <abbr title="Internet Relay Chat">IRC</abbr> kanal</a></dt>
+		<dd>Postoji i online kanal za razgovore koji se koristi za raspravu između ljudi koji koriste WordPress i tu se često nalaze teme za podršku. Wiki stranica (link iznad) bi vas trebala uputiti u pravom smjeru. (<a href="irc://irc.freenode.net/wordpress">irc.freenode.net #wordpress</a>)</dd>
 </dl>
 
-<h2>Final Notes</h2>
+<h2>Završne napomene</h2>
 <ul>
-	<li>If you have any suggestions, ideas, or comments, or if you (gasp!) found a bug, join us in the <a href="https://wordpress.org/support/forums/">Support Forums</a>.</li>
-	<li>WordPress has a robust plugin <abbr>API</abbr> (Application Programming Interface) that makes extending the code easy. If you are a developer interested in utilizing this, see the <a href="https://developer.wordpress.org/plugins/">Plugin Developer Handbook</a>. You shouldn&#8217;t modify any of the core code.</li>
+	<li>Ako imate neke prijedloge, ideje, komentare ili ako (khmm!) pronađete grešku, pridružite nam se na <a href="https://wordpress.org/support/">forumima za podršku</a>.</li>
+	<li>WordPress ima moćan plugin <abbr title="application programming interface">API</abbr> pomoću kojeg možete lahko i jednostavno proširiti mogućnosti WordPressa. Ako ste programer i zainteresovani ste za korištenje ovih mogućnosti, molimo vas da pogledate <a href="https://developer.wordpress.org/plugins/">Plugin Developer Handbook</a>. Ne preporučujemo izmjene koda u jezgri WordPressa.</li>
 </ul>
 
-<h2>Share the Love</h2>
-<p>WordPress has no multi-million dollar marketing campaign or celebrity sponsors, but we do have something even better&#8212;you. If you enjoy WordPress please consider telling a friend, setting it up for someone less knowledgeable than yourself, or writing the author of a media article that overlooks us.</p>
+<h2>Širite ljubav</h2>
+<p>WordPress nema višemilionski vrijedan marketing ili poznate sponzore, ali imamo nešto mnogo bolje za vas. Ako uživate u korištenju WordPressa molimo vas da obavijestite nekog vašeg prijatelja, date savjet nekome ko se ne snalazi tako dobro kao vi ili na neki drugi način pomognete u širenju dobrog glasa o nama.</p>
 
-<p>WordPress is the official continuation of <a href="http://cafelog.com/">b2/caf&#233;log</a>, which came from Michel V. The work has been continued by the <a href="https://wordpress.org/about/">WordPress developers</a>. If you would like to support WordPress, please consider <a href="https://wordpress.org/donate/">donating</a>.</p>
+<p>WordPress je oficijelni nastavak <a href="http://cafelog.com/">b2/caf&#233;log</a> softvera, čiji je autor Michel V. Rad na ovom softveru nastavili su <a href="https://wordpress.org/about/">WordPressovi programeri</a>. Ako želite podržati rad WordPressa, molimo vas da razmislite o <a href="https://wordpress.org/donate/" title="Donacija za WordPress">novčanoj donaciji</a>.</p>
 
-<h2>License</h2>
-<p>WordPress is free software, and is released under the terms of the <abbr>GPL</abbr> (GNU General Public License) version 2 or (at your option) any later version. See <a href="license.txt">license.txt</a>.</p>
+<h2>Licenca</h2>
+<p>WordPress je slobodan softver i izdaje se pod uslovima <abbr title="GNU General Public License">GPL</abbr> licence verzije 2 ili (po vašem izboru) bilo koje novije verzije. Pogledajte <a href="license.txt">license.txt</a>.</p>
 
 </body>
 </html>
