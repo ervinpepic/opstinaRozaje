@@ -64,7 +64,7 @@ ul[id*="sub-accordion-section-__nimble__"] {
 }
 /* CONTROLS */
 li[id*="__nimble__"].customize-control {
-    margin: 8px 0;
+    margin: 4px 0;
     padding: 2px;
     width: calc( 100% - 4px );
     border: 1px solid rgba(221, 221, 221, 0.43);
@@ -72,7 +72,15 @@ li[id*="__nimble__"].customize-control {
     -webkit-box-shadow: 1px 1px 2px 0 rgba(75, 75, 85, 0.2);
     background-color: #fff;
 }
-
+li[id*="__nimble__"].customize-control .customize-control-title {
+  font-size: 13.5px;
+  line-height: 1.5em;
+  font-weight: normal;
+  margin-bottom: 4px;
+}
+li[id*="__nimble__"].customize-control label {
+  cursor: pointer;
+}
 li[id*="__nimble__"].customize-control span.customize-control-title:first-child {
   margin-left: 21px;
 }
@@ -337,6 +345,23 @@ li[id*="sek_draggable_modules"] [data-sek-content-type="preset_section"] {
   max-width: 100%;/*60%!important;*/
   color: #878787;
   max-height: 86px;
+}
+
+/* Specific for advanced list module */
+.sek-content-type-wrapper [data-sek-content-id="czr_advanced_list_module"] .sek-module-icon {
+  height: 66%;
+  display: flex;
+  padding: 0;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sek-content-type-wrapper [data-sek-content-id="czr_advanced_list_module"] .sek-module-icon img {
+  height: 60%;
 }
 
 /* when the module icon is a font icon */
@@ -1370,7 +1395,7 @@ credits : Gutenberg team @wordpress */
 /* STYLE FOR THE PRO ICON NEXT TO THE CONTROL TITLE */
 .sek-pro-icon-next-title {
   padding: 5px;
-  min-width: 22px;
+  width: 22px;
 }
 
 
