@@ -942,6 +942,14 @@ function sek_get_module_collection() {
           'title' => __( 'Image', 'nimble-builder' ),
           'icon' => 'Nimble__image_icon.svg'
         ),
+
+        array(
+            'content-type' => 'module',
+            'content-id' => 'czr_gallery_module',
+            'title' => __( 'Image gallery', 'nimble-builder' ),
+            'icon' => 'Nimble_gallery_icon.svg'
+          ),
+
         array(
           'content-type' => 'module',
           'content-id' => 'czr_heading_module',
@@ -1076,10 +1084,10 @@ function sek_get_module_collection() {
 
 
 // September 2020 : filter the collection of modules
-// Removes pro upsell modules if NIMBLE_PRO_UPSELL_ON is false
+// Removes pro upsell modules if sek_is_upsell_enabled() is false
 // filter declared in inc/sektions/_front_dev_php/_constants_and_helper_functions/0_0_5_modules_helpers.php
 add_filter('sek_get_module_collection', function( $collection ) {
-    if ( defined('NIMBLE_PRO_UPSELL_ON') && NIMBLE_PRO_UPSELL_ON )
+    if ( sek_is_upsell_enabled() )
       return $collection;
 
     $filtered = [];
@@ -2898,7 +2906,7 @@ function sek_get_feedback_notif_status() {
     // sek_error_log('$modules_used ?? ' . count($modules_used), $modules_used );
     // sek_error_log('$customized_pages ??', $customized_pages );
     //version_compare( $this->wp_version, '4.1', '>=' )
-    if ( $customized_pages > 2 && $nb_section_created > 4 && count($modules_used) > 3 ) {
+    if ( $customized_pages > 1 && $nb_section_created > 3 && count($modules_used) > 3 ) {
         $transient_value = 'eligible';
     }
     set_transient( $transient_name, $transient_value, 7 * DAY_IN_SECONDS );
@@ -3399,7 +3407,7 @@ function sek_clean_options_starting_like( $opt_string ) {
 // July 2020 : introduced for https://github.com/presscustomizr/nimble-builder/issues/720
 // @param $features (string) list of features
 function sek_get_pro_notice_for_czr_input( $features = '' ) {
-  if ( !defined('NIMBLE_PRO_UPSELL_ON') || !NIMBLE_PRO_UPSELL_ON )
+  if ( !sek_is_upsell_enabled() )
     return '';
   return sprintf( '<hr/><p class="sek-pro-notice"><img class="sek-pro-icon" src="%1$s"/><span class="sek-pro-notice-icon-bef-text"><img src="%2$s"/></span><span class="sek-pro-notice-text">%3$s : %4$s<br/><br/>%5$s</span><p>',
       NIMBLE_BASE_URL.'/assets/czr/sek/img/pro_white.svg?ver='.NIMBLE_VERSION,
@@ -3407,7 +3415,7 @@ function sek_get_pro_notice_for_czr_input( $features = '' ) {
       __('Unlock more features with Nimble Builder Pro', 'nimble-builder'),
       $features,
       sprintf('<a href="%1$s" rel="noopener noreferrer" title="%2$s" target="_blank">%2$s <i class="fas fa-external-link-alt"></i></a>',
-          'https://presscustomizr.com/nimble-builder-pro/',
+          'https://presscustomizr.com/nimble-builder-pro/?utm_source=usersite&utm_medium=link&utm_campaign=czr',
           __('Go Pro', 'nimble-builder')
       )
   );
@@ -3415,12 +3423,12 @@ function sek_get_pro_notice_for_czr_input( $features = '' ) {
 
 
 // September 2020 : filter the collection of pre-built sections
-// Removes pro upsell modules if NIMBLE_PRO_UPSELL_ON is false
+// Removes pro upsell modules if sek_is_upsell_enabled() is false
 // filter declared in _front_dev_php/_constants_and_helper_functions/0_5_2_sektions_local_sektion_data.php
 add_filter('sek_get_raw_section_registration_params', function( $collection ) {
     if ( sek_is_pro() )
       return $collection;
-    if ( defined('NIMBLE_PRO_UPSELL_ON') && NIMBLE_PRO_UPSELL_ON )
+    if ( sek_is_upsell_enabled() )
       return $collection;
 
     $filtered = [];
@@ -3441,6 +3449,11 @@ add_filter('sek_get_raw_section_registration_params', function( $collection ) {
 // used when generating id server side for a site template
 function sek_generate_level_guid() {
     return NIMBLE_PREFIX_FOR_SETTING_NOT_SAVED . substr( strval( md5( uniqid( rand(), true) ) ),0, 12 );//__nimble__4cdf8be5ce8f
+}
+
+
+function sek_is_upsell_enabled() {
+  return !sek_is_pro();
 }
 
 ?><?php
@@ -3878,7 +3891,7 @@ function sek_get_raw_section_registration_params() {
                     'thumb' => 'pro_intro_two.jpg',
                     'active' => sek_is_pro(),
                     'is_pro' => true,
-                    'demo_url' => 'https://nimblebuilder.com/special-image-demo/'
+                    'demo_url' => 'https://nimblebuilder.com/special-image-demo?utm_source=usersite&utm_medium=link&utm_campaign=section_demos'
                 ),
                 array(
                     'content-id' => 'pro_intro_one',
@@ -3887,6 +3900,34 @@ function sek_get_raw_section_registration_params() {
                     'active' => sek_is_pro(),
                     'is_pro' => true,
                     'demo_url' => '#intro-four'
+                )
+            )
+        ],
+        'sek_post_grids_sec_picker_module' => [
+            'name' => __('Post lists sections', 'nimble-builder'),
+            'section_collection' => array(
+                array(
+                    'content-id' => 'grid_one',
+                    'title' => __('Simple post grid', 'nimble-builder' ),
+                    'thumb' => 'grid_one.jpg',
+                    'demo_url' => 'https://nimblebuilder.com/post-grid-sections?utm_source=usersite&utm_medium=link&utm_campaign=section_demos#grid-one'
+                    //'height' => '188px'
+                ),
+                array(
+                    'content-id' => 'grid_two',
+                    'title' => __('Posts on two columns', 'nimble-builder' ),
+                    'thumb' => 'grid_two.jpg',
+                    'demo_url' => 'https://nimblebuilder.com/post-grid-sections?utm_source=usersite&utm_medium=link&utm_campaign=section_demos#grid-two'
+                    //'height' => '188px'
+                ),
+                array(
+                    'content-id' => 'pro_grid_one',
+                    'title' => __('Masonry post grid', 'nimble-builder' ),
+                    'thumb' => 'pro_grid_one.jpg',
+                    'demo_url' => 'https://nimblebuilder.com/post-grid-sections?utm_source=usersite&utm_medium=link&utm_campaign=section_demos#pro-grid-one',
+                    'active' => sek_is_pro(),
+                    'is_pro' => true
+                    //'height' => '188px'
                 )
             )
         ],

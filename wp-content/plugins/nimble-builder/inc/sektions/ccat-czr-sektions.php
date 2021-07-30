@@ -122,7 +122,7 @@ function sek_enqueue_controls_js_css() {
                 'isDevMode' => sek_is_dev_mode(),
                 'isDebugMode' => sek_is_debug_mode(),
                 'isPro' => sek_is_pro(),
-                'isUpsellEnabled' => defined('NIMBLE_PRO_UPSELL_ON') && NIMBLE_PRO_UPSELL_ON,
+                'isUpsellEnabled' => sek_is_upsell_enabled(),
                 'baseUrl' => NIMBLE_BASE_URL,
                 //ajaxURL is not mandatory because is normally available in the customizer window.ajaxurl
                 'ajaxUrl' => admin_url( 'admin-ajax.php' ),
@@ -1792,7 +1792,7 @@ function sek_print_nimble_input_templates() {
                   if ( secParams['demo_url'] && -1 === secParams['demo_url'].indexOf('http') ) { #>
                     <div class="sek-demo-link"><a href="https://nimblebuilder.com/nimble-builder-sections?utm_source=usersite&amp;utm_medium=link&amp;utm_campaign=section_demos{{secParams['demo_url']}}" target="_blank" rel="noopener noreferrer">{{demo_title}} <i class="fas fa-external-link-alt"></i></a></div>
                   <# } else if ( secParams['demo_url'] ) { #>
-                    <div class="sek-demo-link"><a href="{{secParams['demo_url']}}?utm_source=usersite&amp;utm_medium=link&amp;utm_campaign=section_demos" target="_blank" rel="noopener noreferrer">{{demo_title}} <i class="fas fa-external-link-alt"></i></a></div>
+                    <div class="sek-demo-link"><a href="{{secParams['demo_url']}}" target="_blank" rel="noopener noreferrer">{{demo_title}} <i class="fas fa-external-link-alt"></i></a></div>
                   <# } #>
                 </div>
                 <#
