@@ -23,7 +23,7 @@ p {
 }
 
 .widget_text a {
-	text-decoration:none;
+	text-decoration: none;
 	
 }
 
@@ -46,11 +46,6 @@ p {
  line-height: 140px;
 }
 
-/*img[src$=".svg"] { */
-/*    width: 100% !important; */
-/*    height: auto !important; */
-    
-/*}*/
 a.glink img {
     vertical-align: middle;
     display: inline;
@@ -61,67 +56,88 @@ a.glink img {
     border-radius: 0.5px;
 }
 
+.img-center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 30%;
+}
+
+img.img-center:hover {
+    opacity: 0.4;
+}
+
+.sidebar-text {
+    color: #fff !important;
+}
+
+a.sidebar-text {
+    color: #fff !important;
+}
+
+#nav-topbar .nav li a {
+    color: #fff !important;
+}
+
+.post-title a:hover {
+    opacity: 0.4;
+}
+
+a:hover {
+	opacity: 0.4;
+}
+
+.sidebar-naslov {
+    font-weight: 400;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+	color: #fff !important;
+}
+
 #copyright p {
-	color: rgb(166, 169, 173) ;
+	color: #fff;
+}
+
+.post-nav li>strong {
+	color: white !important
+}
+
+.post-nav li a span {
+	color: white;
+}
+
+.post-nav li a span:hover {
+	color: white;
+	opacity: 0.4
 }
 
 
-@media only screen and (max-width: 1920px) and (min-width: 1750px)  {
-    #gtranslate_wrapper {
-        position: fixed !important;
-        top: 10px !important;
-        right: 24% !important;
-        z-index: 999999 !important;
-    }
+.alx-posts .post-item-title a {
+    color: #fff;
 }
 
-@media only screen and (max-width: 1750px) and (min-width: 1550px)  {
-    #gtranslate_wrapper {
-        position: fixed !important;
-        top: 10px !important;
-        right: 22% !important;
-        z-index: 999999 !important;
-    }
+.widget a:hover {
+	color: #AEAEAE !important;
+	opacity: 1;
 }
 
-@media only screen and (max-width: 1550px) and (min-width: 1450px)  {
-    #gtranslate_wrapper {
-        position: fixed !important;
-        top: 10px !important;
-        right: 18% !important;
-        z-index: 999999 !important;
-    }
+h3.obavjesetenja {
+	margin-bottom: -28px
 }
 
-@media only screen and (max-width: 1450px) and (min-width: 1350px)  {
-    #gtranslate_wrapper {
-        position: fixed !important;
-        top: 10px !important;
-        right: 16% !important;
-        z-index: 999999 !important;
-    }
+.sidebar-top p {
+    color: #fff;
+}
+.social-links .social-tooltip {
+    color: #fff;
 }
 
-@media only screen and (max-width: 1350px) and (min-width: 980px)  {
-    #gtranslate_wrapper {
-        position: fixed !important;
-        top: 10px !important;
-        right: 13% !important;
-        z-index: 999999 !important;
-    }
+#footer-bottom .social-links a {
+    color: #fff !important;
 }
 
-@media only screen and (max-width: 980px) and (min-width: 721px)  {
-    #gtranslate_wrapper {
-        position: fixed !important;
-        top: 11px !important;
-        right: 10% !important;
-        z-index: 999999 !important;
-    }
-}
-
-@media only screen and (max-width: 720px) and (min-width: 150px)  {
-    #gtranslate_wrapper {
-        display: none;
-    }
+@media only screen and (min-width: 479px) and (max-width: 960px) {
+    .sidebar.s1 .sidebar-top p {
+    color: #fff;
+ }
 }

@@ -11,7 +11,7 @@ function enqueue_parent_styles() {
 function wpb_login_logo() { ?>
    <style type="text/css">
        #login h1 a, .login h1 a {
-           background-image: url(https://www.rozaje.me/wp-content/uploads/2019/12/Logo_site1Asset-2.svg);
+           background-image: url(https://www.rozaje.me/wp-content/uploads/2021/11/login-site-logo.svg);
        height:100px;
        width:300px;
        background-size: 300px 100px;
@@ -28,7 +28,7 @@ function wpb_login_logo_url() {
 add_filter( 'login_headerurl', 'wpb_login_logo_url' );
 
 function wpb_login_logo_url_title() {
-   return 'Opština';
+   return 'Opstina Rozaje';
 }
 add_filter( 'login_headertitle', 'wpb_login_logo_url_title' );
 
@@ -38,3 +38,6 @@ function remove_logo_wp_admin() {
    $wp_admin_bar->remove_menu( 'wp-logo' );
 }
 add_action( 'wp_before_admin_bar_render', 'remove_logo_wp_admin', 0 );
+
+#Overwrite files in subdriectories
+
