@@ -39,5 +39,11 @@ function remove_logo_wp_admin() {
 }
 add_action( 'wp_before_admin_bar_render', 'remove_logo_wp_admin', 0 );
 
+function custom_footer_copyright() {
+   echo '<span id="footer-thankyou">Developed by Ervin pepic </span>';
+}
+
+add_filter('admin_footer_text', 'custom_footer_copyright');
+
 #Overwrite files in subdriectories
 
