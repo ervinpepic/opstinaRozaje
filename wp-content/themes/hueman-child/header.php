@@ -5,16 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="profile" href="https://gmpg.org/xfn/11" />
     <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
-    <link rel="apple-touch-icon" sizes="180x180" href="web-favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="web-favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="194x194" href="web-favicon/favicon-194x194.png">
-    <link rel="icon" type="image/png" sizes="192x192" href="web-favicon/android-chrome-192x192.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="web-favicon/favicon-16x16.png">
-    <link rel="manifest" href="web-favicon/site.webmanifest">
-    <link rel="mask-icon" href="web-favicon/safari-pinned-tab.svg" color="#1ea4ca">
-    <meta name="msapplication-TileColor" content="#da532c">
-    <meta name="msapplication-TileImage" content="web-favicon/mstile-144x144.png">
-    <meta name="msapplication-config" content="web-favicon/browserconfig.xml">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="194x194" href="/favicons/favicon-194x194.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicons/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+    <link rel="manifest" href="/favicons/site.webmanifest">
+    <link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#2b5797">
+    <meta name="msapplication-TileImage" content="/favicons/mstile-144x144.png">
     <meta name="theme-color" content="#ffffff">
 
   <?php wp_head(); ?>

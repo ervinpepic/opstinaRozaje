@@ -1,0 +1,4 @@
+[31-Jan-2022 10:27:08 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function get_header() in /home1/rozajptj/public_html/wp-content/themes/hueman/index.php:1
+Stack trace:
+#0 {main}
+  thrown in /home1/rozajptj/public_html/wp-content/themes/hueman/index.php on line 1

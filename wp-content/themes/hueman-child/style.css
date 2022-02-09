@@ -141,3 +141,7 @@ h3.obavjesetenja {
     color: #fff;
  }
 }
+
+.mb {
+    margin-bottom: 2rem !important;
+}
