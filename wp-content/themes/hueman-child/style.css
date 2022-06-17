@@ -145,3 +145,7 @@ h3.obavjesetenja {
 .mb {
     margin-bottom: 2rem !important;
 }
+
+ol li {
+	color: #111111 !important;
+}
