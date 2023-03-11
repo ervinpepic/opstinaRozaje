@@ -15,7 +15,16 @@
     <meta name="msapplication-TileColor" content="#2b5797">
     <meta name="msapplication-TileImage" content="/favicons/mstile-144x144.png">
     <meta name="theme-color" content="#ffffff">
+    
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GKK31Y0GRM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'G-GKK31Y0GRM');
+</script>
   <?php wp_head(); ?>
 </head>
 
