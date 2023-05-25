@@ -2,9 +2,9 @@
 Tags: images, image, right click, stealing
 Donate link: https://www.kpgraham.com
 Requires at least: 3.0
-Tested up to: 5.7.1
+Tested up to: 6.2
 Contributors: Keith Graham
-Stable tag: 3.6
+Stable tag: 3.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -32,7 +32,15 @@ The plugin no longer tries to replace images with a dummy image. This method har
 2. Upload the plugin to your wp-content/plugins directory.
 3. Activate the plugin.
 
+== Donate ==
+Please buy one of my books and give it a good review. I worked hard on these books, and they are worth reading.
+<a href="https://amzn.to/42BjwXv" target="_new">My Author Page at Amazon</a>
+
+
 == Changelog ==
+
+= 3.7 =
+* Tested under WordPress 6.2
 
 = 3.6 =
 * Tested on 5.7 version of WordPress.

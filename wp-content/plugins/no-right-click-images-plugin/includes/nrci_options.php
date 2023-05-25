@@ -96,59 +96,14 @@ function kpg_no_rc_img_control_2()  {
 	<br>
 	<fieldset style="border:thin solid black;padding:6px;width:100%;">
 	<legend> <span style="font-weight:bold;font-size:1.5em">Support the Programmer</span> </legend>
-	<p>If you feel that you"d like to encourage me, you could <a href="https://www.amazon.com/default/e/B004C64N24">buy one of my books</a>. I write short stories for fun and I have sold about 50 stories to various
-	magazines. The books are cheap and very interesting.</p>
-	<p>You can also donate a few dollars. Cash is a little short right now, so my wife convinced me to go the low road and ask for money. There are three levels of donations. 
-	<br>First, at $2.50 you can support me. I like this level because it does not put any stress on you. I think everyone can afford this without any pain. 
-	<br>Second, for those who think they owe a little more, I have a $9.99 level. This is for those who have money to burn and drive expensive sports cars. 
-	<br>Last, there is the $29.99 level. I don"t expect anyone to use this level, but there are possibly a few sysops with a company credit card, and an unlimited budget who might sympathize with a fellow coder and click this button.</p>
-	<p>You can pay using PayPal. All you need is a credit card. There is no account required. Just click and follow the instructions. You can request a refund and I will gladly comply.</p>
-	<table style="border:grey solid thin;min-width:50%">
-	<thead>
-	<tr style="background-color:ivory;">
-	<th>Support Level</th>
-	<th>PayPal</th>
-	</tr>
-	</thead>
-	<tbody>
-	<tr>
-	<td>Level 1) $2.50 <br />
-	Grateful User</td>
-	<td><form action="https://www.paypal.com/cgi-bin/webscr" method="post">
-	<input name="cmd" type="hidden" value="_s-xclick" />
-	<input name="hosted_button_id" type="hidden" value="9V4ZE99S2VYQA" />
-	<input alt="PayPal - The safer, easier way to pay online!" name="submit"
-	src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif" type="image" />
-	<img src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" alt="" width="1" height="1" border="0" />
-	</form></td>
-	</tr>
-	<tr>
-	<td>Level 2) $9.99 <br />
-	Generous Benefactor</td>
-	<td><form action="https://www.paypal.com/cgi-bin/webscr" method="post">
-	<input name="cmd" type="hidden" value="_s-xclick" />
-	<input name="hosted_button_id" type="hidden" value="2UCJBHR44HQAJ" />
-	<input alt="PayPal - The safer, easier way to pay online!" name="submit"
-	src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif" type="image" />
-	<img src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" alt="" width="1" height="1" border="0" />
-	</form></td>
-	</tr>
-	<tr>
-	<td>Level 3) $29.99 <br />
-	Wealthy patron</td>
-	<td><form action="https://www.paypal.com/cgi-bin/webscr" method="post">
-	<input name="cmd" type="hidden" value="_s-xclick" />
-	<input name="hosted_button_id" type="hidden" value="EG83EZCTGYYQQ" />
-	<input alt="PayPal - The safer, easier way to pay online!" name="submit"
-	src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif" type="image" />
-	<img src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" alt="" width="1" height="1" border="0" />
-	</form></td>
-	</tr>
-	</tbody>
-	</table>
+	
+	<p>If you wish to support my programming, anything you can do would be appreciated.</p>
+<p>There are two ways to do this.</p>
+<p>First, you can go to the the plugin pages on WordPress.org and click on a few stars for this plugin rating, and check off the “it works” information. You might, if so moved, say a few nice words under reviews.</p>
+<p>Second, If you feel that you’d like to encourage me, please buy one of my books and give it a good review. I worked hard on these books, and they are worth reading.
+<a href="https://amzn.to/42BjwXv" target="_new">My Author Page at Amazon</a> (I would prefer this. I like knowing people might be reading my books.) Try "Murder in Luna City", a financial thriller that takes place on the Moon.
+
 	</fieldset>
-	</div>
-	<div style="width:220px;float:right;">Powered By <a href="http://www.siteground.com/recommended?referrer_id=6975888" target="_blank">SiteGround.com</a>
 	</div>
 	</div>
 	<?php } 

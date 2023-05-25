@@ -3,7 +3,8 @@
 Plugin Name: No Right Click Images Plugin
 Plugin URI: https://www.kpgraham.com
 Description: Uses Javascript to prevent right clicking of images to help keep leaches from copying images
-Version: 3.6
+Version: 3.7
+Tested up to: 6.2
 Author: Keith P. Graham
 Author URI: https://www.kpgraham.com
 
