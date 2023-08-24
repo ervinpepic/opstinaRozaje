@@ -173,7 +173,11 @@ class TRP_Machine_Translation_Tab {
 
 
     public function add_enable_auto_translate_slug_filter( $allow ){
-        if( isset( $this->settings['trp_machine_translation_settings']['automatically-translate-slug'] ) && $this->settings['trp_machine_translation_settings']['automatically-translate-slug'] == 'yes' ){
+        if( !empty( $this->settings['trp_machine_translation_settings']['machine-translation'] ) &&
+            $this->settings['trp_machine_translation_settings']['machine-translation'] == 'yes' &&
+            isset( $this->settings['trp_machine_translation_settings']['automatically-translate-slug'] ) &&
+            $this->settings['trp_machine_translation_settings']['automatically-translate-slug'] == 'yes'
+        ){
             $allow = true;
         }
         return $allow;
@@ -242,7 +246,7 @@ class TRP_Machine_Translation_Tab {
                     <ul class="trp-unsupported-languages">
                         <?php
                         foreach ( $this->settings['translation-languages'] as $language_code ) {
-                            if ( isset($languages_that_support_formality[$language_code]) && $languages_that_support_formality[$language_code] == "false") {
+                            if ( isset($languages_that_support_formality[$language_code]) && $languages_that_support_formality[$language_code] == "false" || !array_key_exists( $language_code, $languages_that_support_formality ) ) {
                                 echo '<li>' . esc_html( $language_names[$language_code] ) . '</li>';
                             }
                         }

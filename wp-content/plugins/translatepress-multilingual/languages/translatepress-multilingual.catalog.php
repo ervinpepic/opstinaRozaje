@@ -108,6 +108,8 @@
 <?php __("Invalid language code. Please try again.", "translatepress-multilingual"); ?>
 <?php __("Language codes can contain only A-Z a-z 0-9 - _ characters. Check your language codes in TranslatePress General Settings.", "translatepress-multilingual"); ?>
 <?php __("Error! Duplicate URL slug values.", "translatepress-multilingual"); ?>
+<?php __("You cannot select two languages that have the same <a href=\"https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes\" target=\"_blank\">iso code</a> but different formalities because doing so will lead to duplicate <a href=\"https://developers.google.com/search/docs/specialty/international/localized-versions\" target=\"_blank\">hreflang tags</a>.", "translatepress-multilingual"); ?>
+<?php __("Duplicate language detected.<br>Each language can only be added once to ensure accurate translation management.<br> Please change the duplicate language entry and try again. ", "translatepress-multilingual"); ?>
 <?php __("Current Language", "translatepress-multilingual"); ?>
 <?php __("Opposite Language", "translatepress-multilingual"); ?>
 <?php __("General", "translatepress-multilingual"); ?>
@@ -243,6 +245,7 @@
 <?php __("Updating original string ids for language %s...", "translatepress-multilingual"); ?>
 <?php __("Regenerating original meta table for language %s...", "translatepress-multilingual"); ?>
 <?php __("Cleaning original meta table for language %s...", "translatepress-multilingual"); ?>
+<?php __("Replacing original id NULL with value for language %s...", "translatepress-multilingual"); ?>
 <?php __("Inserting gettext original strings for language %s...", "translatepress-multilingual"); ?>
 <?php __("Cleaning gettext original strings table for language %s...", "translatepress-multilingual"); ?>
 <?php __("Updating gettext original string ids for language %s...", "translatepress-multilingual"); ?>
@@ -360,6 +363,7 @@
 <?php __("Language Switcher", "translatepress-multilingual"); ?>
 <?php __("Shortcode ", "translatepress-multilingual"); ?>
 <?php __("Use shortcode on any page or widget.", "translatepress-multilingual"); ?>
+<?php __("You can also add the <a href=\"%s\" title=\"Language Switcher Block Documentation\">Language Switcher Block</a> in the WP Gutenberg Editor.", "translatepress-multilingual"); ?>
 <?php __("Menu item", "translatepress-multilingual"); ?>
 <?php __("Go to  %1$s Appearance -> Menus%2$s to add languages to the Language Switcher in any menu.", "translatepress-multilingual"); ?>
 <?php __("Learn more in our documentation.", "translatepress-multilingual"); ?>
@@ -406,6 +410,8 @@
 <?php __("Cleans up all trp_dictionary_* tables of duplicate rows. These tables contain translations for user-inputted strings such as post content, post title, menus etc.", "translatepress-multilingual"); ?>
 <?php __("Remove duplicate rows for original dictionary strings", "translatepress-multilingual"); ?>
 <?php __("Cleans up all trp_original_strings table of duplicate rows. This table contains strings in the default language, without any translation.<br>The trp_original_meta table, which contains meta information that refers to the post parent’s id, is also regenerated.<br>Such duplicates can appear in exceptional situations of unexpected behavior.", "translatepress-multilingual"); ?>
+<?php __("Replace gettext strings that have original id NULL with the correct original ids", "translatepress-multilingual"); ?>
+<?php __("Some gettext strings might have the original is set to NULL which causes the translation editor to freeze.<br>Replace the original ids of these strings with the correct value.", "translatepress-multilingual"); ?>
 <?php __("Optimize Database", "translatepress-multilingual"); ?>
 <?php __("TranslatePress Database Updater", "translatepress-multilingual"); ?>
 <?php __("Updating TranslatePress tables", "translatepress-multilingual"); ?>
@@ -557,6 +563,8 @@
 <?php __("URL Slugs Translation", "translatepress-multilingual"); ?>
 <?php __("String Translation Editor", "translatepress-multilingual"); ?>
 <?php __("Active*", "translatepress-multilingual"); ?>
+<?php __("Select the languages you wish to make your website available in.", "translatepress-multilingual"); ?>
+<?php __("<br>The Formality field is used by Automatic Translation to decide whether the translated text should lean towards formal or informal language. For now, it is supported only for a few languages and only by <a href=\"%s\" target=\"_blank\">DeepL</a>.", "translatepress-multilingual"); ?>
 <?php __("<br>* The inactive languages will still be visible and active for the admin. For other users they won't be visible in the language switchers and won't be accessible either.", "translatepress-multilingual"); ?>
 <?php __("Post Slug", "translatepress-multilingual"); ?>
 <?php __("First by browser language, then IP address (recommended)", "translatepress-multilingual"); ?>

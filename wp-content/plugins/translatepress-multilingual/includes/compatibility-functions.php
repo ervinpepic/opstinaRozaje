@@ -1845,3 +1845,121 @@ function trp_et_divi_maybe_change_frontend_locale( $locale ) {
     return $locale;
 }
 add_filter( 'locale', 'trp_et_divi_maybe_change_frontend_locale' );
+
+/*
+ * Register old advanced settings if they are checked
+ */
+add_action('admin_init', 'trp_register_old_advanced_settings');
+
+function trp_register_old_advanced_settings( $bool )
+{
+
+    $option = get_option('trp_advanced_settings', true);
+    if (isset($option['fix_broken_html']) && $option['fix_broken_html'] === 'yes') {
+
+        add_filter('trp_register_advanced_settings', 'trp_register_fix_broken_html', 50);
+    }
+}
+
+add_filter('trp_ald_popup_options_array', 'trp_keep_no_popup_setting_for_redirect_directly', 10, 1);
+
+function trp_keep_no_popup_setting_for_redirect_directly($array_popup_options){
+    $option_ald = get_option('trp_ald_settings', true);
+    if (isset($option_ald['popup_option']) && $option_ald['popup_option'] !== 'no_popup' && version_compare(TRP_IN_ALD_PLUGIN_VERSION, '1.1', '>=') ) {
+        unset($array_popup_options['no_popup']);
+    }
+    return $array_popup_options;
+}
+
+/**
+ * Prevent trp-sortable-languages.js script from running
+ *
+ * We have merged the code from trp-sortable-languages.js in trp-back-end-script.js in TP ver. 2.5.3 but we still need trp-sortable-languages for backwards compatibility
+ * If the version of TranslatePress is at least 2.5.3, prevent the trp-sortable-languages.js script from running
+ *
+ */
+add_action( 'trp_before_running_hooks', 'trpc_prevent_sortable_script_from_loading' );
+function trpc_prevent_sortable_script_from_loading( $trp_loader ){
+    if ( version_compare(TRP_PLUGIN_VERSION, '2.5.4', '>=' ) ) {
+        $trp_loader->remove_hook( 'admin_enqueue_scripts', 'enqueue_sortable_language_script' );
+    }
+}
+
+add_filter('trp_advanced_tab_add_element', 'trp_compatibility_for_adl_127_version', 20);
+function trp_compatibility_for_adl_127_version( $settings ){
+    foreach ( $settings as $key => $setting ) {
+        if ( $setting['name'] === 'automatic_user_language_detection' && !isset( $setting['id'] ) ) {
+            $settings[$key]['id'] = 'ald_settings';
+        }
+    }
+    return $settings;
+}
+
+add_action( 'before_woocommerce_init', function() {
+    if ( class_exists( \Automattic\WooCommerce\Utilities\FeaturesUtil::class ) ) {
+        \Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', TRP_PLUGIN_DIR . 'index.php', true );
+    }
+} );
+
+
+/**
+ * Compatibility with RankMath
+ */
+add_filter( 'rank_math/analytics/get_translated_objects', 'trp_rank_math_get_translated_items', 10, 1 );
+function trp_rank_math_get_translated_items( $post_id ) {
+    if ( ! class_exists( 'TRP_Translate_Press' ) || !function_exists('trp_translate')) {
+        return $post_id;
+    }
+
+    $trp                = TRP_Translate_Press::get_trp_instance();
+    $url_converter      = $trp->get_component( 'url_converter' );
+    $settings_component = $trp->get_component( 'settings' );
+    $trp_settings       = $settings_component->get_settings();
+
+    // Needed because adding language slug in urls is not performed by default in admin area.
+    add_filter( 'trp_add_language_to_home_url_check_for_admin', '__return_false' );
+
+    $permalink = get_permalink( $post_id );
+
+    $translated_items = [];
+
+    $languages = $trp_settings['publish-languages'];
+    foreach ( $languages as $language ) {
+
+        $url = esc_url( $url_converter->get_url_for_language( $language, $permalink, '' ) );
+
+        /**
+         * Google API and get_permalink sends URL Encoded strings so we need
+         * to urldecode in order to get them to match with whats saved in DB.
+         */
+        $parse_url = wp_parse_url( urldecode( $url ) );
+        if ( ! $parse_url ) {
+            continue;
+        }
+
+        if ( empty( $parse_url['path'] ) ) {
+            continue;
+        }
+
+        $title = get_the_title( $post_id );
+
+        // Get translated title, if possible.
+        if( $language != $trp_settings['default-language'] ){
+            $title = trp_translate( $title, $language, false );
+        }
+
+        // Push translated URL into array.
+        array_push(
+            $translated_items,
+            [
+                'url'   => $parse_url['path'],
+                'title' => $title,
+            ]
+        );
+    }
+
+    // Revert to default functionality.
+    remove_filter( 'trp_add_language_to_home_url_check_for_admin', '__return_false' );
+
+    return $translated_items;
+}

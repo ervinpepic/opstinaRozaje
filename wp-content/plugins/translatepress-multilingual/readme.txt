@@ -3,9 +3,9 @@ Contributors: cozmoslabs, razvan.mo, madalin.ungureanu, sareiodata, cristophor
 Donate link: https://www.translatepress.com/
 Tags: translate, translation, multilingual, automatic translation, bilingual, front-end translation, google translate, language
 Requires at least: 3.1.0
-Tested up to: 6.2
+Tested up to: 6.3
 Requires PHP: 5.6.20
-Stable tag: 2.5.3
+Stable tag: 2.6.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -140,6 +140,43 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
+= 2.6.0 =
+* Fixed some cases of 404 on translated pages for WooCommerce permalinks
+* Improved compatibility with RankMath
+
+= 2.5.9 =
+* Added loader component as extra parameter in trp_allow_tp_to_run hook to ease integration with 3rd parties
+* Fixed edge case error with undefined variable $disabled_language
+* Fixed notice about deprecated property in php 8.2
+* Fixed edge case error in class-error-manager.php file
+
+= 2.5.8 =
+* Fixed some cases of disappearing CPT slugs translations leading to 404 pages
+* Fixed incorrectly adding empty href attributes to link tags on translated pages
+* Fixed PHP 8 deprecated notices regarding dynamically defined properties
+
+= 2.5.7 =
+* Added a new item in Database optimization tool to fix some cases of gettext not being selectable in Translation Editor
+* Fixed Edit pencil icon being difficult to click when hovering over certain text in Translation Editor
+* Added compatibility with WooCommerce High-Performance Order Storage (HPOS)
+* Improved compatibility with WP Rocket
+
+= 2.5.6 =
+* Improved settings UI by showing formality option only for languages and translation engines that support it
+* Fixed focus on search input when opening the languages dropdown in settings
+* Removed unnecessary calls for Marketing opt-in feature
+
+= 2.5.5 =
+* Redesigned TranslatePress Settings Advanced tab UI using subtabs
+* Improved the translation status icons for the case when multiple strings are shown at once in Translation Editor
+* Fixed deprecated notice on php 8
+
+= 2.5.4 =
+* Updated look of language switchers for shortcode generated and floating options
+* Added notice in TranslatePress settings to avoid adding duplicate languages with different formalities
+* Fixed deprecated warning triggered by date_create function
+* Fixed bug with some strings not being editable in Translation Editor
+
 = 2.5.3 =
 * Improved security by escaping form actions
 * Fixed filtering by gettext domain in String Translation
