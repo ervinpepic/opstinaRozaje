@@ -717,7 +717,9 @@ function trp_woo_fondy_payment_gateway_exclude_gettext_strings($translation, $te
 }
 
 /**
- * Compatibility with Woocommerce Product Filters plugin
+ * Compatibility with Woocommerce Product Filters plugin, unknown author
+ * This is NOT about the plugin made by WBM https://woobewoo.com/, nor by barn2.com
+ *
  * They stop the buffering at priority -150 and that leaves #trpst style tags before we get to remove them
  *
  * The caveat to removing or adding a foreign filter is that it can be done via
@@ -725,6 +727,7 @@ function trp_woo_fondy_payment_gateway_exclude_gettext_strings($translation, $te
  *
  * In this case we obtained access to global objects set by the WCPF plugin
  * and their public methods.
+ *
  */
 
 add_action( 'init', 'trp_woo_product_filters', 10 );
@@ -739,6 +742,22 @@ function trp_woo_product_filters(){
 		$hook_manager->add_action( 'shutdown', 'end_of_buffering', 100 );
 	}
 }
+
+/**
+ * Compatibility with WooCommerce Product Filters by barn2
+ * https://barn2.com/wordpress-plugins/woocommerce-product-filters/
+ *
+ * Set chunk size to 0 because the result of the wcf_fetch_data is HTML instead of JSON, causing errors in browser console
+ */
+if ( class_exists( 'Barn2\Plugin\WC_Filters\Plugin_Factory' ) ) {
+    add_filter( "trp_output_buffer_chunk_size", "trp_set_chunk_size_to_zero", 10, 1 );
+}
+function trp_set_chunk_size_to_zero( $chunk_size ) {
+    $chunk_size = 0;
+
+    return $chunk_size;
+}
+
 
 /**
  * Compatibility with Elementor Popups Links
@@ -942,12 +961,13 @@ if( function_exists('ct_is_show_builder') ) {
     /**
      * Disable TRP when the Oxygen Builder is being loaded
      */
-    add_filter( 'trp_stop_translating_page', 'trp_oxygen_disable_trp_in_builder');
-    function trp_oxygen_disable_trp_in_builder(){
+    add_filter( 'trp_stop_translating_page', 'trp_oxygen_disable_trp_in_builder', 10, 2);
+    function trp_oxygen_disable_trp_in_builder($bool, $output){
 
         if( defined( 'SHOW_CT_BUILDER' ) )
             return true;
 
+        return $bool;
     }
 
     /**
@@ -1181,10 +1201,14 @@ function trp_overrule_main_query_condition(){
     }
 }
 
-// Otherwise trp-post-container is stripped
+/**
+ * Otherwise trp-post-container is stripped
+ *
+ * Applied this solution permanently. It's problematic with Elementor and WooCommerce too.
+ */
 add_filter( 'wp_kses_allowed_html', 'trp_prevent_kses_from_stripping_trp_post_container', 10, 2 );
 function trp_prevent_kses_from_stripping_trp_post_container( $allowedposttags, $context  ) {
-    if ( class_exists('Rtcl') && $context === 'post' ){
+    if ( $context === 'post' ){
         $allowedposttags['trp-post-container'] = array( 'data-trp-post-id' => true );
     }
     return $allowedposttags;
@@ -1990,3 +2014,114 @@ function trp_stop_automatic_translation_for_certain_post_type_base_slugs( $bool,
     
     return $bool;
 }
+
+/**
+ * Compatibility with Duplicate Page plugin
+ */
+
+if (class_exists("duplicate_page")) {
+
+    add_action('save_post', 'trp_add_hook_for_delete', 10, 1);
+}
+
+function trp_add_hook_for_delete( $post_id )
+{
+    global $trp_post_id_for_deleting_duplicate_posts_slugs_from_db;
+
+    if (did_action('admin_action_dt_duplicate_post_as_draft')) {
+        $trp_post_id_for_deleting_duplicate_posts_slugs_from_db = $post_id;
+        add_action('shutdown', 'trp_delete_slug_translation_from_duplicated_pages' );
+    }
+}
+function trp_delete_slug_translation_from_duplicated_pages() {
+    global $trp_post_id_for_deleting_duplicate_posts_slugs_from_db;
+    global $wpdb;
+
+    $sql = $wpdb->prepare("DELETE FROM $wpdb->postmeta WHERE post_id = %d AND (meta_key LIKE %s OR meta_key LIKE %s);", $trp_post_id_for_deleting_duplicate_posts_slugs_from_db, '%'. $wpdb->esc_like('trp_automatically_translated_slug') .'%', '%'. $wpdb->esc_like('trp_translated_slug') .'%');
+
+    $wpdb->query( $sql );
+    
+    unset( $GLOBALS['trp_post_id_for_deleting_duplicate_posts_slugs_from_db'] );
+
+}
+/**
+ * Exclude Query Monitor gettext strings from being processed
+ */
+if ( class_exists( 'QueryMonitor' ) ) {
+    add_filter( 'trp_skip_gettext_processing', 'trp_exclude_query_monitor_strings', 10, 4 );
+}
+function trp_exclude_query_monitor_strings( $bool, $translation, $text, $domain ){
+    if ( trim( $domain ) === 'query-monitor' ) return true;
+
+    return $bool;
+}
+
+/**
+ * Compatibility with Complianz plugin blocking trp_data script
+ */
+// Whitelisting inline script for Complianz
+add_filter ( 'cmplz_service_category', 'trp_cmplz_whitelist_script', 10 , 3 );
+function trp_cmplz_whitelist_script( $category, $total_match, $found ){
+    if ( $found && false !== strpos( $total_match, 'trp-dynamic-translator-js-extra' ) ) {
+        $category = 'functional'; // add cmplz-script for Marketing and cmplz-stats for Statistics
+    }
+
+    return $category;
+}
+
+/**
+ * Compatibility with Fluent Forms
+ * Do not Translate Fluent Forms ajax submit calls for uploaded media
+ */
+add_filter('trp_stop_translating_page', 'trp_do_not_translate_fluent_form_submit', 1000000, 2);
+function trp_do_not_translate_fluent_form_submit($translate, $output){
+    if ( isset( $_POST['action'] )  && $_POST['action'] == 'fluentform_file_upload'){
+        return true;
+    }
+
+    return $translate;
+}
+
+/**
+ * Do not Translate WooCommerce Bookings
+ */
+add_filter('trp_stop_translating_page', 'trp_do_not_translate_woo_bookings_cost_calculator', 10, 2);
+function trp_do_not_translate_woo_bookings_cost_calculator($translate, $output){
+    if ( isset( $_POST['action'] )  && $_POST['action'] == 'wc_bookings_calculate_costs'){
+        return true;
+    }
+    return $translate;
+}
+
+add_action('init', 'trp_woo_bookings_gettext_filter');
+function trp_woo_bookings_gettext_filter(){
+    if ( isset( $_POST['action'] )  && $_POST['action'] == 'wc_bookings_calculate_costs'){
+        add_filter('gettext', 'trp_woo_bookings_exclude_gettext_strings', 1000, 3 );
+    }
+}
+
+function trp_woo_bookings_exclude_gettext_strings($translation, $text, $domain){
+    if ( isset( $_POST['action'] )  && $_POST['action'] == 'wc_bookings_calculate_costs' ){
+        return TRP_Translation_Manager::strip_gettext_tags( $translation );
+    }
+    return $translation;
+}
+
+/**
+ * Add support for the content feed and excerpt feed so they get translated.
+ * They can be manually translated from String Translation -> Regular.
+ * For most contents, they will work with content the client already sees in the front-end.
+ */
+add_filter( 'the_excerpt_rss', 'trp_translate_the_excerpt_rss', 10, 1);
+function trp_translate_the_excerpt_rss( $output ){
+    $trp = TRP_Translate_Press::get_trp_instance();
+    $translation_render = $trp->get_component( 'translation_render' );
+    return $translation_render->translate_page($output);
+};
+
+add_filter( 'the_content_feed', 'trp_translate_the_content_feed', 10, 2);
+function trp_translate_the_content_feed( $content, $feed_type ){
+    $trp = TRP_Translate_Press::get_trp_instance();
+    $translation_render = $trp->get_component( 'translation_render' );
+    return $translation_render->translate_page($content);
+};

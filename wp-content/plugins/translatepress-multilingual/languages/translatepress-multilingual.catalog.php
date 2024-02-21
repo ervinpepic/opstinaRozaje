@@ -167,7 +167,7 @@
 <?php __("However, you can still use TranslatePress to <strong style=\"background: #f5fb9d;\">modify gettext strings</strong> available in your page.", "translatepress-multilingual"); ?>
 <?php __("Strings that are user-created cannot be modified, only those from themes and plugins.", "translatepress-multilingual"); ?>
 <?php __("Extra Translation Features", "translatepress-multilingual"); ?>
-<?php __("Support for 221 Extra Languages", "translatepress-multilingual"); ?>
+<?php __("Support for 130+ Extra Languages", "translatepress-multilingual"); ?>
 <?php __("Yoast SEO support", "translatepress-multilingual"); ?>
 <?php __("Translate SEO Title, Description, Slug", "translatepress-multilingual"); ?>
 <?php __("Publish only when translation is complete", "translatepress-multilingual"); ?>
@@ -180,6 +180,9 @@
 <?php __("Click to Copy", "translatepress-multilingual"); ?>
 <?php __("Human Translation", "translatepress-multilingual"); ?>
 <?php __("Machine Translation", "translatepress-multilingual"); ?>
+<?php __("Text on this page is %s% translated into all languages.", "translatepress-multilingual"); ?>
+<?php __("%1$s% of text on this page is translated into %2$s.", "translatepress-multilingual"); ?>
+<?php __("This page is %1$s% translated into %2$s.", "translatepress-multilingual"); ?>
 <?php __("Hover any text on the page, click %s,<br> then modify the translation in the sidebar.", "translatepress-multilingual"); ?>
 <?php __("Don't forget to Save Translation. Use keyboard shortcut CTRL(⌘) + S", "translatepress-multilingual"); ?>
 <?php __("Switch language to see the translation changes directly on the page.", "translatepress-multilingual"); ?>
@@ -294,6 +297,8 @@
 <?php __("Capture more user information on the registration form with the help of Profile Builder's custom user profile fields and/or add an Email Confirmation process to verify your customers accounts.", "translatepress-multilingual"); ?>
 <?php __("Paid Member Subscriptions", "translatepress-multilingual"); ?>
 <?php __("Accept user payments, create subscription plans and restrict content on your membership site.", "translatepress-multilingual"); ?>
+<?php __("WP Webhooks Automator", "translatepress-multilingual"); ?>
+<?php __("Create no-code automations and workflows on your WordPress site. Easily connect your plugins, sites and apps together.", "translatepress-multilingual"); ?>
 <?php __("TranslatePress Advanced Settings", "translatepress-multilingual"); ?>
 <?php __("Save Changes", "translatepress-multilingual"); ?>
 <?php __("TranslatePress Errors", "translatepress-multilingual"); ?>
@@ -320,7 +325,7 @@
 <?php __("Test API credentials", "translatepress-multilingual"); ?>
 <?php __("Click here to check if the selected translation engine is configured correctly.", "translatepress-multilingual"); ?>
 <?php __("Block Crawlers", "translatepress-multilingual"); ?>
-<?php __("Block crawlers from triggering automatic translations on your website.", "translatepress-multilingual"); ?>
+<?php __("Block crawlers from triggering automatic translations on your website.<br>This will not prevent crawlers from accessing this site's pages.", "translatepress-multilingual"); ?>
 <?php __("Automatically Translate Slugs", "translatepress-multilingual"); ?>
 <?php __("Generate automatic translations of slugs for posts, pages and Custom Post Types.<br/>The slugs will be automatically translated starting with the second refresh of each page.", "translatepress-multilingual"); ?>
 <?php __("This feature is available only in the paid version. <a href=\"%1$s\" target=\"_blank\" title=\"%2$s\">%2$s</a> and unlock more premium features.", "translatepress-multilingual"); ?>
@@ -483,12 +488,14 @@
 <?php __("Adds an additional tab on the String Translation interface that allows editing translations of user-inputted strings.", "translatepress-multilingual"); ?>
 <?php __("<a href=\"%s\">Click here</a> to access the database optimization tool.", "translatepress-multilingual"); ?>
 <?php __("It helps remove possible duplicate translations, clear unnecessary data and repair possible metadata issues.", "translatepress-multilingual"); ?>
+<?php __("<a href=\"%s\" target=\"_blank\">Here</a> you can observe the last 5 SQL errors relevant to TranslatePress if they exist.", "translatepress-multilingual"); ?>
 <?php __("Troubleshooting", "translatepress-multilingual"); ?>
 <?php __("Exclude strings", "translatepress-multilingual"); ?>
 <?php __("Debug", "translatepress-multilingual"); ?>
 <?php __("Miscellaneous options", "translatepress-multilingual"); ?>
 <?php __("Automatic Translation Memory", "translatepress-multilingual"); ?>
-<?php __("Serve same translation for similar text. The strings need to have a percentage of 95% similarity.<br>Helps prevent losing existing translation when correcting typos or making minor adjustments to the original text. <br>If a translation already exists for a very similar original string, it will automatically be used for the current original string.<br>Does not work when making changes to a text that is part of a translation block unless the new text is manually merged again in a translation block.<br>Each string needs to have a minimum of 50 characters. ", "translatepress-multilingual"); ?>
+<?php __("Serve same translation for similar text. The strings need to have a percentage of 95% similarity.<br>Helps prevent losing existing translation when correcting typos or making minor adjustments to the original text. <br>If a translation already exists for a very similar original string, it will automatically be used for the current original string.<br>Does not work when making changes to a text that is part of a translation block unless the new text is manually merged again in a translation block.<br>Each string needs to have a minimum of 50 characters.", "translatepress-multilingual"); ?>
+<?php __("WARNING: This feature can negatively impact page loading times in secondary languages, particularly with large databases (for example websites with a lot of pages or products). If you experience slow loading times, disable this and try again.", "translatepress-multilingual"); ?>
 <?php __("Fix missing dynamic content", "translatepress-multilingual"); ?>
 <?php __("May help fix missing content inserted using JavaScript. <br> It shows dynamically inserted content in original language for a moment before the translation request is finished.", "translatepress-multilingual"); ?>
 <?php __("Filter Gettext wrapping from post content and title", "translatepress-multilingual"); ?>

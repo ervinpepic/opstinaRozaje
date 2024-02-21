@@ -1,4 +1,4 @@
-# Copyright (C) 2023 TranslatePress Multilingual
+# Copyright (C) 2024 TranslatePress Multilingual
 # This file is distributed under the same license as the TranslatePress Multilingual package.
 msgid ""
 msgstr ""
@@ -17,7 +17,7 @@ msgstr ""
 msgid "Plugin activated."
 msgstr ""
 
-#: index-dev.php:37, includes/class-install-plugins.php:36
+#: index-dev.php:37, includes/class-install-plugins.php:43
 msgid "Could not install. Try again from <a href=\"%s\" >Plugins Dashboard.</a>"
 msgstr ""
 
@@ -49,7 +49,7 @@ msgstr ""
 msgid "Settings saved."
 msgstr ""
 
-#: includes/class-advanced-tab.php:351, includes/class-error-manager.php:185, partials/machine-translation-settings-page.php:17, partials/machine-translation-settings-page.php:121, partials/machine-translation-settings-page.php:141, partials/machine-translation-settings-page.php:192, partials/main-settings-page.php:42, partials/main-settings-page.php:55, partials/main-settings-page.php:68
+#: includes/class-advanced-tab.php:351, includes/class-error-manager.php:189, partials/machine-translation-settings-page.php:17, partials/machine-translation-settings-page.php:121, partials/machine-translation-settings-page.php:141, partials/machine-translation-settings-page.php:192, partials/main-settings-page.php:42, partials/main-settings-page.php:55, partials/main-settings-page.php:68
 msgid "Yes"
 msgstr ""
 
@@ -177,91 +177,91 @@ msgstr ""
 msgid "The content of this element should be written in the default language."
 msgstr ""
 
-#: includes/class-error-manager.php:48
+#: includes/class-error-manager.php:52
 msgid "<strong>TranslatePress</strong> encountered SQL errors. <a href=\"%s\" title=\"View TranslatePress SQL Errors\">Check out the errors</a>."
 msgstr ""
 
-#: includes/class-error-manager.php:66
+#: includes/class-error-manager.php:70
 msgid "Automatic translation has been disabled."
 msgstr ""
 
-#: includes/class-error-manager.php:159, includes/class-plugin-notices.php:341, includes/class-plugin-notices.php:388, includes/class-plugin-notices.php:412, includes/class-plugin-notices.php:438, includes/class-plugin-notices.php:462, includes/class-reviews.php:119, includes/class-reviews.php:122, includes/class-upgrade.php:968
+#: includes/class-error-manager.php:163, includes/class-plugin-notices.php:341, includes/class-plugin-notices.php:388, includes/class-plugin-notices.php:412, includes/class-plugin-notices.php:438, includes/class-plugin-notices.php:462, includes/class-reviews.php:119, includes/class-reviews.php:122, includes/class-upgrade.php:968
 msgid "Dismiss this notice."
 msgstr ""
 
-#: includes/class-error-manager.php:177
+#: includes/class-error-manager.php:181
 msgid "Logged errors"
 msgstr ""
 
-#: includes/class-error-manager.php:178
+#: includes/class-error-manager.php:182
 msgid "These are the most recent 5 errors logged by TranslatePress:"
 msgstr ""
 
-#: includes/class-error-manager.php:202
+#: includes/class-error-manager.php:206
 msgid "Why are these errors occuring"
 msgstr ""
 
-#: includes/class-error-manager.php:203
+#: includes/class-error-manager.php:207
 msgid "If TranslatePress detects something wrong when executing queries on your database, it may disable the Automatic Translation feature in order to avoid any extra charging by Google/DeepL. Automatic Translation needs to be manually turned on, after you solve the issues."
 msgstr ""
 
-#: includes/class-error-manager.php:204
+#: includes/class-error-manager.php:208
 msgid "The SQL errors detected can occur for various reasons including missing tables, missing permissions for the SQL user to create tables or perform other operations, problems after site migration or changes to SQL server configuration."
 msgstr ""
 
-#: includes/class-error-manager.php:206
+#: includes/class-error-manager.php:210
 msgid "What you can do in this situation"
 msgstr ""
 
-#: includes/class-error-manager.php:208
+#: includes/class-error-manager.php:212
 msgid "Plan A."
 msgstr ""
 
-#: includes/class-error-manager.php:209
+#: includes/class-error-manager.php:213
 msgid "Go to Settings -> TranslatePress -> General tab and Save Settings. This will regenerate the tables using your current SQL settings. Check if no more errors occur while browsing your website in a translated language. Look at the timestamps of the errors to make sure you are not seeing the old errors. Only the most recent 5 errors are displayed."
 msgstr ""
 
-#: includes/class-error-manager.php:211
+#: includes/class-error-manager.php:215
 msgid "Plan B."
 msgstr ""
 
-#: includes/class-error-manager.php:212
+#: includes/class-error-manager.php:216
 msgid "If your problem isn't solved, try the following steps:"
 msgstr ""
 
-#: includes/class-error-manager.php:214
+#: includes/class-error-manager.php:218
 msgid "Create a backup of your database"
 msgstr ""
 
-#: includes/class-error-manager.php:215
+#: includes/class-error-manager.php:219
 msgid "Create a copy of each translation table where you encounter errors. You can copy the table within the same database (trp_dictionary_en_us_es_es_COPY for example) -- perform this step only if you want to keep the current translations"
 msgstr ""
 
-#: includes/class-error-manager.php:216
+#: includes/class-error-manager.php:220
 msgid "Remove the trouble tables by executing the DROP function on them"
 msgstr ""
 
-#: includes/class-error-manager.php:217
+#: includes/class-error-manager.php:221
 msgid "Go to Settings -> TranslatePress -> General tab and Save Settings. This will regenerate the tables using your current SQL server."
 msgstr ""
 
-#: includes/class-error-manager.php:218
+#: includes/class-error-manager.php:222
 msgid "Copy the relevant content from the duplicated tables (trp_dictionary_en_us_es_es_COPY for example) in the newly generated table (trp_dictionary_en_us_es_es) -- perform this step only if you want to keep the current translations"
 msgstr ""
 
-#: includes/class-error-manager.php:219
+#: includes/class-error-manager.php:223
 msgid "Test it to see if everything is working. If something went wrong, you can restore the backup that you've made at the first step. Check if no more errors occur while browsing your website in a translated language. Look at the timestamps of the errors to make sure you are not seeing the old errors. Only the most recent 5 errors are displayed."
 msgstr ""
 
-#: includes/class-error-manager.php:222
+#: includes/class-error-manager.php:226
 msgid "Plan C."
 msgstr ""
 
-#: includes/class-error-manager.php:223
+#: includes/class-error-manager.php:227
 msgid "If your problem still isn't solved, try asking your hosting about your errors. The most common issue is missing permissions for the SQL user, such as the Create Tables permission."
 msgstr ""
 
-#: includes/class-install-plugins.php:34, includes/class-settings.php:163
+#: includes/class-install-plugins.php:41, includes/class-settings.php:163
 msgid "Active"
 msgstr ""
 
@@ -469,7 +469,7 @@ msgstr ""
 msgid "General"
 msgstr ""
 
-#: includes/class-settings.php:583, includes/class-translation-manager.php:499
+#: includes/class-settings.php:583, includes/class-translation-manager.php:504, add-ons-pro/translator-accounts/includes/class-translator-accounts.php:152
 msgid "Translate Site"
 msgstr ""
 
@@ -481,7 +481,7 @@ msgstr ""
 msgid "License"
 msgstr ""
 
-#: includes/class-settings.php:640, includes/class-translation-manager.php:531
+#: includes/class-settings.php:640, includes/class-translation-manager.php:536
 msgid "Settings"
 msgstr ""
 
@@ -649,7 +649,7 @@ msgstr ""
 msgid "Dismiss tooltip"
 msgstr ""
 
-#: includes/class-translation-manager.php:144, includes/class-translation-manager.php:180, includes/class-translation-manager.php:186, includes/class-translation-manager.php:191, includes/class-translation-manager.php:196
+#: includes/class-translation-manager.php:144, includes/class-translation-manager.php:185, includes/class-translation-manager.php:191, includes/class-translation-manager.php:196, includes/class-translation-manager.php:201
 msgid "Quick Intro"
 msgstr ""
 
@@ -686,7 +686,7 @@ msgid "Extra Translation Features"
 msgstr ""
 
 #: includes/class-translation-manager.php:158
-msgid "Support for 221 Extra Languages"
+msgid "Support for 130+ Extra Languages"
 msgstr ""
 
 #: includes/class-translation-manager.php:159
@@ -737,219 +737,231 @@ msgstr ""
 msgid "Machine Translation"
 msgstr ""
 
-#: includes/class-translation-manager.php:181
+#: includes/class-translation-manager.php:174
+msgid "Text on this page is %s% translated into all languages."
+msgstr ""
+
+#: includes/class-translation-manager.php:175
+msgid "%1$s% of text on this page is translated into %2$s."
+msgstr ""
+
+#: includes/class-translation-manager.php:176
+msgid "This page is %1$s% translated into %2$s."
+msgstr ""
+
+#: includes/class-translation-manager.php:186
 msgid "Hover any text on the page, click %s,<br> then modify the translation in the sidebar."
 msgstr ""
 
-#: includes/class-translation-manager.php:187
+#: includes/class-translation-manager.php:192
 msgid "Don't forget to Save Translation. Use keyboard shortcut CTRL(⌘) + S"
 msgstr ""
 
-#: includes/class-translation-manager.php:192
+#: includes/class-translation-manager.php:197
 msgid "Switch language to see the translation changes directly on the page."
 msgstr ""
 
-#: includes/class-translation-manager.php:197
+#: includes/class-translation-manager.php:202
 msgid "Search for any text in this page in the dropdown."
 msgstr ""
 
-#: includes/class-translation-manager.php:216
+#: includes/class-translation-manager.php:221
 msgid "Your %s license has <span class=\"trp-license-status-emphasized\">expired</span>."
 msgstr ""
 
-#: includes/class-translation-manager.php:217
+#: includes/class-translation-manager.php:222
 msgid "Please renew your license to continue receiving access to product downloads, automatic updates and support."
 msgstr ""
 
-#: includes/class-translation-manager.php:218
+#: includes/class-translation-manager.php:223
 msgid "Renew Now"
 msgstr ""
 
-#: includes/class-translation-manager.php:224
+#: includes/class-translation-manager.php:229
 msgid "Your %s license was <span class=\"trp-license-status-emphasized\">refunded</span>."
 msgstr ""
 
-#: includes/class-translation-manager.php:225
+#: includes/class-translation-manager.php:230
 msgid "Please purchase a new license to continue receiving access to product downloads, automatic updates and support."
 msgstr ""
 
-#: includes/class-translation-manager.php:226
+#: includes/class-translation-manager.php:231
 msgid "Purchase a new license"
 msgstr ""
 
-#: includes/class-translation-manager.php:237
+#: includes/class-translation-manager.php:242
 msgid "Your %s license is <span class=\"trp-license-status-emphasized\">empty or incorrect</span>."
 msgstr ""
 
-#: includes/class-translation-manager.php:238
+#: includes/class-translation-manager.php:243
 msgid "Please enter a valid license to continue receiving access to product downloads, automatic updates and support."
 msgstr ""
 
-#: includes/class-translation-manager.php:239
+#: includes/class-translation-manager.php:244
 msgid "Enter a valid license"
 msgstr ""
 
-#: includes/class-translation-manager.php:290, includes/string-translation/class-string-translation.php:365, add-ons-advanced/seo-pack/includes/string-translation/class-string-translation-seo.php:12
+#: includes/class-translation-manager.php:295, includes/string-translation/class-string-translation.php:365, add-ons-advanced/seo-pack/includes/string-translation/class-string-translation-seo.php:12
 msgid "Slugs"
 msgstr ""
 
-#: includes/class-translation-manager.php:291
+#: includes/class-translation-manager.php:296
 msgid "Meta Information"
 msgstr ""
 
-#: includes/class-translation-manager.php:292
+#: includes/class-translation-manager.php:297
 msgid "String List"
 msgstr ""
 
-#: includes/class-translation-manager.php:293
+#: includes/class-translation-manager.php:298
 msgid "Gettext Strings"
 msgstr ""
 
-#: includes/class-translation-manager.php:294
+#: includes/class-translation-manager.php:299
 msgid "Images"
 msgstr ""
 
-#: includes/class-translation-manager.php:295
+#: includes/class-translation-manager.php:300
 msgid "Dynamically Added Strings"
 msgstr ""
 
-#: includes/class-translation-manager.php:332
+#: includes/class-translation-manager.php:337
 msgid "Translation Editor"
 msgstr ""
 
-#: includes/class-translation-manager.php:334
+#: includes/class-translation-manager.php:339
 msgid "Edit translations by visually selecting them on each site page"
 msgstr ""
 
-#: includes/class-translation-manager.php:338
+#: includes/class-translation-manager.php:343
 msgid "String Translation"
 msgstr ""
 
-#: includes/class-translation-manager.php:340
+#: includes/class-translation-manager.php:345
 msgid "Edit url slug translations, plugins and theme translation (emails, forms etc.)"
 msgstr ""
 
-#: includes/class-translation-manager.php:512, includes/class-translation-manager.php:574
+#: includes/class-translation-manager.php:517, includes/class-translation-manager.php:579
 msgid "Translate Page"
 msgstr ""
 
-#: includes/class-translation-manager.php:572
+#: includes/class-translation-manager.php:577
 msgid "Opens post in the translation editor. Post must be saved as draft or published beforehand."
 msgstr ""
 
-#: includes/class-translation-manager.php:686
+#: includes/class-translation-manager.php:691
 msgid "Security check"
 msgstr ""
 
-#: includes/class-translation-manager.php:758
+#: includes/class-translation-manager.php:763
 msgid "<strong>Warning:</strong> Some strings have possibly incorrectly encoded characters. This may result in breaking the queries, rendering the page untranslated in live mode. Consider revising the following strings or their method of outputting."
 msgstr ""
 
-#: includes/class-translation-manager.php:783, includes/class-upgrade.php:323
+#: includes/class-translation-manager.php:788, includes/class-upgrade.php:323
 msgid "TranslatePress data update"
 msgstr ""
 
-#: includes/class-translation-manager.php:783, includes/class-upgrade.php:323
+#: includes/class-translation-manager.php:788, includes/class-upgrade.php:323
 msgid "We need to update your translations database to the latest version."
 msgstr ""
 
-#: includes/class-translation-manager.php:784
+#: includes/class-translation-manager.php:789
 msgid "Updating will allow editing translations of localized text from plugins and theme. Existing translation will still work as expected."
 msgstr ""
 
-#: includes/class-translation-manager.php:786, includes/class-upgrade.php:324
+#: includes/class-translation-manager.php:791, includes/class-upgrade.php:324
 msgid "IMPORTANT: It is strongly recommended to first backup the database!\nAre you sure you want to continue?"
 msgstr ""
 
-#: includes/class-translation-manager.php:786, includes/class-upgrade.php:324
+#: includes/class-translation-manager.php:791, includes/class-upgrade.php:324
 msgid "Run the updater"
 msgstr ""
 
-#: includes/class-translation-manager.php:836
+#: includes/class-translation-manager.php:841
 msgid "The SEO Pack add-on allows translation of all the URL slugs:"
 msgstr ""
 
-#: includes/class-translation-manager.php:839
+#: includes/class-translation-manager.php:844
 msgid "Taxonomy slugs"
 msgstr ""
 
-#: includes/class-translation-manager.php:842
+#: includes/class-translation-manager.php:847
 msgid "Term slugs"
 msgstr ""
 
-#: includes/class-translation-manager.php:845
+#: includes/class-translation-manager.php:850
 msgid "Post slugs (this includes pages and custom post types)"
 msgstr ""
 
-#: includes/class-translation-manager.php:848
+#: includes/class-translation-manager.php:853
 msgid "Post type base slugs"
 msgstr ""
 
-#: includes/class-translation-manager.php:851
+#: includes/class-translation-manager.php:856
 msgid "WooCommerce slugs"
 msgstr ""
 
-#: includes/class-translation-manager.php:856
+#: includes/class-translation-manager.php:861
 msgid "The SEO Pack add-on is available with ALL premium versions of the plugin."
 msgstr ""
 
-#: includes/class-translation-manager.php:859
+#: includes/class-translation-manager.php:864
 msgid "Update to Pro"
 msgstr ""
 
-#: includes/class-translation-render.php:154
+#: includes/class-translation-render.php:155
 msgid "Description"
 msgstr ""
 
-#: includes/class-translation-render.php:160
+#: includes/class-translation-render.php:161
 msgid "OG Title"
 msgstr ""
 
-#: includes/class-translation-render.php:166
+#: includes/class-translation-render.php:167
 msgid "OG Site Name"
 msgstr ""
 
-#: includes/class-translation-render.php:172
+#: includes/class-translation-render.php:173
 msgid "OG Description"
 msgstr ""
 
-#: includes/class-translation-render.php:178
+#: includes/class-translation-render.php:179
 msgid "OG Image Alt"
 msgstr ""
 
-#: includes/class-translation-render.php:184
+#: includes/class-translation-render.php:185
 msgid "Twitter Title"
 msgstr ""
 
-#: includes/class-translation-render.php:190
+#: includes/class-translation-render.php:191
 msgid "Twitter Description"
 msgstr ""
 
-#: includes/class-translation-render.php:196
+#: includes/class-translation-render.php:197
 msgid "Twitter Image Alt"
 msgstr ""
 
-#: includes/class-translation-render.php:200
+#: includes/class-translation-render.php:201
 msgid "Page Title"
 msgstr ""
 
-#: includes/class-translation-render.php:206
+#: includes/class-translation-render.php:207
 msgid "Dublin Core Title"
 msgstr ""
 
-#: includes/class-translation-render.php:212
+#: includes/class-translation-render.php:213
 msgid "Dublin Core Description"
 msgstr ""
 
-#: includes/class-translation-render.php:218
+#: includes/class-translation-render.php:219
 msgid "OG Image"
 msgstr ""
 
-#: includes/class-translation-render.php:224
+#: includes/class-translation-render.php:225
 msgid "OG Image Secure URL"
 msgstr ""
 
-#: includes/class-translation-render.php:230
+#: includes/class-translation-render.php:231
 msgid "Twitter Image"
 msgstr ""
 
@@ -1069,7 +1081,7 @@ msgstr ""
 msgid "<strong>TranslatePress</strong> requires <strong><a href=\"http://php.net/manual/en/book.mbstring.php\">Multibyte String PHP library</a></strong>. Please contact your server administrator to install it on your server."
 msgstr ""
 
-#: includes/compatibility-functions.php:1651
+#: includes/compatibility-functions.php:1675
 msgid "Detected long query limitation on WPEngine hosting. Some large pages may appear untranslated. You can remove limitation by adding the following to your site’s wp-config.php: define( 'WPE_GOVERNOR', false ); "
 msgstr ""
 
@@ -1193,6 +1205,14 @@ msgstr ""
 msgid "Accept user payments, create subscription plans and restrict content on your membership site."
 msgstr ""
 
+#: partials/addons-settings-page.php:111
+msgid "WP Webhooks Automator"
+msgstr ""
+
+#: partials/addons-settings-page.php:112
+msgid "Create no-code automations and workflows on your WordPress site. Easily connect your plugins, sites and apps together."
+msgstr ""
+
 #: partials/advanced-settings-page.php:5
 msgid "TranslatePress Advanced Settings"
 msgstr ""
@@ -1301,7 +1321,7 @@ msgid "Block Crawlers"
 msgstr ""
 
 #: partials/machine-translation-settings-page.php:124
-msgid "Block crawlers from triggering automatic translations on your website."
+msgid "Block crawlers from triggering automatic translations on your website.<br>This will not prevent crawlers from accessing this site's pages."
 msgstr ""
 
 #: partials/machine-translation-settings-page.php:130
@@ -1955,6 +1975,10 @@ msgstr ""
 msgid "It helps remove possible duplicate translations, clear unnecessary data and repair possible metadata issues."
 msgstr ""
 
+#: includes/advanced-settings/remove-duplicates-from-db.php:8
+msgid "<a href=\"%s\" target=\"_blank\">Here</a> you can observe the last 5 SQL errors relevant to TranslatePress if they exist."
+msgstr ""
+
 #: includes/advanced-settings/separators.php:8
 msgid "Troubleshooting"
 msgstr ""
@@ -1976,7 +2000,11 @@ msgid "Automatic Translation Memory"
 msgstr ""
 
 #: includes/advanced-settings/serve-similar-translation.php:10
-msgid "Serve same translation for similar text. The strings need to have a percentage of 95% similarity.<br>Helps prevent losing existing translation when correcting typos or making minor adjustments to the original text. <br>If a translation already exists for a very similar original string, it will automatically be used for the current original string.<br>Does not work when making changes to a text that is part of a translation block unless the new text is manually merged again in a translation block.<br>Each string needs to have a minimum of 50 characters. "
+msgid "Serve same translation for similar text. The strings need to have a percentage of 95% similarity.<br>Helps prevent losing existing translation when correcting typos or making minor adjustments to the original text. <br>If a translation already exists for a very similar original string, it will automatically be used for the current original string.<br>Does not work when making changes to a text that is part of a translation block unless the new text is manually merged again in a translation block.<br>Each string needs to have a minimum of 50 characters."
+msgstr ""
+
+#: includes/advanced-settings/serve-similar-translation.php:10
+msgid "WARNING: This feature can negatively impact page loading times in secondary languages, particularly with large databases (for example websites with a lot of pages or products). If you experience slow loading times, disable this and try again."
 msgstr ""
 
 #: includes/advanced-settings/show-dynamic-content-before-translation.php:8
@@ -2433,15 +2461,15 @@ msgstr ""
 msgid "Visit <a href=\"%s\" target=\"_blank\">this link</a> to see how you can set up an API key and control API costs."
 msgstr ""
 
-#: add-ons-pro/translator-accounts/includes/class-translator-accounts-activator.php:30, add-ons-pro/translator-accounts/includes/class-translator-accounts.php:96, add-ons-pro/translator-accounts/includes/class-translator-accounts.php:97
+#: add-ons-pro/translator-accounts/includes/class-translator-accounts-activator.php:30, add-ons-pro/translator-accounts/includes/class-translator-accounts.php:97, add-ons-pro/translator-accounts/includes/class-translator-accounts.php:98
 msgid "Translator"
 msgstr ""
 
-#: add-ons-pro/translator-accounts/includes/class-translator-accounts.php:92
+#: add-ons-pro/translator-accounts/includes/class-translator-accounts.php:93
 msgid " TranslatePress Settings"
 msgstr ""
 
-#: add-ons-pro/translator-accounts/includes/class-translator-accounts.php:101
+#: add-ons-pro/translator-accounts/includes/class-translator-accounts.php:102
 msgid "Allow this user to translate the website."
 msgstr ""
 

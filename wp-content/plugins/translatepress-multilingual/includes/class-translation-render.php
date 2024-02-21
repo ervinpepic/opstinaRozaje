@@ -45,7 +45,8 @@ class TRP_Translation_Render{
             mb_http_output("UTF-8");
             if ( $TRP_LANGUAGE == $this->settings['default-language'] && !trp_is_translation_editor() ) {
                 // on default language when we are not in editor we just need to clear any trp tags that could still be present and handle links for special situation
-                $chunk_size = ($this->handle_custom_links_for_default_language() ) ? null : 4096;
+                $chunk_size = ($this->handle_custom_links_for_default_language() ) ? 0 : 4096;
+                $chunk_size = apply_filters("trp_output_buffer_chunk_size", $chunk_size);
                 ob_start(array( $this, 'render_default_language' ), $chunk_size);
                 $trp_output_buffer_started = true;
             } else {
@@ -346,6 +347,9 @@ class TRP_Translation_Render{
      */
     public function handle_rest_api_translations($response){
     	if ( isset( $response->data ) ) {
+            if ( isset( $response->data['name'] ) ){
+                $response->data['name'] = $this->translate_page( $response->data['name'] );
+            }
 		    if ( isset( $response->data['title'] ) && isset( $response->data['title']['rendered'] ) ) {
 			    $response->data['title']['rendered'] = $this->translate_page( $response->data['title']['rendered'] );
 		    }
@@ -363,7 +367,7 @@ class TRP_Translation_Render{
 	 * Apply translation filters for REST API response
 	 */
 	public function add_callbacks_for_translating_rest_api(){
-		$post_types = get_post_types();
+        $post_types = array_merge(["comment", "category"],get_post_types());
 		foreach ( $post_types as $post_type ) {
 			add_filter( 'rest_prepare_'. $post_type, array( $this, 'handle_rest_api_translations' ) );
 		}
@@ -696,6 +700,7 @@ class TRP_Translation_Render{
                 && strpos($row->outertext,'[vc_') === false
                 && !$this->trp_is_numeric($trimmed_string)
                 && !preg_match('/^\d+%$/',$trimmed_string)
+                && $row->find_ancestor_tag( 'script' ) === null // sometimes the script has an html tree that gets detected, so script is not a direct parent
                 && !$this->has_ancestor_attribute( $row, $no_translate_attribute ) )
             {
                 $string_count = array_push( $translateable_strings, $trimmed_string );
@@ -720,6 +725,7 @@ class TRP_Translation_Render{
                 && !preg_match('/^\d+%$/',$trimmed_string)
                 && !$this->has_ancestor_attribute( $row, $no_translate_attribute )
                 && !$this->has_ancestor_class( $row, 'translation-block')
+                && $row->find_ancestor_tag( 'script' ) === null // sometimes the script has an html tree that gets detected, so script is not a direct parent
                 && ( !$ignore_cdata || ( strpos($trimmed_string, '<![CDATA[') !== 0 && strpos($trimmed_string, '&lt;![CDATA[') !== 0  ) )
                 && (strpos($trimmed_string, 'BEGIN:VCALENDAR') !== 0)
                 && !$this->contains_substrings($trimmed_string, $skip_strings_containing_key_terms ) )
@@ -977,7 +983,7 @@ class TRP_Translation_Render{
                 strpos($url, '#TRPLINKPROCESSED') === false &&
 	            ( !$this->has_ancestor_attribute( $a_href, $no_translate_attribute ) || $this->has_ancestor_attribute($a_href, 'data-trp-gettext') ) // add language param to link if it's inside a gettext
             ){
-                $a_href->href = apply_filters( 'trp_force_custom_links', $this->url_converter->get_url_for_language( $TRP_LANGUAGE, $url ), $url, $TRP_LANGUAGE, $a_href );
+                $a_href->href = apply_filters( 'trp_force_custom_links', $this->url_converter->get_url_for_language( $TRP_LANGUAGE, $url, '' ), $url, $TRP_LANGUAGE, $a_href );
                 $url = $a_href->href;
             }
 
@@ -1366,6 +1372,10 @@ class TRP_Translation_Render{
      * @return array
      */
     public function process_strings( $translateable_strings, $language_code, $block_type = null, $skip_machine_translating_strings = array() ) {
+        if ( !in_array( $language_code, $this->settings['translation-languages'] ) || $language_code === $this->settings['default-language'] ) {
+            return array();
+        }
+
         if ( !$this->machine_translator ) {
             $trp                      = TRP_Translate_Press::get_trp_instance();
             $this->machine_translator = $trp->get_component( 'machine_translator' );
@@ -1696,10 +1706,35 @@ class TRP_Translation_Render{
         global $TRP_LANGUAGE;
 
         if ( $TRP_LANGUAGE != $this->settings['default-language'] || ( isset( $_REQUEST['trp-edit-translation'] ) && $_REQUEST['trp-edit-translation'] == 'preview' ) ) {
-
-            wp_enqueue_script('trp-dynamic-translator', TRP_PLUGIN_URL . 'assets/js/trp-translate-dom-changes.js', array('jquery'), TRP_PLUGIN_VERSION, true );
-            wp_localize_script('trp-dynamic-translator', 'trp_data', $this->get_trp_data() );
+            $this->output_dynamic_translation_script();
         }
+    }
+
+    /**
+     * If is_late_dom_html_plugin_active() returns true, echo script on shutdown hook priority 10
+     *
+     * Otherwise, enqueue script
+     *
+     * @see is_late_dom_html_plugin_active()
+     *
+     */
+    public function output_dynamic_translation_script(){
+        $script_src     = TRP_PLUGIN_URL . 'assets/js/trp-translate-dom-changes.js';
+        $trp_data       = $this->get_trp_data();
+        $trp_plugin_ver = TRP_PLUGIN_VERSION;
+
+        $echo_scripts = function() use ( $script_src, $trp_data, $trp_plugin_ver ){
+            echo '<script type="text/javascript" id="trp-dynamic-translator-js-extra"> var trp_data = ' . json_encode( $trp_data ) . ';</script>';
+            echo '<script src="' . esc_url( $script_src  ) . '?ver=' . esc_attr($trp_plugin_ver) .'" id="trp-dynamic-translator-js"></script>';
+        };
+
+        if ( is_late_dom_html_plugin_active() ){
+            add_action( 'shutdown', $echo_scripts );
+            return;
+        }
+
+        wp_enqueue_script('trp-dynamic-translator', $script_src, array('jquery'), TRP_PLUGIN_VERSION, true );
+        wp_localize_script('trp-dynamic-translator', 'trp_data', $trp_data );
     }
 
 	/**

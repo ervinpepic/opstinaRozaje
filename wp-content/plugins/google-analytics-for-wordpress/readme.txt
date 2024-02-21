@@ -2,10 +2,10 @@
 Contributors: chriscct7, smub
 Donate link: http://www.wpbeginner.com/wpbeginner-needs-your-help/
 Tags: WordPress analytics, google analytics, google analytics dashboard, google analytics widget, WooCommerce stats, analytics dashboard, universal google analytics, statistics, tracking, stats, google, google analytics by yoast, ga, monster insights, monsterinsights, universal analytics, web stats, ecommerce, ecommerce tracking
-Requires at least: 4.8.0
-Tested up to: 6.3
-Stable tag: 8.19
-Requires PHP: 5.6
+Requires at least: 5.6.0
+Tested up to: 6.4.3
+Stable tag: 8.24.0
+Requires PHP: 7.2
 License: GPL v3
 
 The best free Google Analytics plugin for WordPress. See how visitors find and use your website, so you can grow your business.
@@ -310,6 +310,52 @@ You can also learn about other <a href="http://www.wpbeginner.com/category/plugi
 4. Want more features? <a href="https://www.monsterinsights.com/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion">Purchase MonsterInsights Pro</a>!
 
 == Changelog ==
+= 8.24.0: February 19, 2024 =
+- New: Site Insights Gutenberg block. Easily share website stats with your visitors.
+- New: PrivacyGuard Feature - Proactively block PII (Personally Identifiable Information) from ever making it to Google Analytics
+- New: EEA Checker tool for Google Ads / Analytics Requirements
+- Fix: We solved an issue occurring in the Weekly/Monthly Email reports.
+- Fix: We solved an issue occurring with Popular Posts.
+- Fix: We solved an issue occurring with Tracking Video Title in Divi theme.
+
+= 8.23.1: December 18, 2023 =
+- Fix: We fixed an issue related to All in One SEO plugin.
+
+= 8.23.0: December 14, 2023 =
+- New: Our Year In Review report is here. This report will automatically show up starting in January 1 until Jan 14 2024.
+- Fix: We fixed an issue occurring with Site Notes.
+- Fix: We fixed minor issues in the Gutenberg blocks.
+- Fix: We added support for WooCommerce custom order status.
+
+= 8.22.0: November 29, 2023 =
+- Enhancement: Improved Social Media report.
+- Fix: We fixed the View More link in the Email Summaries.
+- Fix: We fixed a Vue warning in Site Notes.
+- Fix: We fixed the sporadic Error 429 from Google Analytics API.
+- Fix: We fixed a duplicate error message in the Setup Checklist.
+
+= 8.21.0: November 13, 2023 =
+- New: Social Media report.
+- New: Exclude query parameters from GA4 data stream.
+- Enhancement: Improved compatibility towards WordPress 6.4.1.
+- Fix: We fixed an issue that occurred with Pretty Links.
+
+= 8.20.2: November 01, 2023 =
+- Fix: Popular posts, we fixed a bug occurring in curated popular posts.
+
+= 8.20.1: October 09, 2023 =
+- Fix: We updated our lite emails to render better inside multiple mail clients. We also changed the emails to send out monthly instead of weekly. To disable emails go to Settings -> Advanced - Toggle the "Enable Email Summaries.
+
+= 8.20: October 03, 2023 =
+- New: Google Analytics and eCommerce support for WishList Member
+- New: Google Analytics and eCommerce support for WPCharitable 
+- Enhanced: Improved support for PHP 8.2.
+- Enhanced: Improved Site Health compatibility.
+- Fixed: Restrict Content Pro, we fixed the refund event in GoogleAnalytics when order status is failed or abandoned.
+- Fixed: We fixed some minor bugs related to notifications. 
+- Fixed: Popular posts, we fixed a bug occurring in curated popular posts.
+- Fixed: We fixed some minor bugs related to User Journey.
+
 = 8.19: August 23, 2023 =
 - New: Ecommerce funnel report for WooCommerce and Easy Digital Downloads.
 - New: Setup checklist to get up and running faster

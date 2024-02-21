@@ -62,29 +62,46 @@ function trp_utf8ize($mixed) {
  * function that gets the translation for a string with context directly from a .mo file
  * @TODO this was developped firstly for woocommerce so it maybe needs further development.
 */
-function trp_x( $text, $context, $domain, $language ){
+function trp_x( $text, $context, $domain, $language ) {
     $original_text = $text;
+
+    $cache_key = 'trp_x_' . md5( $text . $context . $domain . $language );
+    $new_text  = wp_cache_get( $cache_key );
+    if ( $new_text !== false ) {
+        return $new_text;
+    }
     /* try to find the correct path for the textdomain */
-    $path = trp_find_translation_location_for_domain( $domain, $language );
-
-    if( !empty( $path ) ) {
-
-        $mo_file = trp_cache_get( 'trp_x_' . $domain .'_'. $language );
-
-        if( false === $mo_file ){
-            $mo_file = new MO();
-            $mo_file->import_from_file( $path );
-            wp_cache_set( 'trp_x_' . $domain .'_'. $language, $mo_file );
-        }
-
-        if ( !$mo_file ) return apply_filters('trp_x', $text, $original_text, $context, $domain, $language );
-
-
-        if (!empty($mo_file->entries[$context . '' . $text]))
-            $text = $mo_file->entries[$context . '' . $text]->translations[0];
+    $path_cache_key = 'trp_x_path_' . md5( $domain . $language );
+    $path           = wp_cache_get( $path_cache_key );
+    if ( $path === false ) {
+        $path = trp_find_translation_location_for_domain( $domain, $language );
+        wp_cache_set( $path_cache_key, $path );
     }
 
-    return apply_filters('trp_x', $text, $original_text,  $context, $domain, $language );
+    if ( !empty( $path ) ) {
+
+        $mo_file = trp_cache_get( 'trp_x_' . $domain . '_' . $language );
+
+        if ( false === $mo_file ) {
+            $mo_file = new MO();
+            $mo_file->import_from_file( $path );
+            wp_cache_set( 'trp_x_' . $domain . '_' . $language, $mo_file );
+        }
+
+        if ( !$mo_file ) {
+            $return = apply_filters( 'trp_x', $text, $original_text, $context, $domain, $language );
+            wp_cache_set( $cache_key, $return );
+            return $return;
+        }
+
+        if ( !empty( $mo_file->entries[ $context . '' . $text ] ) ) {
+            $text = $mo_file->entries[ $context . '' . $text ]->translations[0];
+        }
+    }
+
+    $return = apply_filters( 'trp_x', $text, $original_text, $context, $domain, $language );
+    wp_cache_set( $cache_key, $return );
+    return $return;
 }
 
 /**
@@ -861,4 +878,21 @@ function trp_woo_hpos_get_post_meta( $order_id, $meta_key, $single = false ){
     }
 
     return get_post_meta( $order_id, $meta_key, $single );
+}
+
+/**
+ * Helper function that determines if we should output the dynamic translation script later than usual
+ *
+ * Some plugins add HTML to the DOM very late in the page load cycle, so the site becomes slow due our mutation observer capturing it
+ *
+ * @return bool
+ */
+function is_late_dom_html_plugin_active(){
+    $classes_array = ['QueryMonitor']; // for the moment, only Query Monitor matches the criteria
+
+    foreach ( $classes_array as $class ){
+        if ( class_exists( $class ) ) return true;
+    }
+
+    return apply_filters( 'trp_delay_dom_changes_script', false );
 }

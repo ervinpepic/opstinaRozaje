@@ -161,20 +161,32 @@ function monsterinsights_get_uuid() {
  * @var string $measurement_id
  *   GA4 Measurement Id (Property Id). E.g., 'G-1YS1VWHG3V'.
  *
- * @return int
+ * @return string|null
  *   Returns GA4 Session Id or NULL if cookie wasn't found.
  */
 function monsterinsights_get_browser_session_id( $measurement_id ) {
-	// Cookie name example: '_ga_1YS1VWHG3V'.
-	$cookie_name = '_ga_' . str_replace( 'G-', '', $measurement_id );
-	if ( isset( $_COOKIE[ $cookie_name ] ) ) {
-		// Cookie value example: 'GS1.1.1659710029.4.1.1659710504.0'.
-		// Session Id:                  ^^^^^^^^^^.
-		$parts = explode( '.', sanitize_text_field($_COOKIE[ $cookie_name ]) );
-		return $parts[2];
+
+	if ( ! is_string( $measurement_id ) ) {
+		return null;
 	}
 
-	return null;
+	// Cookie name example: '_ga_1YS1VWHG3V'.
+	$cookie_name = '_ga_' . str_replace( 'G-', '', $measurement_id );
+
+	if ( ! isset( $_COOKIE[ $cookie_name ] ) ) {
+		return null;
+	}
+
+	// Cookie value example: 'GS1.1.1659710029.4.1.1659710504.0'.
+	// Session Id:                  ^^^^^^^^^^.
+	$cookie = sanitize_text_field( $_COOKIE[ $cookie_name ] );
+	$parts = explode( '.', $cookie );
+
+	if ( ! isset( $parts[2] ) ){
+		return null;
+	}
+
+	return $parts[2];
 }
 
 /**
@@ -1323,15 +1335,6 @@ function monsterinsights_count_addon_codes( $current_code ) {
 		}
 	}
 
-	// If the performance addon is installed and its Google Optimize ID is the same as the current code, then increase the count
-	if ( class_exists( 'MonsterInsights_Performance' ) ) {
-		$container_id = monsterinsights_get_option( 'goptimize_container', '' );
-
-		if ( $container_id === $current_code ) {
-			$count ++;
-		}
-	}
-
 	return $count;
 }
 
@@ -1370,7 +1373,9 @@ function monsterinsights_detect_tracking_code_error( $body ) {
 	}
 
 	if ( false === strpos( $body, '__gtagTracker' ) ) {
-		$errors[] = $cache_error;
+		if ( ! isset ( $errors ) ) {
+			$errors[] = $cache_error;
+		}
 
 		return $errors;
 	}
@@ -1395,6 +1400,18 @@ function monsterinsights_detect_tracking_code_error( $body ) {
 	if ( strpos( $body, 'googletagmanager.com/gtag/js?id=' . $current_code ) !== false ) {
 		// In that case, we can safely deduct one from the total count
 		-- $total_count;
+	}
+
+	// Test for Advanced Ads plugin tracking code.
+	$pattern = '/advanced_ads_ga_UID.*?"' . $current_code . '"/m';
+	if ( preg_match_all( $pattern, $body, $matches ) ) {
+		$total_count -= count( $matches[0] );
+	}
+
+	// Test for WP Popups tracking code.
+	$pattern = '/wppopups_pro_vars.*?"' . $current_code . '"/m';
+	if ( preg_match_all( $pattern, $body, $matches ) ) {
+		$total_count -= count( $matches[0] );
 	}
 
 	if ( $total_count > $limit ) {
@@ -1441,10 +1458,7 @@ function monsterinsights_is_code_installed_frontend() {
 	if ( in_array( $response_code, $accepted_http_codes, true ) ) {
 		$body = wp_remote_retrieve_body( $request );
 
-		$errors = array_merge(
-			monsterinsights_detect_tracking_code_error( $body ),
-			monsterinsights_detect_tracking_code_error( $body, 'v4' )
-		);
+		$errors = monsterinsights_detect_tracking_code_error( $body );
 	}
 
 	return $errors;
@@ -1512,10 +1526,21 @@ function monsterinsights_custom_track_pretty_links_redirect( $url ) {
 	}
 
 	if ( monsterinsights_get_v4_id_to_output() ) {
+		// Get Pretty Links settings.
+		$pretty_track = monsterinsights_get_option( 'pretty_links_backend_track', '' );
+
+		if ( 'pretty_link' == $pretty_track ) {
+			global $prli_link;
+			$pretty_link = $prli_link->get_one_by( 'url', $url );
+			$link_url    = PrliUtils::get_pretty_link_url( $pretty_link->slug );
+		} else {
+			$link_url = $url;
+		}
+
 		$url_components = parse_url( $url );
 		$params_args    = array(
 			'link_text'   => 'external-redirect',
-			'link_url'    => $url,
+			'link_url'    => $link_url,
 			'link_domain' => $url_components['host'],
 			'outbound'    => 'true',
 		);
@@ -2029,6 +2054,22 @@ function monsterinsights_is_aioseo_active() {
 	return false;
 }
 
+// /**
+//  * Return FunnelKit Stripe Woo Gateway Settings URL if plugin is active.
+//  *
+//  * @return string
+//  * @since 8.24.0
+//  */
+// function monsterinsights_funnelkit_stripe_woo_gateway_dashboard_url() {
+// 	$url = '';
+
+// 	if ( class_exists( 'FKWCS_Gateway_Stripe' ) ) {
+// 		$url = is_multisite() ? network_admin_url( 'admin.php?page=wc-settings&tab=fkwcs_api_settings' ) : admin_url( 'admin.php?page=wc-settings&tab=fkwcs_api_settings' );
+// 	}
+
+// 	return $url;
+// }
+
 /**
  * Return AIOSEO Dashboard URL if plugin is active.
  *
@@ -2246,5 +2287,13 @@ if ( ! function_exists( 'current_datetime' ) ) {
 	 */
 	function current_datetime() {
 		return new DateTimeImmutable( 'now', wp_timezone() );
+	}
+}
+
+
+if ( ! function_exists( 'monsterinsights_is_authed' ) ) {
+	function monsterinsights_is_authed() {
+		$site_profile = get_option('monsterinsights_site_profile');
+		return isset($site_profile['key']);
 	}
 }

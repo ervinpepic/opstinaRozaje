@@ -3,9 +3,9 @@ Contributors: cozmoslabs, razvan.mo, madalin.ungureanu, sareiodata, cristophor
 Donate link: https://www.translatepress.com/
 Tags: translate, translation, multilingual, automatic translation, bilingual, front-end translation, google translate, language
 Requires at least: 3.1.0
-Tested up to: 6.3.1
+Tested up to: 6.4.3
 Requires PHP: 5.6.20
-Stable tag: 2.6.2
+Stable tag: 2.7.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -109,7 +109,7 @@ TranslatePress - Multilingual plugin works out of the box with WooCommerce, cust
 
 = How is it different from other multilingual & translation plugins like WPML or Polylang? =
 
-TranslatePress is easier to use and more intuitive altogether. No more switching between the editor, string translation interfaces or badly translated plugins. You can now translate the full page content directly from the front-end. This makes TranslatePress a great alternative to plugins like Polylang and WPML.
+TranslatePress is easier to use and more intuitive altogether. No more switching between the editor, string translation interfaces or badly translated plugins. You can now translate the full page content directly from the front-end. This makes TranslatePress a great alternative to plugins like Polylang and WPML. For more details check out this [WordPress Translation Plugin Comparison: TranslatePress vs WPML vs Polylang vs Gtranslate](https://translatepress.com/wordpress-translation-plugin-comparison-translatepress-vs-free-and-paid-alternatives/translate-woocommerce-products-translatepress/?utm_source=wp.org&utm_medium=tp-description-page&utm_campaign=TPFree).
 
 = How do I start to translate my WordPress site? =
 
@@ -140,6 +140,58 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
+= 2.7.2 =
+ * Fixed translation saved confirmation message in the Translation Editor
+ * Fixed CSS issue in Advanced settings
+ * Fixed notice in TranslatePress settings
+
+= 2.7.1 =
+* Fixed potential security issue in the language switcher
+* Fixed floating language switcher appearance when displaying only flags on sites with many languages
+* Minor UI tweaks in TranslatePress settings
+
+= 2.7.0 =
+* Fixed issue with Exclude only certain paths advanced option on subfolder path installs
+* Improved Error Manager by outputting the entire failed query
+* Improved SQL error handling in trp-ajax calls 
+
+= 2.6.9 =
+* Added compatibility with WooCommerce Product Filters by barn2
+
+= 2.6.8 =
+* Fixed relative urls with anchor links on translated pages
+* Fixed searching in translated languages on sites with specific plugins combination
+
+= 2.6.7 =
+* Added new feature that displays translation percentage for current page in Translation Editor
+* Added RSS Feed support for translating title, content and excerpt
+* Added support for Duplicate Page plugin resolving post slug translation conflict
+* Added compatibility with Fluent Forms
+* Added compatibility with WooCommerce Bookings plugin
+* Added WP Webhooks Automator under recommended plugins
+* Fixed deprecated warning in PHP 8.1
+
+= 2.6.6 =
+* Allow translation of comments and categories in REST API
+* Improved compatibility with Complianz plugin
+* Improved rules for creating translation blocks
+
+= 2.6.5 =
+* Fixed some cases of unnecessarily detecting text inside script tags
+* Fixed compatibility code with Oxygen
+
+= 2.6.4 =
+* Improved page loading speed when WooCommerce is active
+* Fixed some cases of errors on function insert_gettext_string
+* Fixed edge case issue with missing tables
+
+= 2.6.3 =
+* Improved page loading speed by optimizing code handling gettext
+* Improved page loading speed when Query Monitor plugin is active
+* Fixed internal links not being translated when using Do not translate certain paths feature
+* Fixed trp-gettext wrappings on Query Monitor strings
+* Fixed flag for Hindi and Punjabi (India) languages
+
 = 2.6.2 =
 * Fixed absolute paths not working in the Exclude Paths From Translation option
 * Fixed Pencil icon displayed in wrong positions on WP Forms in the Translation Editor

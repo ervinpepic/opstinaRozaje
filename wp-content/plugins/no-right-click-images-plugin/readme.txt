@@ -1,14 +1,13 @@
-=== No Right Click Images Plugin ===
-Tags: images, image, right click, stealing
-Donate link: https://www.kpgraham.com
+=== No Right Click Images ===
+Tags: images, image, right click, stealing, protect
 Requires at least: 3.0
-Tested up to: 6.2
-Contributors: Keith Graham
-Stable tag: 3.7
+Tested up to: 6.4
+Contributors: WebFactory
+Stable tag: 3.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Disables right click context menu on images to help deter leeches from glomming images.
+Disables right click context menu on images to help deter leeches from stealing images.
 
 == Description ==
 The No Right Click Images Plugin Plugin uses JavaScript to change the right click action on IMG tags to disable the context menu. It disables the context menu on images only so other right click actions, such as links, should work normally.
@@ -32,12 +31,12 @@ The plugin no longer tries to replace images with a dummy image. This method har
 2. Upload the plugin to your wp-content/plugins directory.
 3. Activate the plugin.
 
-== Donate ==
-Please buy one of my books and give it a good review. I worked hard on these books, and they are worth reading.
-<a href="https://amzn.to/42BjwXv" target="_new">My Author Page at Amazon</a>
-
 
 == Changelog ==
+= 3.8 =
+* 2024/01/15
+* security fixes
+* rewrite of most functions
 
 = 3.7 =
 * Tested under WordPress 6.2
@@ -106,17 +105,6 @@ Please buy one of my books and give it a good review. I worked hard on these boo
 == Frequently Asked Questions ==
 = I click on an image to open it and then I can save it =
 When you added the image to WordPress you specified this behavior. When you insert an image you have to specify that you don't want to have a click on the image open the image. It is up to you to protect your images by not opening the image on a click.
-If you are able to click on an image to display the image in a new window, it is then outside of Wordpress and can't be protected.
+If you are able to click on an image to display the image in a new window, it is then outside of WordPress and can't be protected.
 = I have a Slideshow or Gallery and users can right click on the images in the gallery. =
 Special image presentation plugins that use jQuery or other Javascript systems override the behavior of this plugin. When they load they take over and my plugin can't help you. You need to contact the authors of the gallery and ask they they disable the right click event and drag events inside their plugin.
-
-
-== Support ==
-= Rate the Plugin =
-This plugin is free and I expect nothing in return. Please rate the plugin at: http://wordpress.org/extend/plugins/no-right-click-images-plugin/
-= Buy my book =
-If you wish to support my programming, buy my book:
-https://www.facebook.com/BlogsEye/ : Error Message Eyes: A Programmer's Guide to the Digital Soul
-= Other Plugins =
-* I am a contributor to https://wordpress.org/plugins/astounding-spam-prevention which is a very powerful anti spam plugin.
-* I have also written https://wordpress.org/plugins/open-in-new-window-plugin which forces external links to open in a new window.

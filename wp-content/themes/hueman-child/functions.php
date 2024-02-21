@@ -45,4 +45,23 @@ function custom_footer_copyright() {
 add_filter('admin_footer_text', 'custom_footer_copyright');
 
 #Overwrite files in subdriectories
+function get_last_edit_date_shortcode($atts) {
+    // Get the post's ID
+    $post_id = get_the_ID();
 
+    // Get the custom field value (last edit date)
+    $last_edit_date = get_post_meta($post_id, 'last_edit_date', true);
+
+    // If the field is empty, it's the first edit, so set it to the current date
+    if (empty($last_edit_date)) {
+        $last_edit_date = current_time('mysql');
+        update_post_meta($post_id, 'last_edit_date', $last_edit_date);
+    }
+
+    // Format the date as desired
+    $format = isset($atts['format']) ? $atts['format'] : 'F j, Y';
+    $formatted_date = date($format, strtotime($last_edit_date));
+
+    return $formatted_date;
+}
+add_shortcode('edit_date', 'get_last_edit_date_shortcode');
