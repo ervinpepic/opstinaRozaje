@@ -26,7 +26,7 @@ function monsterinsights_gutenberg_editor_assets() {
 	wp_enqueue_script( 'lodash', includes_url('js') . '/underscore.min.js' );
 	// @TODO Robo minification is breaking the editor. We will use the main version for now.
 	$plugins_js_path    = '/assets/gutenberg/js/editor.js';
-	$plugins_style_path = '/assets/gutenberg/css/editor' . $suffix . '.css';
+	$plugins_style_path = '/assets/gutenberg/css/editor.css';
 	$version_path       = monsterinsights_is_pro_version() ? 'pro' : 'lite';
 
 	$plugins_js_url = apply_filters(
@@ -113,7 +113,8 @@ function monsterinsights_gutenberg_editor_assets() {
 			'page_insights_addon_active'   => class_exists( 'MonsterInsights_Page_Insights' ),
 			'page_insights_nonce'          => wp_create_nonce( 'mi-admin-nonce' ),
 			'isnetwork'                    => is_network_admin(),
-			'is_v4'                        => true
+			'is_v4'                        => true,
+			'dismiss_envira_promo'         => isset($plugins['envira-gallery-lite/envira-gallery-lite.php']) || isset($plugins['envira-gallery/envira-gallery.php']) || get_transient('_monsterinsights_dismiss_envira_promo'),
 		) )
 	);
 }

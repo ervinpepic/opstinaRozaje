@@ -606,6 +606,10 @@ class TRP_Plugin_Updater{
                         'url'        => home_url()
                     );
 
+                    if( !empty( $license ) || get_option( 'trp_plugin_optin' ) == 'yes' ){
+                        $api_params['machine_translated_strings_data'] = json_encode( get_option( 'trp_machine_translated_characters', array() ), JSON_HEX_QUOT );
+                    }
+
                     // Call the custom API.
                     $response = wp_remote_post($this->store_url, array('timeout' => 15, 'sslverify' => false, 'body' => $api_params));
 
@@ -632,7 +636,7 @@ class TRP_Plugin_Updater{
             }
 
             set_transient( 'trp_checked_licence', 'yes', DAY_IN_SECONDS );
-            
+
         }
 
         return $transient_data;
@@ -667,6 +671,8 @@ class TRP_Plugin_Updater{
             if( ! check_admin_referer( 'trp_license_nonce', 'trp_license_nonce' ) )
                 return; // get out if we didn't click the Activate button
 
+            if( !current_user_can( 'manage_options' ) )
+                return;
 
             if ( isset( $_POST['trp_license_key'] ) && preg_match('/^[*]+$/', $_POST['trp_license_key']) && strlen( $_POST['trp_license_key'] ) > 5 ) { //phpcs:ignore
                 // pressed submit without altering the existing license key (containing only * as outputted by default)
@@ -690,6 +696,10 @@ class TRP_Plugin_Updater{
                         'item_name'  => urlencode( $active_pro_addon_name ), // the name of our product in EDD
                         'url'        => home_url()
                     );
+
+                    if( !empty( $license ) || get_option( 'trp_plugin_optin' ) == 'yes' ){
+                        $api_params['machine_translated_strings_data'] = json_encode( get_option( 'trp_machine_translated_characters', array() ), JSON_HEX_QUOT );
+                    }
 
                     // Call the custom API.
                     $response = wp_remote_post( $this->store_url, array( 'timeout' => 15, 'sslverify' => false, 'body' => $api_params ) );
@@ -739,6 +749,7 @@ class TRP_Plugin_Updater{
                         }
                         else{
                             $license_information_for_all_addons['valid'][] =  $license_data;
+                            trp_mtapi_sync_license_call( $license );
                         }
 
                     }
@@ -761,6 +772,7 @@ class TRP_Plugin_Updater{
             // $license_data->license will be either "valid" or "invalid"
 
             $this->update_option( 'trp_license_status', $license_data->license );
+
             wp_redirect( add_query_arg( array( 'trp_sl_activation' => 'true', 'message' => urlencode( __( 'You have successfully activated your license', 'translatepress-multilingual' ) ) ), $this->license_page_url() ) );
             exit();
         }
@@ -774,6 +786,9 @@ class TRP_Plugin_Updater{
             // run a quick security check
             if( ! check_admin_referer( 'trp_license_nonce', 'trp_license_nonce' ) )
                 return; // get out if we didn't click the Activate button
+
+            if( !current_user_can( 'manage_options' ) )
+                return;
 
             // retrieve the license from the database
             $license = trim( $this->get_option( 'trp_license_key' ) );

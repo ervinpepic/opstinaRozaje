@@ -2364,6 +2364,294 @@ const store = registerStore('monsterinsights/v1/popular-posts/widget', {
 
 /***/ }),
 
+/***/ "./src/hooks/components/EnviraPromo.js":
+/*!*********************************************!*\
+  !*** ./src/hooks/components/EnviraPromo.js ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   EnviraPromo: () => (/* binding */ EnviraPromo),
+/* harmony export */   EnviraPromoPortal: () => (/* binding */ EnviraPromoPortal)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/api-fetch */ "@wordpress/api-fetch");
+/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__);
+
+
+
+
+
+
+const EnviraPromo = ({
+  children
+}) => {
+  const [state, setState] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)({
+    dismissed: monsterinsights_gutenberg_tool_vars.dismiss_envira_promo,
+    isResolving: false,
+    isError: false,
+    isDone: window.sessionStorage.getItem('monsterinsights_envira_installed') === 'true'
+  });
+  const {
+    dismissed,
+    isResolving,
+    isError,
+    isDone
+  } = state;
+
+  // This session storage item is only needed for the current session.
+  // Once the user leaves the page we need to rely on monsterinsights_gutenberg_tool_vars.dismiss_envira_promo which tests for lite and pro.
+  // So let's remove it when the user leaves the page or reloads.
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
+    const handleOnUnload = () => {
+      window.sessionStorage.removeItem("monsterinsights_envira_installed");
+    };
+    window.addEventListener("beforeunload", handleOnUnload);
+    return () => {
+      window.removeEventListener("beforeunload", handleOnUnload);
+    };
+  }, [isDone]);
+
+  // Check if the user can install plugins.
+  const {
+    canUserInstallPlugins
+  } = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_2__.useSelect)(select => {
+    return {
+      canUserInstallPlugins: select('core').canUser('create', 'plugins')
+    };
+  });
+  if (dismissed || !canUserInstallPlugins) {
+    return null;
+  }
+
+  // @TODO - Should we create a confirm dialog for this?
+  const onDismiss = () => {
+    setState({
+      ...state,
+      isResolving: true
+    });
+    wp.ajax.post('monsterinsights_ajax_dismiss_editor_notice', {
+      notice: 'envira_promo',
+      nonce: monsterinsights_admin_common.dismiss_notice_nonce
+    }).done(() => {
+      setState({
+        ...state,
+        dismissed: true,
+        isResolving: false
+      });
+    }).fail(error => {
+      setState({
+        ...state,
+        isError: true,
+        isResolving: false
+      });
+      console.log('error: ', error);
+    });
+  };
+  const handleEnviraInstall = () => {
+    setState({
+      ...state,
+      isResolving: true
+    });
+    const promise = _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_4___default()({
+      path: `/wp/v2/plugins/`,
+      method: 'POST',
+      data: {
+        slug: 'envira-gallery-lite',
+        status: 'active'
+      }
+    });
+    promise.then(() => {
+      setState({
+        ...state,
+        dismissed: false,
+        isResolving: false,
+        isDone: true
+      });
+      // persistently store this decision along all the Gallery blocks so they don't show this notice again.
+      window.sessionStorage.setItem('monsterinsights_envira_installed', true);
+    });
+    promise.catch(error => {
+      // if the folder already exists, we can consider it as a success.
+      if (error.code === 'folder_exists') {
+        setState({
+          ...state,
+          dismissed: false,
+          isResolving: false,
+          isDone: true
+        });
+        return;
+      }
+      setState({
+        ...state,
+        isError: true,
+        isResolving: false
+      });
+    });
+  };
+
+  // Note: <Tooltip> cannot hold a custom component as `child`, so we need to wrap it in a <span>. https://github.com/WordPress/gutenberg/issues/43129
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "monsterinsights-editor-notice monsterinsights-editor-notice-envira-promo"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.Card, {
+    isBorderless: true
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.CardDivider, {
+    style: {
+      margin: "0"
+    }
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.CardHeader, {
+    isBorderless: true,
+    size: "small",
+    style: {
+      pading: '16px 16px 0'
+    }
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.__experimentalHeading, {
+    level: 2,
+    style: {
+      marginBottom: '0'
+    }
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Envira Gallery Plugin', "google-analytics-for-wordpress")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.Button, {
+    className: "monsterinsights-editor-notice-dismiss",
+    onClick: onDismiss
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.Dashicon, {
+    icon: "no-alt"
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    className: "screen-reader-text"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Dismiss "Envira Promo" panel!', "google-analytics-for-wordpress")))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.CardBody, {
+    isBorderless: true,
+    size: "small",
+    style: {
+      padding: '0 16px'
+    }
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "monsterinsights-editor-notice-content"
+  }, !isDone && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Adds lightboxes, drag and drop galleries and more.', "google-analytics-for-wordpress"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.Tooltip, {
+    delay: "200",
+    placement: "top",
+    text: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Recommended by MonsterInsights.', "google-analytics-for-wordpress")
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.Dashicon, {
+    icon: "info-outline",
+    size: "14",
+    style: {
+      marginLeft: '2px',
+      padding: '2px'
+    }
+  })))), isDone && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    style: {
+      color: 'green'
+    }
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)("Success! Save your work and then reload this page to start using Envira Gallery.", "google-analytics-for-wordpress")), isError && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    style: {
+      color: 'red'
+    }
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('An error occurred!', "google-analytics-for-wordpress")))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.CardFooter, {
+    isBorderless: true,
+    size: "small"
+  }, !isDone && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.Button, {
+    className: "monsterinsights-editor-notice-action",
+    variant: "secondary",
+    onClick: handleEnviraInstall,
+    disabled: isResolving || isError,
+    isBusy: isResolving
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Install Now', "google-analytics-for-wordpress")), isDone && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.Button, {
+    className: "monsterinsights-editor-notice-action",
+    variant: "secondary",
+    icon: "image-rotate",
+    onClick: () => window.location.reload()
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Reload', "google-analytics-for-wordpress")))));
+};
+class EnviraPromoPortal extends _wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Component {
+  el = document.createElement("div");
+  componentDidMount() {
+    setTimeout(() => {
+      this.targetEl = window.document.querySelector('.block-editor-block-inspector');
+      this.targetEl.appendChild(this.el);
+    }, 100);
+  }
+  render() {
+    return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createPortal)((0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(EnviraPromo, null), this.el);
+  }
+}
+
+
+/***/ }),
+
+/***/ "./src/hooks/components/index.js":
+/*!***************************************!*\
+  !*** ./src/hooks/components/index.js ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   EnviraPromo: () => (/* reexport safe */ _EnviraPromo__WEBPACK_IMPORTED_MODULE_0__.EnviraPromo),
+/* harmony export */   EnviraPromoPortal: () => (/* reexport safe */ _EnviraPromo__WEBPACK_IMPORTED_MODULE_0__.EnviraPromoPortal)
+/* harmony export */ });
+/* harmony import */ var _EnviraPromo__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./EnviraPromo */ "./src/hooks/components/EnviraPromo.js");
+
+
+/***/ }),
+
+/***/ "./src/hooks/gallery.js":
+/*!******************************!*\
+  !*** ./src/hooks/gallery.js ***!
+  \******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_hooks__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/hooks */ "@wordpress/hooks");
+/* harmony import */ var _wordpress_hooks__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_compose__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/compose */ "@wordpress/compose");
+/* harmony import */ var _wordpress_compose__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_compose__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _components___WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/ */ "./src/hooks/components/index.js");
+
+
+
+
+const withInspectorControls = (0,_wordpress_compose__WEBPACK_IMPORTED_MODULE_2__.createHigherOrderComponent)(BlockEdit => {
+  const imageBlocks = ['core/gallery', 'core/image', 'core/cover'];
+  return props => {
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(BlockEdit, {
+      ...props
+    }), props.isSelected && imageBlocks.includes(props.name) && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components___WEBPACK_IMPORTED_MODULE_3__.EnviraPromoPortal, null));
+  };
+}, 'withInspectorControl');
+
+// Avoid adding the filter if it is not needed; performance reasons.
+if (!monsterinsights_gutenberg_tool_vars.dismiss_envira_promo) {
+  (0,_wordpress_hooks__WEBPACK_IMPORTED_MODULE_1__.addFilter)('editor.BlockEdit', 'monsterinsights/editor-promo', withInspectorControls);
+}
+
+/***/ }),
+
+/***/ "./src/hooks/index.js":
+/*!****************************!*\
+  !*** ./src/hooks/index.js ***!
+  \****************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _gallery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./gallery */ "./src/hooks/gallery.js");
+
+
+/***/ }),
+
 /***/ "./src/plugins/index.js":
 /*!******************************!*\
   !*** ./src/plugins/index.js ***!
@@ -2770,15 +3058,10 @@ class SiteNotes extends _wordpress_element__WEBPACK_IMPORTED_MODULE_2__.Componen
       },
       published_template: __('Published: %s', "google-analytics-for-wordpress")
     };
+    this.categories = window.monsterinsights_gutenberg_tool_vars ? window.monsterinsights_gutenberg_tool_vars['site_notes_categories'] : [];
+    this.onToggleControlChange = this.onToggleControlChange.bind(this);
   }
   componentDidMount() {
-    this.categories = window.monsterinsights_gutenberg_tool_vars ? window.monsterinsights_gutenberg_tool_vars['site_notes_categories'] : [];
-    if (this.categories.length > 0 && this.state.category === 0) {
-      this.setState({
-        category: this.categories[0]['value']
-      }, this.saveCategoryField);
-    }
-
     // Listener to trigger a function after the post is saved.
     subscribe(() => {
       if (isSavingPost()) {
@@ -2848,12 +3131,7 @@ class SiteNotes extends _wordpress_element__WEBPACK_IMPORTED_MODULE_2__.Componen
       checked: this.state.addSiteNote,
       help: this.texts.checkbox.help,
       label: this.texts.checkbox.label,
-      onChange: value => {
-        this.setState({
-          addSiteNote: !!value
-        }, this.saveActiveField);
-        this.refreshNoteText();
-      }
+      onChange: this.onToggleControlChange
     }), this.state.addSiteNote && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(TextareaControl, {
       help: "",
       label: "",
@@ -2879,6 +3157,18 @@ class SiteNotes extends _wordpress_element__WEBPACK_IMPORTED_MODULE_2__.Componen
       __nextHasNoMarginBottom: true
     }));
   }
+  onToggleControlChange(value) {
+    // When user open site-note toggle, Set first category as selected.
+    if (value && this.state.category === 0 && this.categories.length > 0) {
+      this.setState({
+        category: this.categories[0]['value']
+      }, this.saveCategoryField);
+    }
+    this.setState({
+      addSiteNote: !!value
+    }, this.saveActiveField);
+    this.refreshNoteText();
+  }
 }
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SiteNotes);
 
@@ -2897,6 +3187,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_pro_badge__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/pro-badge */ "./src/plugins/metabox/components/pro-badge.js");
 /* harmony import */ var _components_page_insights_GUTENBERG_APP_VERSION__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/page-insights-GUTENBERG_APP_VERSION */ "./src/plugins/metabox/components/page-insights-Lite.js");
 /* harmony import */ var _components_site_notes__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/site-notes */ "./src/plugins/metabox/components/site-notes.js");
+var _wp$editor$PluginDocu, _wp$editPost$PluginDo;
 
 const {
   ToggleControl
@@ -2911,9 +3202,7 @@ const {
 const {
   __
 } = wp.i18n;
-const {
-  PluginDocumentSettingPanel
-} = wp.editPost;
+const PluginDocumentSettingPanel = (_wp$editor$PluginDocu = wp.editor?.PluginDocumentSettingPanel) !== null && _wp$editor$PluginDocu !== void 0 ? _wp$editor$PluginDocu : (_wp$editPost$PluginDo = wp.editPost?.PluginDocumentSettingPanel) !== null && _wp$editPost$PluginDo !== void 0 ? _wp$editPost$PluginDo : wp.editSite?.PluginDocumentSettingPanel;
 const {
   useState,
   Fragment
@@ -4021,6 +4310,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_HeadlinePanelWordCount__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/HeadlinePanelWordCount */ "./src/plugins/monsterinsights-Headline-Analyzer/components/HeadlinePanelWordCount.js");
 /* harmony import */ var _components_HeadlinePanelStartEndWords__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/HeadlinePanelStartEndWords */ "./src/plugins/monsterinsights-Headline-Analyzer/components/HeadlinePanelStartEndWords.js");
 /* harmony import */ var _components_HeadlinePanelSearchPreview__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/HeadlinePanelSearchPreview */ "./src/plugins/monsterinsights-Headline-Analyzer/components/HeadlinePanelSearchPreview.js");
+var _wp$editor$PluginSide, _wp$editPost$PluginSi, _wp$editor$PluginSide2, _wp$editPost$PluginSi2;
 
 const {
   __
@@ -4033,10 +4323,8 @@ const {
 const {
   registerPlugin
 } = wp.plugins;
-const {
-  PluginSidebar,
-  PluginSidebarMoreMenuItem
-} = wp.editPost;
+const PluginSidebar = (_wp$editor$PluginSide = wp.editor?.PluginSidebar) !== null && _wp$editor$PluginSide !== void 0 ? _wp$editor$PluginSide : (_wp$editPost$PluginSi = wp.editPost?.PluginSidebar) !== null && _wp$editPost$PluginSi !== void 0 ? _wp$editPost$PluginSi : wp.editSite?.PluginSidebar;
+const PluginSidebarMoreMenuItem = (_wp$editor$PluginSide2 = wp.editor?.PluginSidebarMoreMenuItem) !== null && _wp$editor$PluginSide2 !== void 0 ? _wp$editor$PluginSide2 : (_wp$editPost$PluginSi2 = wp.editPost?.PluginSidebarMoreMenuItem) !== null && _wp$editPost$PluginSi2 !== void 0 ? _wp$editPost$PluginSi2 : wp.editSite?.PluginSidebarMoreMenuItem;
 const {
   useSelect
 } = wp.data;
@@ -4184,6 +4472,75 @@ if ('undefined' !== typeof monsterinsights_gutenberg_tool_vars && monsterinsight
 
 /***/ }),
 
+/***/ "./node_modules/classnames/index.js":
+/*!******************************************!*\
+  !*** ./node_modules/classnames/index.js ***!
+  \******************************************/
+/***/ ((module, exports) => {
+
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
+	Copyright (c) 2018 Jed Watson.
+	Licensed under the MIT License (MIT), see
+	http://jedwatson.github.io/classnames
+*/
+/* global define */
+
+(function () {
+	'use strict';
+
+	var hasOwn = {}.hasOwnProperty;
+	var nativeCodeString = '[native code]';
+
+	function classNames() {
+		var classes = [];
+
+		for (var i = 0; i < arguments.length; i++) {
+			var arg = arguments[i];
+			if (!arg) continue;
+
+			var argType = typeof arg;
+
+			if (argType === 'string' || argType === 'number') {
+				classes.push(arg);
+			} else if (Array.isArray(arg)) {
+				if (arg.length) {
+					var inner = classNames.apply(null, arg);
+					if (inner) {
+						classes.push(inner);
+					}
+				}
+			} else if (argType === 'object') {
+				if (arg.toString !== Object.prototype.toString && !arg.toString.toString().includes('[native code]')) {
+					classes.push(arg.toString());
+					continue;
+				}
+
+				for (var key in arg) {
+					if (hasOwn.call(arg, key) && arg[key]) {
+						classes.push(key);
+					}
+				}
+			}
+		}
+
+		return classes.join(' ');
+	}
+
+	if ( true && module.exports) {
+		classNames.default = classNames;
+		module.exports = classNames;
+	} else if (true) {
+		// register as 'classnames', consistent with npm package name
+		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = (function () {
+			return classNames;
+		}).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	} else {}
+}());
+
+
+/***/ }),
+
 /***/ "./src/assets/scss/monsterinsights/editor.scss":
 /*!*****************************************************!*\
   !*** ./src/assets/scss/monsterinsights/editor.scss ***!
@@ -4266,6 +4623,50 @@ module.exports = window["lodash"];
 
 /***/ }),
 
+/***/ "@wordpress/api-fetch":
+/*!**********************************!*\
+  !*** external ["wp","apiFetch"] ***!
+  \**********************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = window["wp"]["apiFetch"];
+
+/***/ }),
+
+/***/ "@wordpress/components":
+/*!************************************!*\
+  !*** external ["wp","components"] ***!
+  \************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = window["wp"]["components"];
+
+/***/ }),
+
+/***/ "@wordpress/compose":
+/*!*********************************!*\
+  !*** external ["wp","compose"] ***!
+  \*********************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = window["wp"]["compose"];
+
+/***/ }),
+
+/***/ "@wordpress/data":
+/*!******************************!*\
+  !*** external ["wp","data"] ***!
+  \******************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = window["wp"]["data"];
+
+/***/ }),
+
 /***/ "@wordpress/element":
 /*!*********************************!*\
   !*** external ["wp","element"] ***!
@@ -4277,6 +4678,17 @@ module.exports = window["wp"]["element"];
 
 /***/ }),
 
+/***/ "@wordpress/hooks":
+/*!*******************************!*\
+  !*** external ["wp","hooks"] ***!
+  \*******************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = window["wp"]["hooks"];
+
+/***/ }),
+
 /***/ "@wordpress/i18n":
 /*!******************************!*\
   !*** external ["wp","i18n"] ***!
@@ -4285,92 +4697,6 @@ module.exports = window["wp"]["element"];
 
 "use strict";
 module.exports = window["wp"]["i18n"];
-
-/***/ }),
-
-/***/ "./node_modules/classnames/index.js":
-/*!******************************************!*\
-  !*** ./node_modules/classnames/index.js ***!
-  \******************************************/
-/***/ ((module, exports) => {
-
-var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
-	Copyright (c) 2018 Jed Watson.
-	Licensed under the MIT License (MIT), see
-	http://jedwatson.github.io/classnames
-*/
-/* global define */
-
-(function () {
-	'use strict';
-
-	var hasOwn = {}.hasOwnProperty;
-
-	function classNames () {
-		var classes = '';
-
-		for (var i = 0; i < arguments.length; i++) {
-			var arg = arguments[i];
-			if (arg) {
-				classes = appendClass(classes, parseValue(arg));
-			}
-		}
-
-		return classes;
-	}
-
-	function parseValue (arg) {
-		if (typeof arg === 'string' || typeof arg === 'number') {
-			return arg;
-		}
-
-		if (typeof arg !== 'object') {
-			return '';
-		}
-
-		if (Array.isArray(arg)) {
-			return classNames.apply(null, arg);
-		}
-
-		if (arg.toString !== Object.prototype.toString && !arg.toString.toString().includes('[native code]')) {
-			return arg.toString();
-		}
-
-		var classes = '';
-
-		for (var key in arg) {
-			if (hasOwn.call(arg, key) && arg[key]) {
-				classes = appendClass(classes, key);
-			}
-		}
-
-		return classes;
-	}
-
-	function appendClass (value, newClass) {
-		if (!newClass) {
-			return value;
-		}
-	
-		if (value) {
-			return value + ' ' + newClass;
-		}
-	
-		return value + newClass;
-	}
-
-	if ( true && module.exports) {
-		classNames.default = classNames;
-		module.exports = classNames;
-	} else if (true) {
-		// register as 'classnames', consistent with npm package name
-		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = (function () {
-			return classNames;
-		}).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
-		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-	} else {}
-}());
-
 
 /***/ }),
 
@@ -5134,31 +5460,7 @@ class Axios {
    *
    * @returns {Promise} The Promise to be fulfilled
    */
-  async request(configOrUrl, config) {
-    try {
-      return await this._request(configOrUrl, config);
-    } catch (err) {
-      if (err instanceof Error) {
-        let dummy;
-
-        Error.captureStackTrace ? Error.captureStackTrace(dummy = {}) : (dummy = new Error());
-
-        // slice off the Error: ... line
-        const stack = dummy.stack ? dummy.stack.replace(/^.+\n/, '') : '';
-
-        if (!err.stack) {
-          err.stack = stack;
-          // match without the 2 top stack lines
-        } else if (stack && !String(err.stack).endsWith(stack.replace(/^.+\n.+\n/, ''))) {
-          err.stack += '\n' + stack
-        }
-      }
-
-      throw err;
-    }
-  }
-
-  _request(configOrUrl, config) {
+  request(configOrUrl, config) {
     /*eslint no-param-reassign:0*/
     // Allow for axios('example/url'[, config]) a la fetch API
     if (typeof configOrUrl === 'string') {
@@ -6267,6 +6569,9 @@ const defaults = {
     const isFormData = _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].isFormData(data);
 
     if (isFormData) {
+      if (!hasJSONContentType) {
+        return data;
+      }
       return hasJSONContentType ? JSON.stringify((0,_helpers_formDataToJSON_js__WEBPACK_IMPORTED_MODULE_2__["default"])(data)) : data;
     }
 
@@ -6407,7 +6712,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   VERSION: () => (/* binding */ VERSION)
 /* harmony export */ });
-const VERSION = "1.6.7";
+const VERSION = "1.6.5";
 
 /***/ }),
 
@@ -8610,6 +8915,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _assets_scss_GUTENBERG_APP_THEME_frontend_GUTENBERG_APP_VERSION_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./assets/scss/GUTENBERG_APP_THEME/frontend-GUTENBERG_APP_VERSION.scss */ "./src/assets/scss/monsterinsights/frontend-Lite.scss");
 /* harmony import */ var _plugins___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./plugins/ */ "./src/plugins/index.js");
 /* harmony import */ var _blocks_index_GUTENBERG_APP_VERSION__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./blocks/index-GUTENBERG_APP_VERSION */ "./src/blocks/index-Lite.js");
+/* harmony import */ var _hooks___WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./hooks/ */ "./src/hooks/index.js");
 /**
  * Import styles & files
  */
@@ -8625,6 +8931,8 @@ if ('undefined' !== typeof window.monsterinsights_gutenberg_tool_vars.translatio
 // import plugins
 
  // eslint-disable-line import/no-unresolved
+
+
 })();
 
 /******/ })()

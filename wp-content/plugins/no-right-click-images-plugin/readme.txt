@@ -1,9 +1,9 @@
 === No Right Click Images ===
 Tags: images, image, right click, stealing, protect
 Requires at least: 3.0
-Tested up to: 6.4
+Tested up to: 6.7
 Contributors: WebFactory
-Stable tag: 3.8
+Stable tag: 4.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -31,8 +31,15 @@ The plugin no longer tries to replace images with a dummy image. This method har
 2. Upload the plugin to your wp-content/plugins directory.
 3. Activate the plugin.
 
-
 == Changelog ==
+= 4.0 =
+* 2024/07/07
+* minor security fixes
+
+= 3.9 =
+* 2024/03/13
+* bug fixes
+
 = 3.8 =
 * 2024/01/15
 * security fixes
@@ -108,3 +115,7 @@ When you added the image to WordPress you specified this behavior. When you inse
 If you are able to click on an image to display the image in a new window, it is then outside of WordPress and can't be protected.
 = I have a Slideshow or Gallery and users can right click on the images in the gallery. =
 Special image presentation plugins that use jQuery or other Javascript systems override the behavior of this plugin. When they load they take over and my plugin can't help you. You need to contact the authors of the gallery and ask they they disable the right click event and drag events inside their plugin.
+
+= How can I report security bugs? =
+
+You can report security bugs through the Patchstack Vulnerability Disclosure Program. The Patchstack team help validate, triage and handle any security vulnerabilities. [Report a security vulnerability.](https://patchstack.com/database/vdp/no-right-click-images-plugin)

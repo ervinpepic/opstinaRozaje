@@ -2,8 +2,8 @@
 /*
 Plugin Name: No Right Click Images
 Description: Uses JavaScript to prevent right clicking on images to help keep leaches from copying images
-Version: 3.8
-Tested up to: 6.2
+Version: 4.0
+Tested up to: 6.7
 Author: WebFactory Ltd
 Author URI: https://www.webfactoryltd.com/
 
@@ -169,9 +169,8 @@ class No_Right_Click_Images
       $change = true;
     }
 
-    if (isset($_POST['submit'])) {
-
-      if (!isset($_POST['norightclickimages_update_admin_options_nonce']) || !wp_verify_nonce($_POST['norightclickimages_update_admin_options_nonce'], 'norightclickimages_update_admin_options')) {
+    if (isset($_POST['submit']) && isset($_POST['norightclickimages_update_admin_options_nonce'])) {
+      if (!wp_verify_nonce($_POST['norightclickimages_update_admin_options_nonce'], 'norightclickimages_update_admin_options')) {
         echo '<div id="message" class="updated fade">
                     <p><strong>' . esc_html__('Sorry, your nonce did not verify.', 'no-right-click-images') . '</strong></p>
                 </div>';
@@ -276,7 +275,7 @@ class No_Right_Click_Images
   static function options_page()
   {
     if (!current_user_can('manage_options')) {
-      wp_die(__('You do not have sufficient permissions to access this page.'));
+      wp_die(esc_html__('You do not have sufficient permissions to access this page.'));
     }
 
     $options = self::get_options();
@@ -406,7 +405,7 @@ class No_Right_Click_Images
 		</style>';
 
     echo '<div style="margin: 20px; color:#444;">';
-    echo 'If things are not done in a minute <a target="_parent" href="' . admin_url('plugin-install.php?s=301%20redirects%20webfactory&tab=search&type=term') . '">install the plugin manually via Plugins page</a><br><br>';
+    echo 'If things are not done in a minute <a target="_parent" href="' . esc_url(admin_url('plugin-install.php?s=301%20redirects%20webfactory&tab=search&type=term')) . '">install the plugin manually via Plugins page</a><br><br>';
     echo 'Starting ...<br><br>';
 
     wp_cache_flush();
@@ -429,11 +428,11 @@ class No_Right_Click_Images
       if (is_null($activate)) {
         echo 'WP 301 Redirects Activated.<br />';
 
-        echo '<script>setTimeout(function() { top.location = "' . admin_url('options-general.php?page=eps_redirects') . '"; }, 1000);</script>';
-        echo '<br>If you are not redirected in a few seconds - <a href="' . admin_url('options-general.php?page=eps_redirects') . '" target="_parent">click here</a>.';
+        echo '<script>setTimeout(function() { top.location = "' . esc_url(admin_url('options-general.php?page=eps_redirects')) . '"; }, 1000);</script>';
+        echo '<br>If you are not redirected in a few seconds - <a href="' . esc_url(admin_url('options-general.php?page=eps_redirects')) . '" target="_parent">click here</a>.';
       }
     } else {
-      echo 'Could not install WP 301 Redirects. You\'ll have to <a target="_parent" href="' . admin_url('plugin-install.php?s=301%20redirects%20webfactory&tab=search&type=term') . '">download and install manually</a>.';
+      echo 'Could not install WP 301 Redirects. You\'ll have to <a target="_parent" href="' . esc_url(admin_url('plugin-install.php?s=301%20redirects%20webfactory&tab=search&type=term')) . '">download and install manually</a>.';
     }
 
     echo '</div>';
@@ -465,7 +464,7 @@ class No_Right_Click_Images
 		</style>';
 
     echo '<div style="margin: 20px; color:#444;">';
-    echo 'If things are not done in a minute <a target="_parent" href="' . admin_url('plugin-install.php?s=advanced%20google%20recaptcha%20webfactory&tab=search&type=term') . '">install the plugin manually via Plugins page</a><br><br>';
+    echo 'If things are not done in a minute <a target="_parent" href="' . esc_url(admin_url('plugin-install.php?s=advanced%20google%20recaptcha%20webfactory&tab=search&type=term')) . '">install the plugin manually via Plugins page</a><br><br>';
     echo 'Starting ...<br><br>';
 
     wp_cache_flush();
@@ -488,11 +487,11 @@ class No_Right_Click_Images
       if (is_null($activate)) {
         echo 'WP Captcha Activated.<br />';
 
-        echo '<script>setTimeout(function() { top.location = "' . admin_url('options-general.php?page=wpcaptcha') . '"; }, 1000);</script>';
-        echo '<br>If you are not redirected in a few seconds - <a href="' . admin_url('options-general.php?page=wpcaptcha') . '" target="_parent">click here</a>.';
+        echo '<script>setTimeout(function() { top.location = "' . esc_url(admin_url('options-general.php?page=wpcaptcha')) . '"; }, 1000);</script>';
+        echo '<br>If you are not redirected in a few seconds - <a href="' . esc_url(admin_url('options-general.php?page=wpcaptcha')) . '" target="_parent">click here</a>.';
       }
     } else {
-      echo 'Could not install WP Captcha. You\'ll have to <a target="_parent" href="' . admin_url('plugin-install.php?s=advanced%20google%20recaptcha%20webfactory&tab=search&type=term') . '">download and install manually</a>.';
+      echo 'Could not install WP Captcha. You\'ll have to <a target="_parent" href="' . esc_url(admin_url('plugin-install.php?s=advanced%20google%20recaptcha%20webfactory&tab=search&type=term')) . '">download and install manually</a>.';
     }
 
     echo '</div>';
