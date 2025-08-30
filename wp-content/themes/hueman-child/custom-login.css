@@ -1,0 +1,18 @@
+/* custom-login.css */
+
+/* Style the WordPress login logo */
+.login #login h1 a {
+    background: url('/wp-content/uploads/2022/08/logo-textless.svg') center/contain no-repeat;
+    width: 320px;
+    height: 100px;
+    text-indent: -9999px;
+    display: block;
+}
+
+/* Optional: Style the heading under the login logo */
+.login #login h2 {
+    text-align: center;
+    margin: 10px 0 20px;
+    font-size: 1.5em;
+    color: #333;
+}

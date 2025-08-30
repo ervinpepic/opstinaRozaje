@@ -175,7 +175,7 @@ function monsterinsights_get_browser_session_id( $measurement_id ) {
 	}
 
 	$cookie = sanitize_text_field( $_COOKIE[ $cookie_name ] ); // phpcs:ignore WordPressVIPMinimum.Variables.RestrictedVariables.cache_constraints___COOKIE
-	
+
 	// Check if it's GS2 format
 	// New format: 'GS2.1.s1747078634$o1$g1$t1747081074$j0$l0$h0'
 	// Session Id:        ^^^^^^^^^^ (1747078634)
@@ -186,7 +186,7 @@ function monsterinsights_get_browser_session_id( $measurement_id ) {
 		}
 		return null;
 	}
-	
+
 	// Handle original GS1 format
 	// Cookie value example: 'GS1.1.1659710029.4.1.1659710504.0'.
 	// Session Id:                  ^^^^^^^^^^. (1659710029)
@@ -994,6 +994,56 @@ function monsterinsights_get_country_list( $translated = false ) {
 function monsterinsights_get_api_url() {
 	return apply_filters( 'monsterinsights_get_api_url', 'api.monsterinsights.com/v2/' );
 }
+/**
+ * Defines the new dynamic onboarding URL.
+ *
+ * @since 9.5.0
+ * @return string
+ */
+function monsterinsights_get_onboarding_url() {
+	$base_url = apply_filters( 'monsterinsights_get_onboarding_url', 'https://connect.monsterinsights.com' );
+
+	$auth       = MonsterInsights()->api_auth;
+	$is_network = is_network_admin();
+	$params = array(
+		'tt'                => $auth->get_tt(),
+		'sitei'             => $auth->get_sitei(),
+		'site_url'          => get_site_url(),
+		'onboarding_key'    => monsterinsights_get_onboarding_key(),
+		'triggered_by'      => get_current_user_id(),
+		'rest_url'          => rest_url( 'monsterinsights/v1' ),
+		'return_url'        => $is_network ? network_admin_url( 'admin.php?page=monsterinsights_settings' ) : admin_url( 'admin.php?page=monsterinsights_settings' ),
+		'is_network'        => $is_network ? 1 : 0,
+		'can_install'       => monsterinsights_can_install_plugins() ? 1 : 0,
+	);
+
+	// Apply args filter for backwards compatibility.
+	$request_args = apply_filters( 'monsterinsights_auth_request_body', $params );
+	return add_query_arg( $request_args, $base_url );
+}
+
+/**
+ * Gets the onboarding key from the transient if it exists, otherwise generates a new one and stores it in the transient
+ *
+ * @since 9.5.0
+ * @return string The onboarding key
+ */
+function monsterinsights_get_onboarding_key() {
+	$key = get_transient( 'monsterinsights_onboarding_key' );
+	if ( empty( $key ) ) {
+		$key = wp_generate_password( 32, false );
+		set_transient( 'monsterinsights_onboarding_key', $key, 30 * MINUTE_IN_SECONDS );
+	}
+	return $key;
+}
+/**
+ * Clears the onboarding key
+ *
+ * @since 9.5.0
+ */
+function monsterinsights_clear_onboarding_key() {
+	delete_transient( 'monsterinsights_onboarding_key' );
+}
 
 function monsterinsights_get_licensing_url() {
 	$licensing_website = apply_filters( 'monsterinsights_get_licensing_url', 'https://www.monsterinsights.com' );
@@ -1012,8 +1062,10 @@ function monsterinsights_get_licensing_url() {
  * @since 6.0.0
  */
 function monsterinsights_perform_remote_request( $action, $body = array(), $headers = array(), $return_format = 'json' ) {
-
-	$key = is_network_admin() ? MonsterInsights()->license->get_network_license_key() : MonsterInsights()->license->get_site_license_key();
+	$key = '';
+	if ( class_exists( 'MonsterInsights' ) && MonsterInsights() && isset( MonsterInsights()->license ) ) {
+		$key = is_network_admin() ? MonsterInsights()->license->get_network_license_key() : MonsterInsights()->license->get_site_license_key();
+	}
 
 	// Build the body of the request.
 	$query_params = wp_parse_args(
@@ -1030,6 +1082,7 @@ function monsterinsights_perform_remote_request( $action, $body = array(), $head
 	$args = [
 		'headers' => $headers,
 	];
+	// echo add_query_arg( $query_params, monsterinsights_get_licensing_url() ); die;
 	// Perform the query and retrieve the response.
 	$response      = wp_remote_get( add_query_arg( $query_params, monsterinsights_get_licensing_url() ), $args );
 	$response_code = wp_remote_retrieve_response_code( $response );
@@ -1426,9 +1479,12 @@ function monsterinsights_get_page_title() {
 		/* translators: Post type archive title. %s: Post type name */
 		$title = sprintf( __( 'Archives: %s' ), post_type_archive_title( '', false ) );
 	} elseif ( is_tax() ) {
-		$tax = get_taxonomy( get_queried_object()->taxonomy );
-		/* translators: Taxonomy term archive title. 1: Taxonomy singular name, 2: Current taxonomy term */
-		$title = sprintf( '%1$s: %2$s', $tax->labels->singular_name, single_term_title( '', false ) );
+		$queried_object = get_queried_object();
+		if ( $queried_object && isset( $queried_object->taxonomy ) ) {
+			$tax = get_taxonomy( $queried_object->taxonomy );
+			/* translators: Taxonomy term archive title. 1: Taxonomy singular name, 2: Current taxonomy term */
+			$title = sprintf( '%1$s: %2$s', $tax->labels->singular_name, single_term_title( '', false ) );
+		}
 	}
 
 	return $title;
@@ -2132,17 +2188,17 @@ function monsterinsights_get_english_speaking_countries() {
  *
  * @return bool
  */
-function monsterinsights_can_install_plugins() {
-
-	if ( ! current_user_can( 'install_plugins' ) ) {
+function monsterinsights_can_install_plugins( $user_id = null ) {
+	if ( empty( $user_id ) ) {
+		$user_id = get_current_user_id();
+	}
+	if ( ! user_can( $user_id, 'install_plugins' ) ) {
 		return false;
 	}
-
 	// Determine whether file modifications are allowed.
 	if ( function_exists( 'wp_is_file_mod_allowed' ) && ! wp_is_file_mod_allowed( 'monsterinsights_can_install' ) ) {
 		return false;
 	}
-
 	return true;
 }
 
@@ -2440,4 +2496,57 @@ function monsterinsights_disable_wpconsent_onboarding_redirect() {
 	if ( is_plugin_active( 'wpconsent-cookies-banner-privacy-suite/wpconsent.php' ) ) {
 		delete_transient( 'wpconsent_onboarding_redirect' );
 	}
+}
+add_action( 'wp_ajax_monsterinsights_report_error', 'monsterinsights_report_error' );
+/**
+ * Capture the last plugin error and save it.
+ * @since 9.7.0
+ * @return string
+ */
+function monsterinsights_report_error() {
+	check_ajax_referer( 'mi-admin-nonce', 'nonce' );
+	if ( ! current_user_can( 'monsterinsights_save_settings' ) ) {
+		return;
+	}
+	if ( ! isset( $_POST['error_code'] ) || ! isset( $_POST['current_screen'] ) ) {
+		return;
+	}
+	$error_code     = sanitize_text_field( wp_unslash( $_POST['error_code'] ) );
+	$current_screen = sanitize_text_field( wp_unslash( $_POST['current_screen'] ) );
+	$last_plugin_error = array(
+		'code' => $error_code,
+		'screen' => $current_screen,
+		'date' => time()
+	);
+	update_option( 'monsterinsights_last_plugin_error', $last_plugin_error );
+	wp_send_json_success();
+}
+
+/**
+ * Check any of the following CMP plugis is active.
+ *
+ * @return bool
+ */
+function monsterinsights_wpconsent_is_cmp_plugin_active() {
+	// Complianz
+	if ( defined( 'cmplz_plugin' ) || defined( 'cmplz_premium' ) ) {
+		return true;
+	}
+
+	// CookieYes (cookie-law-info)
+	if ( defined( 'CLI_SETTINGS_FIELD' ) ) {
+		return true;
+	}
+
+	// GDPR Cookie Compliance
+	if ( defined( 'MOOVE_GDPR_VERSION' ) ) {
+		return true;
+	}
+
+	// Cookie Notice
+	if ( function_exists( 'Cookie_Notice' ) ) {
+		return true;
+	}
+
+	return false;
 }
