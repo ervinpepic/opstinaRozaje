@@ -925,3 +925,237 @@ Aug 30 2025 13:10:05
 Aug 30 2025 13:10:10
 {"Number":2,"Message":"mkdir(): File exists","File":"\/Users\/pepic__ervin\/Documents\/Development\/Web_dev\/PHP_apps\/WordpressProjects\/opstinaRozaje\/wp-includes\/functions.php","Line":2090}
 
+Feb 01 2026 21:58:19
+{"type":8192,"message":"enshrined\\svgSanitize\\Exceptions\\NestingException::__construct(): Implicitly marking parameter $element as nullable is deprecated, the explicit nullable type must be used instead","file":"\/Users\/pepic__ervin\/Documents\/Development\/Web_dev\/PHP_apps\/WordpressProjects\/opstinaRozaje\/wp-content\/plugins\/wp-svg-images\/svg-sanitizer\/Exceptions\/NestingException.php","line":21}
+
+Feb 02 2026 19:15:47
+{"Number":8192,"Message":"rtrim(): Passing null to parameter #1 ($string) of type string is deprecated","File":"\/Users\/pepic__ervin\/Documents\/Development\/Web_dev\/PHP_apps\/WordpressProjects\/opstinaRozaje\/wp-includes\/formatting.php","Line":2837}
+
+Feb 02 2026 19:15:47
+{"Number":8192,"Message":"rtrim(): Passing null to parameter #1 ($string) of type string is deprecated","File":"\/Users\/pepic__ervin\/Documents\/Development\/Web_dev\/PHP_apps\/WordpressProjects\/opstinaRozaje\/wp-includes\/formatting.php","Line":2837}
+
+Feb 02 2026 19:15:47
+{"Number":8192,"Message":"rtrim(): Passing null to parameter #1 ($string) of type string is deprecated","File":"\/Users\/pepic__ervin\/Documents\/Development\/Web_dev\/PHP_apps\/WordpressProjects\/opstinaRozaje\/wp-includes\/formatting.php","Line":2837}
+
+Feb 02 2026 19:15:47
+{"Number":8192,"Message":"rtrim(): Passing null to parameter #1 ($string) of type string is deprecated","File":"\/Users\/pepic__ervin\/Documents\/Development\/Web_dev\/PHP_apps\/WordpressProjects\/opstinaRozaje\/wp-includes\/formatting.php","Line":2837}
+
+Feb 02 2026 19:15:47
+{"Number":8192,"Message":"rtrim(): Passing null to parameter #1 ($string) of type string is deprecated","File":"\/Users\/pepic__ervin\/Documents\/Development\/Web_dev\/PHP_apps\/WordpressProjects\/opstinaRozaje\/wp-includes\/formatting.php","Line":2837}
+
+Feb 02 2026 19:15:47
+{"Number":8192,"Message":"rtrim(): Passing null to parameter #1 ($string) of type string is deprecated","File":"\/Users\/pepic__ervin\/Documents\/Development\/Web_dev\/PHP_apps\/WordpressProjects\/opstinaRozaje\/wp-includes\/formatting.php","Line":2837}
+
+Feb 02 2026 19:15:47
+{"Number":8192,"Message":"rtrim(): Passing null to parameter #1 ($string) of type string is deprecated","File":"\/Users\/pepic__ervin\/Documents\/Development\/Web_dev\/PHP_apps\/WordpressProjects\/opstinaRozaje\/wp-includes\/formatting.php","Line":2837}
+
+Feb 02 2026 19:15:47
+{"Number":8192,"Message":"rtrim(): Passing null to parameter #1 ($string) of type string is deprecated","File":"\/Users\/pepic__ervin\/Documents\/Development\/Web_dev\/PHP_apps\/WordpressProjects\/opstinaRozaje\/wp-includes\/formatting.php","Line":2837}
+
+Feb 02 2026 19:15:47
+{"Number":8192,"Message":"rtrim(): Passing null to parameter #1 ($string) of type string is deprecated","File":"\/Users\/pepic__ervin\/Documents\/Development\/Web_dev\/PHP_apps\/WordpressProjects\/opstinaRozaje\/wp-includes\/formatting.php","Line":2837}
+
+Feb 02 2026 19:15:47
+{"Number":8192,"Message":"rtrim(): Passing null to parameter #1 ($string) of type string is deprecated","File":"\/Users\/pepic__ervin\/Documents\/Development\/Web_dev\/PHP_apps\/WordpressProjects\/opstinaRozaje\/wp-includes\/formatting.php","Line":2837}
+
+Feb 02 2026 19:15:47
+{"Number":8192,"Message":"rtrim(): Passing null to parameter #1 ($string) of type string is deprecated","File":"\/Users\/pepic__ervin\/Documents\/Development\/Web_dev\/PHP_apps\/WordpressProjects\/opstinaRozaje\/wp-includes\/formatting.php","Line":2837}
+
+Feb 02 2026 19:15:47
+{"Number":8192,"Message":"rtrim(): Passing null to parameter #1 ($string) of type string is deprecated","File":"\/Users\/pepic__ervin\/Documents\/Development\/Web_dev\/PHP_apps\/WordpressProjects\/opstinaRozaje\/wp-includes\/formatting.php","Line":2837}
+
+Feb 02 2026 19:15:47
+{"Number":8192,"Message":"rtrim(): Passing null to parameter #1 ($string) of type string is deprecated","File":"\/Users\/pepic__ervin\/Documents\/Development\/Web_dev\/PHP_apps\/WordpressProjects\/opstinaRozaje\/wp-includes\/formatting.php","Line":2837}
+
+Feb 02 2026 19:15:47
+{"Number":8192,"Message":"rtrim(): Passing null to parameter #1 ($string) of type string is deprecated","File":"\/Users\/pepic__ervin\/Documents\/Development\/Web_dev\/PHP_apps\/WordpressProjects\/opstinaRozaje\/wp-includes\/formatting.php","Line":2837}
+
+Feb 02 2026 19:15:47
+{"Number":8192,"Message":"rtrim(): Passing null to parameter #1 ($string) of type string is deprecated","File":"\/Users\/pepic__ervin\/Documents\/Development\/Web_dev\/PHP_apps\/WordpressProjects\/opstinaRozaje\/wp-includes\/formatting.php","Line":2837}
+
+Feb 02 2026 19:15:47
+{"Number":8192,"Message":"rtrim(): Passing null to parameter #1 ($string) of type string is deprecated","File":"\/Users\/pepic__ervin\/Documents\/Development\/Web_dev\/PHP_apps\/WordpressProjects\/opstinaRozaje\/wp-includes\/formatting.php","Line":2837}
+
+Feb 02 2026 19:15:47
+{"Number":8192,"Message":"rtrim(): Passing null to parameter #1 ($string) of type string is deprecated","File":"\/Users\/pepic__ervin\/Documents\/Development\/Web_dev\/PHP_apps\/WordpressProjects\/opstinaRozaje\/wp-includes\/formatting.php","Line":2837}
+
+Feb 02 2026 19:15:47
+{"Number":8192,"Message":"rtrim(): Passing null to parameter #1 ($string) of type string is deprecated","File":"\/Users\/pepic__ervin\/Documents\/Development\/Web_dev\/PHP_apps\/WordpressProjects\/opstinaRozaje\/wp-includes\/formatting.php","Line":2837}
+
+Feb 02 2026 19:15:47
+{"Number":8192,"Message":"rtrim(): Passing null to parameter #1 ($string) of type string is deprecated","File":"\/Users\/pepic__ervin\/Documents\/Development\/Web_dev\/PHP_apps\/WordpressProjects\/opstinaRozaje\/wp-includes\/formatting.php","Line":2837}
+
+Feb 02 2026 19:15:47
+{"Number":8192,"Message":"rtrim(): Passing null to parameter #1 ($string) of type string is deprecated","File":"\/Users\/pepic__ervin\/Documents\/Development\/Web_dev\/PHP_apps\/WordpressProjects\/opstinaRozaje\/wp-includes\/formatting.php","Line":2837}
+
+Feb 02 2026 19:15:47
+{"Number":8192,"Message":"rtrim(): Passing null to parameter #1 ($string) of type string is deprecated","File":"\/Users\/pepic__ervin\/Documents\/Development\/Web_dev\/PHP_apps\/WordpressProjects\/opstinaRozaje\/wp-includes\/formatting.php","Line":2837}
+
+Feb 02 2026 19:15:47
+{"Number":8192,"Message":"rtrim(): Passing null to parameter #1 ($string) of type string is deprecated","File":"\/Users\/pepic__ervin\/Documents\/Development\/Web_dev\/PHP_apps\/WordpressProjects\/opstinaRozaje\/wp-includes\/formatting.php","Line":2837}
+
+Feb 02 2026 19:15:47
+{"Number":8192,"Message":"rtrim(): Passing null to parameter #1 ($string) of type string is deprecated","File":"\/Users\/pepic__ervin\/Documents\/Development\/Web_dev\/PHP_apps\/WordpressProjects\/opstinaRozaje\/wp-includes\/formatting.php","Line":2837}
+
+Feb 02 2026 19:15:47
+{"Number":8192,"Message":"rtrim(): Passing null to parameter #1 ($string) of type string is deprecated","File":"\/Users\/pepic__ervin\/Documents\/Development\/Web_dev\/PHP_apps\/WordpressProjects\/opstinaRozaje\/wp-includes\/formatting.php","Line":2837}
+
+Feb 02 2026 19:15:47
+{"Number":8192,"Message":"rtrim(): Passing null to parameter #1 ($string) of type string is deprecated","File":"\/Users\/pepic__ervin\/Documents\/Development\/Web_dev\/PHP_apps\/WordpressProjects\/opstinaRozaje\/wp-includes\/formatting.php","Line":2837}
+
+Feb 02 2026 19:15:47
+{"Number":8192,"Message":"rtrim(): Passing null to parameter #1 ($string) of type string is deprecated","File":"\/Users\/pepic__ervin\/Documents\/Development\/Web_dev\/PHP_apps\/WordpressProjects\/opstinaRozaje\/wp-includes\/formatting.php","Line":2837}
+
+Feb 02 2026 19:15:47
+{"Number":8192,"Message":"rtrim(): Passing null to parameter #1 ($string) of type string is deprecated","File":"\/Users\/pepic__ervin\/Documents\/Development\/Web_dev\/PHP_apps\/WordpressProjects\/opstinaRozaje\/wp-includes\/formatting.php","Line":2837}
+
+Feb 02 2026 19:15:47
+{"Number":8192,"Message":"rtrim(): Passing null to parameter #1 ($string) of type string is deprecated","File":"\/Users\/pepic__ervin\/Documents\/Development\/Web_dev\/PHP_apps\/WordpressProjects\/opstinaRozaje\/wp-includes\/formatting.php","Line":2837}
+
+Feb 02 2026 19:15:47
+{"Number":8192,"Message":"rtrim(): Passing null to parameter #1 ($string) of type string is deprecated","File":"\/Users\/pepic__ervin\/Documents\/Development\/Web_dev\/PHP_apps\/WordpressProjects\/opstinaRozaje\/wp-includes\/formatting.php","Line":2837}
+
+Feb 02 2026 19:15:47
+{"Number":8192,"Message":"rtrim(): Passing null to parameter #1 ($string) of type string is deprecated","File":"\/Users\/pepic__ervin\/Documents\/Development\/Web_dev\/PHP_apps\/WordpressProjects\/opstinaRozaje\/wp-includes\/formatting.php","Line":2837}
+
+Feb 02 2026 19:15:47
+{"Number":8192,"Message":"rtrim(): Passing null to parameter #1 ($string) of type string is deprecated","File":"\/Users\/pepic__ervin\/Documents\/Development\/Web_dev\/PHP_apps\/WordpressProjects\/opstinaRozaje\/wp-includes\/formatting.php","Line":2837}
+
+Feb 02 2026 19:15:47
+{"Number":8192,"Message":"rtrim(): Passing null to parameter #1 ($string) of type string is deprecated","File":"\/Users\/pepic__ervin\/Documents\/Development\/Web_dev\/PHP_apps\/WordpressProjects\/opstinaRozaje\/wp-includes\/formatting.php","Line":2837}
+
+Feb 02 2026 19:15:47
+{"Number":8192,"Message":"rtrim(): Passing null to parameter #1 ($string) of type string is deprecated","File":"\/Users\/pepic__ervin\/Documents\/Development\/Web_dev\/PHP_apps\/WordpressProjects\/opstinaRozaje\/wp-includes\/formatting.php","Line":2837}
+
+Feb 02 2026 19:15:47
+{"Number":8192,"Message":"rtrim(): Passing null to parameter #1 ($string) of type string is deprecated","File":"\/Users\/pepic__ervin\/Documents\/Development\/Web_dev\/PHP_apps\/WordpressProjects\/opstinaRozaje\/wp-includes\/formatting.php","Line":2837}
+
+Feb 02 2026 19:15:47
+{"Number":8192,"Message":"rtrim(): Passing null to parameter #1 ($string) of type string is deprecated","File":"\/Users\/pepic__ervin\/Documents\/Development\/Web_dev\/PHP_apps\/WordpressProjects\/opstinaRozaje\/wp-includes\/formatting.php","Line":2837}
+
+Feb 02 2026 19:15:47
+{"Number":8192,"Message":"rtrim(): Passing null to parameter #1 ($string) of type string is deprecated","File":"\/Users\/pepic__ervin\/Documents\/Development\/Web_dev\/PHP_apps\/WordpressProjects\/opstinaRozaje\/wp-includes\/formatting.php","Line":2837}
+
+Feb 02 2026 19:15:47
+{"Number":8192,"Message":"Creation of dynamic property Ai1wm_Database_Mysqli::$old_replace_raw_values is deprecated","File":"\/Users\/pepic__ervin\/Documents\/Development\/Web_dev\/PHP_apps\/WordpressProjects\/opstinaRozaje\/wp-content\/plugins\/all-in-one-wp-migration\/lib\/vendor\/servmask\/database\/class-ai1wm-database.php","Line":300}
+
+Feb 02 2026 19:15:47
+{"Number":8192,"Message":"Creation of dynamic property Ai1wm_Database_Mysqli::$new_replace_raw_values is deprecated","File":"\/Users\/pepic__ervin\/Documents\/Development\/Web_dev\/PHP_apps\/WordpressProjects\/opstinaRozaje\/wp-content\/plugins\/all-in-one-wp-migration\/lib\/vendor\/servmask\/database\/class-ai1wm-database.php","Line":321}
+
+Feb 02 2026 19:15:57
+{"Number":8192,"Message":"rtrim(): Passing null to parameter #1 ($string) of type string is deprecated","File":"\/Users\/pepic__ervin\/Documents\/Development\/Web_dev\/PHP_apps\/WordpressProjects\/opstinaRozaje\/wp-includes\/formatting.php","Line":2837}
+
+Feb 02 2026 19:15:57
+{"Number":8192,"Message":"rtrim(): Passing null to parameter #1 ($string) of type string is deprecated","File":"\/Users\/pepic__ervin\/Documents\/Development\/Web_dev\/PHP_apps\/WordpressProjects\/opstinaRozaje\/wp-includes\/formatting.php","Line":2837}
+
+Feb 02 2026 19:15:57
+{"Number":8192,"Message":"rtrim(): Passing null to parameter #1 ($string) of type string is deprecated","File":"\/Users\/pepic__ervin\/Documents\/Development\/Web_dev\/PHP_apps\/WordpressProjects\/opstinaRozaje\/wp-includes\/formatting.php","Line":2837}
+
+Feb 02 2026 19:15:57
+{"Number":8192,"Message":"rtrim(): Passing null to parameter #1 ($string) of type string is deprecated","File":"\/Users\/pepic__ervin\/Documents\/Development\/Web_dev\/PHP_apps\/WordpressProjects\/opstinaRozaje\/wp-includes\/formatting.php","Line":2837}
+
+Feb 02 2026 19:15:57
+{"Number":8192,"Message":"rtrim(): Passing null to parameter #1 ($string) of type string is deprecated","File":"\/Users\/pepic__ervin\/Documents\/Development\/Web_dev\/PHP_apps\/WordpressProjects\/opstinaRozaje\/wp-includes\/formatting.php","Line":2837}
+
+Feb 02 2026 19:15:57
+{"Number":8192,"Message":"rtrim(): Passing null to parameter #1 ($string) of type string is deprecated","File":"\/Users\/pepic__ervin\/Documents\/Development\/Web_dev\/PHP_apps\/WordpressProjects\/opstinaRozaje\/wp-includes\/formatting.php","Line":2837}
+
+Feb 02 2026 19:15:57
+{"Number":8192,"Message":"rtrim(): Passing null to parameter #1 ($string) of type string is deprecated","File":"\/Users\/pepic__ervin\/Documents\/Development\/Web_dev\/PHP_apps\/WordpressProjects\/opstinaRozaje\/wp-includes\/formatting.php","Line":2837}
+
+Feb 02 2026 19:15:57
+{"Number":8192,"Message":"rtrim(): Passing null to parameter #1 ($string) of type string is deprecated","File":"\/Users\/pepic__ervin\/Documents\/Development\/Web_dev\/PHP_apps\/WordpressProjects\/opstinaRozaje\/wp-includes\/formatting.php","Line":2837}
+
+Feb 02 2026 19:15:57
+{"Number":8192,"Message":"rtrim(): Passing null to parameter #1 ($string) of type string is deprecated","File":"\/Users\/pepic__ervin\/Documents\/Development\/Web_dev\/PHP_apps\/WordpressProjects\/opstinaRozaje\/wp-includes\/formatting.php","Line":2837}
+
+Feb 02 2026 19:15:57
+{"Number":8192,"Message":"rtrim(): Passing null to parameter #1 ($string) of type string is deprecated","File":"\/Users\/pepic__ervin\/Documents\/Development\/Web_dev\/PHP_apps\/WordpressProjects\/opstinaRozaje\/wp-includes\/formatting.php","Line":2837}
+
+Feb 02 2026 19:15:57
+{"Number":8192,"Message":"rtrim(): Passing null to parameter #1 ($string) of type string is deprecated","File":"\/Users\/pepic__ervin\/Documents\/Development\/Web_dev\/PHP_apps\/WordpressProjects\/opstinaRozaje\/wp-includes\/formatting.php","Line":2837}
+
+Feb 02 2026 19:15:57
+{"Number":8192,"Message":"rtrim(): Passing null to parameter #1 ($string) of type string is deprecated","File":"\/Users\/pepic__ervin\/Documents\/Development\/Web_dev\/PHP_apps\/WordpressProjects\/opstinaRozaje\/wp-includes\/formatting.php","Line":2837}
+
+Feb 02 2026 19:15:57
+{"Number":8192,"Message":"rtrim(): Passing null to parameter #1 ($string) of type string is deprecated","File":"\/Users\/pepic__ervin\/Documents\/Development\/Web_dev\/PHP_apps\/WordpressProjects\/opstinaRozaje\/wp-includes\/formatting.php","Line":2837}
+
+Feb 02 2026 19:15:57
+{"Number":8192,"Message":"rtrim(): Passing null to parameter #1 ($string) of type string is deprecated","File":"\/Users\/pepic__ervin\/Documents\/Development\/Web_dev\/PHP_apps\/WordpressProjects\/opstinaRozaje\/wp-includes\/formatting.php","Line":2837}
+
+Feb 02 2026 19:15:57
+{"Number":8192,"Message":"rtrim(): Passing null to parameter #1 ($string) of type string is deprecated","File":"\/Users\/pepic__ervin\/Documents\/Development\/Web_dev\/PHP_apps\/WordpressProjects\/opstinaRozaje\/wp-includes\/formatting.php","Line":2837}
+
+Feb 02 2026 19:15:57
+{"Number":8192,"Message":"rtrim(): Passing null to parameter #1 ($string) of type string is deprecated","File":"\/Users\/pepic__ervin\/Documents\/Development\/Web_dev\/PHP_apps\/WordpressProjects\/opstinaRozaje\/wp-includes\/formatting.php","Line":2837}
+
+Feb 02 2026 19:15:57
+{"Number":8192,"Message":"rtrim(): Passing null to parameter #1 ($string) of type string is deprecated","File":"\/Users\/pepic__ervin\/Documents\/Development\/Web_dev\/PHP_apps\/WordpressProjects\/opstinaRozaje\/wp-includes\/formatting.php","Line":2837}
+
+Feb 02 2026 19:15:57
+{"Number":8192,"Message":"rtrim(): Passing null to parameter #1 ($string) of type string is deprecated","File":"\/Users\/pepic__ervin\/Documents\/Development\/Web_dev\/PHP_apps\/WordpressProjects\/opstinaRozaje\/wp-includes\/formatting.php","Line":2837}
+
+Feb 02 2026 19:15:57
+{"Number":8192,"Message":"rtrim(): Passing null to parameter #1 ($string) of type string is deprecated","File":"\/Users\/pepic__ervin\/Documents\/Development\/Web_dev\/PHP_apps\/WordpressProjects\/opstinaRozaje\/wp-includes\/formatting.php","Line":2837}
+
+Feb 02 2026 19:15:57
+{"Number":8192,"Message":"rtrim(): Passing null to parameter #1 ($string) of type string is deprecated","File":"\/Users\/pepic__ervin\/Documents\/Development\/Web_dev\/PHP_apps\/WordpressProjects\/opstinaRozaje\/wp-includes\/formatting.php","Line":2837}
+
+Feb 02 2026 19:15:57
+{"Number":8192,"Message":"rtrim(): Passing null to parameter #1 ($string) of type string is deprecated","File":"\/Users\/pepic__ervin\/Documents\/Development\/Web_dev\/PHP_apps\/WordpressProjects\/opstinaRozaje\/wp-includes\/formatting.php","Line":2837}
+
+Feb 02 2026 19:15:57
+{"Number":8192,"Message":"rtrim(): Passing null to parameter #1 ($string) of type string is deprecated","File":"\/Users\/pepic__ervin\/Documents\/Development\/Web_dev\/PHP_apps\/WordpressProjects\/opstinaRozaje\/wp-includes\/formatting.php","Line":2837}
+
+Feb 02 2026 19:15:57
+{"Number":8192,"Message":"rtrim(): Passing null to parameter #1 ($string) of type string is deprecated","File":"\/Users\/pepic__ervin\/Documents\/Development\/Web_dev\/PHP_apps\/WordpressProjects\/opstinaRozaje\/wp-includes\/formatting.php","Line":2837}
+
+Feb 02 2026 19:15:57
+{"Number":8192,"Message":"rtrim(): Passing null to parameter #1 ($string) of type string is deprecated","File":"\/Users\/pepic__ervin\/Documents\/Development\/Web_dev\/PHP_apps\/WordpressProjects\/opstinaRozaje\/wp-includes\/formatting.php","Line":2837}
+
+Feb 02 2026 19:15:57
+{"Number":8192,"Message":"rtrim(): Passing null to parameter #1 ($string) of type string is deprecated","File":"\/Users\/pepic__ervin\/Documents\/Development\/Web_dev\/PHP_apps\/WordpressProjects\/opstinaRozaje\/wp-includes\/formatting.php","Line":2837}
+
+Feb 02 2026 19:15:57
+{"Number":8192,"Message":"rtrim(): Passing null to parameter #1 ($string) of type string is deprecated","File":"\/Users\/pepic__ervin\/Documents\/Development\/Web_dev\/PHP_apps\/WordpressProjects\/opstinaRozaje\/wp-includes\/formatting.php","Line":2837}
+
+Feb 02 2026 19:15:57
+{"Number":8192,"Message":"rtrim(): Passing null to parameter #1 ($string) of type string is deprecated","File":"\/Users\/pepic__ervin\/Documents\/Development\/Web_dev\/PHP_apps\/WordpressProjects\/opstinaRozaje\/wp-includes\/formatting.php","Line":2837}
+
+Feb 02 2026 19:15:57
+{"Number":8192,"Message":"rtrim(): Passing null to parameter #1 ($string) of type string is deprecated","File":"\/Users\/pepic__ervin\/Documents\/Development\/Web_dev\/PHP_apps\/WordpressProjects\/opstinaRozaje\/wp-includes\/formatting.php","Line":2837}
+
+Feb 02 2026 19:15:57
+{"Number":8192,"Message":"rtrim(): Passing null to parameter #1 ($string) of type string is deprecated","File":"\/Users\/pepic__ervin\/Documents\/Development\/Web_dev\/PHP_apps\/WordpressProjects\/opstinaRozaje\/wp-includes\/formatting.php","Line":2837}
+
+Feb 02 2026 19:15:57
+{"Number":8192,"Message":"rtrim(): Passing null to parameter #1 ($string) of type string is deprecated","File":"\/Users\/pepic__ervin\/Documents\/Development\/Web_dev\/PHP_apps\/WordpressProjects\/opstinaRozaje\/wp-includes\/formatting.php","Line":2837}
+
+Feb 02 2026 19:15:57
+{"Number":8192,"Message":"rtrim(): Passing null to parameter #1 ($string) of type string is deprecated","File":"\/Users\/pepic__ervin\/Documents\/Development\/Web_dev\/PHP_apps\/WordpressProjects\/opstinaRozaje\/wp-includes\/formatting.php","Line":2837}
+
+Feb 02 2026 19:15:57
+{"Number":8192,"Message":"rtrim(): Passing null to parameter #1 ($string) of type string is deprecated","File":"\/Users\/pepic__ervin\/Documents\/Development\/Web_dev\/PHP_apps\/WordpressProjects\/opstinaRozaje\/wp-includes\/formatting.php","Line":2837}
+
+Feb 02 2026 19:15:57
+{"Number":8192,"Message":"rtrim(): Passing null to parameter #1 ($string) of type string is deprecated","File":"\/Users\/pepic__ervin\/Documents\/Development\/Web_dev\/PHP_apps\/WordpressProjects\/opstinaRozaje\/wp-includes\/formatting.php","Line":2837}
+
+Feb 02 2026 19:15:57
+{"Number":8192,"Message":"rtrim(): Passing null to parameter #1 ($string) of type string is deprecated","File":"\/Users\/pepic__ervin\/Documents\/Development\/Web_dev\/PHP_apps\/WordpressProjects\/opstinaRozaje\/wp-includes\/formatting.php","Line":2837}
+
+Feb 02 2026 19:15:57
+{"Number":8192,"Message":"rtrim(): Passing null to parameter #1 ($string) of type string is deprecated","File":"\/Users\/pepic__ervin\/Documents\/Development\/Web_dev\/PHP_apps\/WordpressProjects\/opstinaRozaje\/wp-includes\/formatting.php","Line":2837}
+
+Feb 02 2026 19:15:57
+{"Number":8192,"Message":"rtrim(): Passing null to parameter #1 ($string) of type string is deprecated","File":"\/Users\/pepic__ervin\/Documents\/Development\/Web_dev\/PHP_apps\/WordpressProjects\/opstinaRozaje\/wp-includes\/formatting.php","Line":2837}
+
+Feb 02 2026 19:15:57
+{"Number":8192,"Message":"Creation of dynamic property Ai1wm_Database_Mysqli::$old_replace_raw_values is deprecated","File":"\/Users\/pepic__ervin\/Documents\/Development\/Web_dev\/PHP_apps\/WordpressProjects\/opstinaRozaje\/wp-content\/plugins\/all-in-one-wp-migration\/lib\/vendor\/servmask\/database\/class-ai1wm-database.php","Line":300}
+
+Feb 02 2026 19:15:57
+{"Number":8192,"Message":"Creation of dynamic property Ai1wm_Database_Mysqli::$new_replace_raw_values is deprecated","File":"\/Users\/pepic__ervin\/Documents\/Development\/Web_dev\/PHP_apps\/WordpressProjects\/opstinaRozaje\/wp-content\/plugins\/all-in-one-wp-migration\/lib\/vendor\/servmask\/database\/class-ai1wm-database.php","Line":321}
+
+Feb 02 2026 19:16:04
+{"type":2,"message":"unlink(\/Users\/pepic__ervin\/Documents\/Development\/Web_dev\/PHP_apps\/WordpressProjects\/opstinaRozaje\/wp-content\/wflogs\/template.0172072001770059764.tmp): No such file or directory","file":"\/Users\/pepic__ervin\/Documents\/Development\/Web_dev\/PHP_apps\/WordpressProjects\/opstinaRozaje\/wp-content\/plugins\/wordfence\/lib\/wordfenceClass.php","line":2255}
+

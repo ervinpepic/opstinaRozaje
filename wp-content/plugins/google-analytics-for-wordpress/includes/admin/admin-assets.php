@@ -28,6 +28,11 @@ class MonsterInsights_Admin_Assets {
 	private static $manifest_data;
 
 	/**
+	 * Directory path of assets.
+	 */
+	private $version_path;
+
+	/**
 	 * Class constructor.
 	 */
 	public function __construct() {
@@ -44,7 +49,11 @@ class MonsterInsights_Admin_Assets {
 
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_scripts' ) );
 		$this->get_manifest_data();
+
+		// CSS files path.
+		$this->version_path = monsterinsights_is_pro_version() ? 'pro' : 'lite';
 	}
+
 	/**
 	 * Updates the script type for the plugin's handles to type module.
 	 *
@@ -90,6 +99,13 @@ class MonsterInsights_Admin_Assets {
 		wp_register_style( 'monsterinsights-admin-common-style', plugins_url( 'assets/css/admin-common' . $suffix . '.css', MONSTERINSIGHTS_PLUGIN_FILE ), array(), monsterinsights_get_asset_version() );
 		wp_enqueue_style( 'monsterinsights-admin-common-style' );
 
+		wp_enqueue_style(
+			'monsterinsights-admin-common-build',
+			plugins_url( $this->version_path . '/assets/vue/css/admin.css', MONSTERINSIGHTS_PLUGIN_FILE ),
+			array(),
+			monsterinsights_get_asset_version()
+		);
+
 		// Get current screen.
 		$screen = get_current_screen();
 
@@ -101,7 +117,7 @@ class MonsterInsights_Admin_Assets {
 		// For the settings pages, load the Vue app scripts.
 		if ( monsterinsights_is_settings_page() ) {
 			if ( ! defined( 'MONSTERINSIGHTS_LOCAL_JS_URL' ) ) {
-				+$this->enqueue_script_specific_css( 'src/modules/settings/settings.js' );
+				$this->enqueue_script_specific_css( 'src/modules/settings/settings.js' );
 			}
 
 			// Don't load other scripts on the settings page.
@@ -142,10 +158,23 @@ class MonsterInsights_Admin_Assets {
 			)
 		);
 
+		// Load setup wizard handler script for all admin pages where the setup wizard link might appear
+		// This includes MonsterInsights pages and any admin page where the setup notice might show
+		wp_enqueue_script( 'monsterinsights-admin-setup-wizard', plugins_url( 'assets/js/admin-setup-wizard.js', MONSTERINSIGHTS_PLUGIN_FILE ), array( 'jquery' ), monsterinsights_get_asset_version(), true );
+
+		wp_localize_script(
+			'monsterinsights-admin-setup-wizard',
+			'monsterinsights',
+			array(
+				'ajax'  => admin_url( 'admin-ajax.php' ),
+				'nonce' => wp_create_nonce( 'mi-admin-nonce' ),
+			)
+		);
+
 		// Get current screen.
 		$screen = get_current_screen();
 
-		// Bail if we're not on a MonsterInsights screen.
+		// Bail if we're not on a MonsterInsights screen for other scripts.
 		if ( empty( $screen->id ) || strpos( $screen->id, 'monsterinsights' ) === false ) {
 			return;
 		}
@@ -230,6 +259,7 @@ class MonsterInsights_Admin_Assets {
 					'is_admin'                        => true,
 					'admin_email'                     => get_option( 'admin_email' ),
 					'site_url'                        => get_site_url(),
+					'site_name'                       => get_bloginfo( 'name' ),
 					'reports_url'                     => add_query_arg( 'page', 'monsterinsights_reports', admin_url( 'admin.php' ) ),
 					'landing_pages_top_reports_url'   => add_query_arg( 'page', 'monsterinsights_reports#/top-landing-pages', admin_url( 'admin.php' ) ),
 					'ecommerce_report_url'            => add_query_arg( 'page', 'monsterinsights_reports#/ecommerce', admin_url( 'admin.php' ) ),
@@ -244,6 +274,8 @@ class MonsterInsights_Admin_Assets {
 					'timezone'                        => date( 'e' ), // phpcs:ignore WordPress.DateTime.RestrictedFunctions.date_date -- We need this to depend on the runtime timezone.
 					'funnelkit_stripe_woo_page_url'   => admin_url( 'admin.php?page=wc-settings&tab=fkwcs_api_settings' ),
 					'funnelkit_stripe_woo_nonce'      => wp_create_nonce( 'monsterinsights-funnelkit-stripe-woo-nonce' ),
+					'site_notes_export_synced'        => monsterinsights_get_option( 'site_notes_export_synced', 0 ),
+					'site_notes_import_synced'        => monsterinsights_get_option( 'site_notes_import_synced', 0 ),
 					'license'                         => $license_info,
 				)
 			);
@@ -305,8 +337,10 @@ class MonsterInsights_Admin_Assets {
 					'feedback'            => MonsterInsights_Feature_Feedback::get_settings(),
 					'addons_pre_check'    => array(
 						'ai_insights' => is_plugin_active( 'monsterinsights-ai-insights/monsterinsights-ai-insights.php' ),
+						'woo_product_feed_pro' => is_plugin_active( 'woo-product-feed-pro/woocommerce-sea.php' ),
 					),
 					'license'             => $license_info,
+					'charitablewp_notice' => $this->show_charitablewp_notice(),
 				)
 			);
 
@@ -502,6 +536,24 @@ class MonsterInsights_Admin_Assets {
 		return sanitize_text_field( $value );
 	}
 
+	/**
+	 * Check if the CharitableWP notice should be shown.
+	 */
+	private function show_charitablewp_notice() {
+		// Check if user has permission to show the notice.
+		if ( ! current_user_can( 'monsterinsights_save_settings' ) ) {
+			return false;
+		}
+
+		$installed_plugins = get_plugins();
+		$plugin_path = 'charitable/charitable.php';
+
+		if ( isset( $installed_plugins[$plugin_path] ) ) {
+			return false;
+		}
+
+		return monsterinsights_get_option( 'show_charitable_notice', false );
+	}
 }
 
 new MonsterInsights_Admin_Assets();

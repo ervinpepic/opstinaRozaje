@@ -47,11 +47,21 @@ add_action('init', function () {
 		require_once MONSTERINSIGHTS_PLUGIN_DIR . 'lite/includes/admin/reports/report-summaries.php';
 		$summaries = new MonsterInsights_Report_Summaries();
 		MonsterInsights()->reporting->add_report( $summaries );
+		
+		require_once MONSTERINSIGHTS_PLUGIN_DIR . 'lite/includes/admin/reports/report-ecommerce-product-feed.php';
+		$ecommerce_product_feed = new MonsterInsights_Report_Ecommerce_Product_Feed();
+		MonsterInsights()->reporting->add_report( $ecommerce_product_feed );
 
 		// Email summaries related classes
 		require_once MONSTERINSIGHTS_PLUGIN_DIR . 'lite/includes/emails/summaries-infoblocks.php';
 		require_once MONSTERINSIGHTS_PLUGIN_DIR . 'lite/includes/emails/summaries.php';
 		new MonsterInsights_Email_Summaries();
+
+		// Load API classes
+		require_once MONSTERINSIGHTS_PLUGIN_DIR . 'includes/api/class-monsterinsights-api-error.php';
+		require_once MONSTERINSIGHTS_PLUGIN_DIR . 'includes/api/class-monsterinsights-api.php';
+		require_once MONSTERINSIGHTS_PLUGIN_DIR . 'includes/api/class-monsterinsights-api-reports.php';
+		require_once MONSTERINSIGHTS_PLUGIN_DIR . 'includes/api/class-monsterinsights-api-tracking.php';
 	}
 
 	if ( is_admin() ) {

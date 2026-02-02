@@ -1,5 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap");
-
 /* Floating switcher */
 .trp-floating-switcher {
     display: flex;
@@ -16,7 +14,6 @@
     right: var(--right, unset);
     bottom: var(--bottom, unset);
     left: var(--left, unset);
-    font-family: "Outfit", sans-serif !important;
     box-shadow: 0 10px 20px 0 #0000000D;
 }
 
@@ -26,6 +23,7 @@
 
 .trp-switcher-position-top.trp-floating-switcher {
     flex-direction: column;
+    top: var(--wp-admin--admin-bar--height, 0);
 }
 
 .trp-floating-switcher.trp-switcher-position-top:not(.trp-ls-inline) .trp-language-switcher-inner,
@@ -34,7 +32,7 @@
 }
 
 /* Inline variant */
-div.trp-ls-inline .trp-language-switcher-inner {
+nav.trp-ls-inline .trp-language-switcher-inner {
     flex-direction: row;
 }
 
@@ -48,6 +46,7 @@ div.trp-ls-inline .trp-language-switcher-inner {
     font-size: 12px;
     text-align: center;
     padding: 0 5px;
+    opacity: 70%;
 }
 
 #trp-floater-powered-by a {
@@ -55,13 +54,13 @@ div.trp-ls-inline .trp-language-switcher-inner {
 }
 
 .trp-switcher-position-bottom #trp-floater-powered-by {
-    border-top: 1px solid var(--text, #747474);
+    border-top: 1px solid var(--border-color, #747474);
     padding-top: 5px;
     margin-top: 5px;
 }
 
 .trp-switcher-position-top #trp-floater-powered-by {
-    border-bottom: 1px solid var(--text, #747474);
+    border-bottom: 1px solid var(--border-color, #747474);
     padding-bottom: 5px;
     margin-bottom: 5px;
 }
@@ -82,7 +81,11 @@ div.trp-ls-inline .trp-language-switcher-inner {
     background: var(--bg, #fff);
     width: auto;
     box-shadow: none;
-    font-family: "Outfit", sans-serif;
+}
+
+/* Hide the anchor that holds space in the document for the actual switcher. Only if opposite mode is not enabled. We show only the anchor in opposite mode */
+.trp-shortcode-anchor:not(.trp-opposite-button) {
+    visibility: hidden;
 }
 
 .trp-shortcode-switcher.trp-open-on-click {
@@ -95,8 +98,8 @@ div.trp-ls-inline .trp-language-switcher-inner {
     top: 0;
     z-index: 9999;
 }
-
-.trp-current-language-item__wrapper {
+/* Opposite mode enabled */
+.trp-current-language-item__wrapper:not(.trp-hide-arrow) {
     display: flex;
     align-items: center;
     padding-right: 10px;
@@ -119,10 +122,9 @@ div.trp-ls-inline .trp-language-switcher-inner {
 .trp-switcher-dropdown-list {
     display: flex;
     overflow-y: hidden; /* closed state */
-    transition: max-height 0.2s linear;
+    transition: max-height 0.2s ease-in-out;
     max-height: 0;
     transition-duration: var(--transition-duration);
-    gap: 5px;
 }
 
 .trp-shortcode-switcher .trp-switcher-dropdown-list {
@@ -154,17 +156,11 @@ div.trp-ls-inline .trp-language-switcher-inner {
     transform: rotate(180deg);
 }
 
-.trp-shortcode-overlay:focus { outline: none; }
-.trp-shortcode-overlay:focus-visible {
+/* Links inside switcher */
+.trp-language-item:focus { outline: none; }
+.trp-language-item:focus-visible {
     outline: 2px solid var(--text);
-    outline-offset: 2px;
-}
-
-/* Links inside (optional) */
-.trp-shortcode-overlay .trp-language-item:focus { outline: none; }
-.trp-shortcode-overlay .trp-language-item:focus-visible {
-    outline: 2px solid var(--text);
-    outline-offset: 2px;
+    outline-offset: -2px;
 }
 
 /* Items */
@@ -172,7 +168,7 @@ div.trp-ls-inline .trp-language-switcher-inner {
     display: flex;
     align-items: center;
     gap: 8px;
-    padding: 5px 5px 5px 16px;
+    padding: 7px 16px;
     text-decoration: none;
     min-height: 19px;
     box-sizing: content-box;
@@ -199,13 +195,16 @@ div.trp-ls-inline .trp-language-switcher-inner {
     color: var(--text, #000);
     font-size: var(--font-size, 14px);
     line-height: 1.2;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
+    font-weight: 400;
 }
 
 .trp-flag-image {
-    border-radius: var(--flag-radius, 0);
-    aspect-ratio: var(--aspect-ratio, 4/3);
-    width: var(--flag-size, 18px);
-    display: inline-block;
+    border-radius: var(--flag-radius, 0) !important;
+    aspect-ratio: var(--aspect-ratio, 4/3) !important;
+    width: var(--flag-size, 18px) !important;
+    display: inline-block !important;
+    height: auto !important;
 }
 
 .trp-menu-ls-label .trp-flag-image {
@@ -213,10 +212,6 @@ div.trp-ls-inline .trp-language-switcher-inner {
 }
 
 .trp-custom-flag {
-    width: var(--flag-size, 18px);
-    height: auto;
-    aspect-ratio: var(--aspect-ratio, 4/3);
-    border-radius: var(--flag-radius, 2px);
     object-fit: cover;
 }
 
@@ -234,16 +229,19 @@ div.trp-ls-inline .trp-language-switcher-inner {
 
 /* Menu item */
 .trp-flag-rounded {
-    border-radius: 9999px;
-    aspect-ratio: 1 / 1;
+    border-radius: 9999px !important;
+    aspect-ratio: 1 / 1 !important;
 }
 
 .trp-ls-name {
     padding-left: 5px;
 }
 
-
-
+@media (prefers-reduced-motion: reduce) {
+    .trp-switcher-dropdown-list {
+        transition: none !important; /* no max-height animation */
+    }
+}
 
 /* Legacy Language Switcher shortcode css rules
  * Useful for displaying the Automatic Language Detection language switcher

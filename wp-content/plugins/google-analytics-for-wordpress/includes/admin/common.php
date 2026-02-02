@@ -17,6 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 function monsterinsights_is_settings_page() {
 	$current_screen = function_exists( 'get_current_screen' ) ? get_current_screen() : false;
+
 	global $admin_page_hooks;
 
 	if ( ! is_object( $current_screen ) || empty( $current_screen->id ) || empty( $admin_page_hooks ) ) {
@@ -37,6 +38,10 @@ function monsterinsights_is_settings_page() {
 	}
 
 	if ( strpos( $current_screen->id, 'monsterinsights_settings' ) !== false ) {
+		$settings_page = true;
+	}
+
+	if ( strpos( $current_screen->id, 'monsterinsights_google_ads' ) !== false ) {
 		$settings_page = true;
 	}
 
@@ -95,6 +100,14 @@ function monsterinsights_is_own_admin_page() {
 	}
 
 	return false;
+}
+
+/**
+ * Determine if the current page is Google Ads
+ * @return bool
+ */
+function monsterinsights_is_ads_page() {
+	return str_contains( get_current_screen()->id, 'monsterinsights_google_ads' );
 }
 
 /**
@@ -737,15 +750,14 @@ add_filter( 'monsterinsights_vue_reports_data', 'monsterinsights_year_in_review_
  */
 function monsterinsights_yearinreview_dates() {
 	$current_date = wp_date( 'Y-m-d' );
-	$current_year = wp_date( 'Y' );
-	$report_year = $current_year - 1;
-	$report_year = 2024;
-	$next_year = 2025;
+	$report_year = 2025;
+	$current_year = (string) $report_year + 1;
 	$show_report = false;
 
-	$next_year = (string) $report_year + 1;
 	$show_report_start_date = wp_date( 'Y-m-d', strtotime( 'Jan 01, ' . $current_year ) );
 	$show_report_end_date = wp_date( 'Y-m-d', strtotime( 'Jan 14, ' . $current_year ) );
+
+	// Check if current date is between january 1st and january 14th.
 	if (
 		$current_date >= $show_report_start_date
 		&& $current_date <= $show_report_end_date
@@ -759,7 +771,7 @@ function monsterinsights_yearinreview_dates() {
 
 	return array(
 		'report_year' => $report_year,
-		'next_year' => $next_year,
+		'next_year'   => $current_year,
 		'show_report' => apply_filters( 'monsterinsights_yearinreview_show_report', $show_report ),
 	);
 }
@@ -782,3 +794,8 @@ function monsterinsights_get_sitei() {
  * Inlcude admin assets files.
  */
 require_once __DIR__ . '/admin-assets.php';
+
+/**
+ * Inlcude admin Charitable notice files.
+ */
+require_once __DIR__ . '/class-monsterinsights-charitable-notice.php';

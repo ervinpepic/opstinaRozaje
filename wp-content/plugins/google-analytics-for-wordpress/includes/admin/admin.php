@@ -117,6 +117,9 @@ function monsterinsights_admin_menu()
 	// then SEO
 	add_submenu_page($parent_slug, __('SEO', 'google-analytics-for-wordpress'), __('SEO', 'google-analytics-for-wordpress'), 'manage_options', $seo_url);
 
+	// Google PAX
+	add_submenu_page($parent_slug, __('Google Ads', 'google-analytics-for-wordpress'), __('Google Ads', 'google-analytics-for-wordpress'), 'monsterinsights_view_dashboard', $submenu_base . '#/google-ads');
+
 	// then tools
 	add_submenu_page($parent_slug, __('Tools:', 'google-analytics-for-wordpress'), __('Tools', 'google-analytics-for-wordpress'), 'manage_options', $submenu_base . '#/tools');
 
@@ -134,16 +137,16 @@ function monsterinsights_admin_menu()
 		$submenu_base . '#/userfeedback'
 	);
 
-	// then About Us page.
-	add_submenu_page($parent_slug, __('About Us:', 'google-analytics-for-wordpress'), __('About Us', 'google-analytics-for-wordpress'), 'manage_options', $submenu_base . '#/about');
-
 	add_submenu_page(
 		$parent_slug,
-		__('WPConsent:', 'google-analytics-for-wordpress'),
-		__('WPConsent', 'google-analytics-for-wordpress') . $new_indicator,
+		__('Privacy Compliance:', 'google-analytics-for-wordpress'),
+		__('Privacy Compliance', 'google-analytics-for-wordpress'),
 		'manage_options',
 		$submenu_base . '#/wpconsent'
 	);
+
+	// then About Us page.
+	add_submenu_page($parent_slug, __('About Us:', 'google-analytics-for-wordpress'), __('About Us', 'google-analytics-for-wordpress'), 'manage_options', $submenu_base . '#/about');
 
 	if (!monsterinsights_is_pro_version() && !strstr(plugin_basename(__FILE__), 'dashboard-for')) {
 		// automated promotion
@@ -461,7 +464,7 @@ function monsterinsights_admin_footer($text)
 	) {
 		$url = 'https://wordpress.org/support/view/plugin-reviews/google-analytics-for-wordpress?filter=5';
 		// Translators: Placeholders add a link to the wordpress.org repository.
-		$text = sprintf(esc_html__('Please rate %1$sMonsterInsights%2$s on %3$s %4$sWordPress.org%5$s to help us spread the word.', 'google-analytics-for-wordpress'), '<strong>', '</strong>', '<a class="monsterinsights-no-text-decoration" href="' . $url . '" target="_blank" rel="noopener noreferrer"><i class="monstericon-star"></i><i class="monstericon-star"></i><i class="monstericon-star"></i><i class="monstericon-star"></i><i class="monstericon-star"></i></a>', '<a href="' . $url . '" target="_blank" rel="noopener noreferrer">', '</a>');
+		$text = sprintf(esc_html__('Please rate %1$sMonsterInsights%2$s %3$s on %4$sWordPress.org%5$s to help us spread the word.', 'google-analytics-for-wordpress'), '<strong>', '</strong>', '<a class="monsterinsights-no-text-decoration" href="' . $url . '" target="_blank" rel="noopener noreferrer"><i class="monstericon-star"></i><i class="monstericon-star"></i><i class="monstericon-star"></i><i class="monstericon-star"></i><i class="monstericon-star"></i></a>', '<a href="' . $url . '" target="_blank" rel="noopener noreferrer">', '</a>');
 	}
 
 	return $text;
@@ -886,6 +889,11 @@ function monsterinsights_ads_addon_installed_notice() {
 		return;
 	}
 
+	// Hide notice if dismissed in the last 30 days.
+	if ( get_transient( 'monsterinsights_ads_addon_installed_notice_dismissed' ) ) {
+		return;
+	}
+
 	if ( monsterinsights_is_pro_version() && MonsterInsights()->license->get_license_type() === 'pro' ) {
 		$addons_url = admin_url() . '/admin.php?page=monsterinsights_settings#/addons?ads_addon_ppc_alert=1';
 		$button_text = esc_html__( 'Install Now', 'google-analytics-for-wordpress' );
@@ -908,10 +916,21 @@ function monsterinsights_ads_addon_installed_notice() {
 		'</a>'
 	);
 
-	echo '<div class="notice notice-info is-dismissible"><p>' . $message . '</p><p><a href="' . $addons_url . '" class="button button-primary" target="' . $button_target . '">' . $button_text . '</a></p></div>'; // phpcs:ignore
+	// Output notice with an ID so the common admin JS can catch the dismiss and persist it for 30 days.
+	echo '<div id="monsterinsights-ads-addon-notice" class="notice notice-info is-dismissible"><p>' . $message . '</p><p><a href="' . $addons_url . '" class="button button-primary" target="' . $button_target . '">' . $button_text . '</a></p></div>'; // phpcs:ignore
 }
 
 add_action( 'admin_notices', 'monsterinsights_ads_addon_installed_notice' );
+
+/**
+ * AJAX handler to persist dismissal of the Ads addon installed notice for 30 days.
+ */
+function monsterinsights_dismiss_ads_addon_notice_ajax() {
+	check_ajax_referer( 'monsterinsights-dismiss-notice', 'nonce' );
+	set_transient( 'monsterinsights_ads_addon_installed_notice_dismissed', 1, 30 * DAY_IN_SECONDS );
+	wp_send_json_success();
+}
+add_action( 'wp_ajax_monsterinsights_dismiss_ads_addon_notice', 'monsterinsights_dismiss_ads_addon_notice_ajax' );
 
 /**
  * Check if the plugin is MI Lite.
@@ -968,6 +987,13 @@ add_action( 'in_admin_footer', 'monsterinsights_in_admin_footer' );
  * Display notice in admin to install WPConsent.
  */
 function monsterinsights_wpconsent_install_notice() {
+	global $pagenow;
+
+	// Dont show the notice on update page.
+	if ( 'update-core.php' === $pagenow ) {
+		return;
+	}
+
 	// If WPConsent plugin active.
 	if ( function_exists( 'WPConsent' ) ) {
 		return;

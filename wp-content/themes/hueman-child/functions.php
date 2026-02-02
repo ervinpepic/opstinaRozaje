@@ -77,7 +77,7 @@ add_action( 'login_enqueue_scripts', 'rozaje_enqueue_login_scripts' );
 function rozaje_login_heading( $message ) {
     $heading = sprintf(
         '<h2 style="text-align: center; margin: 10px 0 20px; font-size: 1.5em; color: #333;">%s</h2>',
-        esc_html__( 'Dobrodošli na admin panel web aplikacije Opštine Rožaje', 'rozaje-municipality' )
+        esc_html__( 'Dobro došli na admin panel web aplikacije Opštine Rožaje', 'rozaje-municipality' )
     );
     return $heading . $message;
 }
